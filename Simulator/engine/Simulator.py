@@ -14,7 +14,8 @@ class Simulator:
         self.time = 0
 
         self.reward_history: list[tuple[int, float]] = []
-
+        for node in nodes:
+            node.set_simulator(self)
 
     def add_bandit(self, bandit: Bandit):
         self.bandit = bandit

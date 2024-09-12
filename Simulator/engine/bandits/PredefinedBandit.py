@@ -6,13 +6,17 @@ from engine.bandits.Bandit import Bandit
 
 
 class PredefinedBandit(Bandit):
-    def __init__(self):
-        pass
+    def __init__(self, definition: list[tuple[int, int]]):
+        self.definition = definition
+
 
     def tick(self, time_s: int):
         print("BANDIT tick!", self.simulator.TIME_MAX)
 
         self.simulator.reset()
+
+        #for self.definition
+
         for container in self.simulator.containers:
             self.random_node().deploy(container)
 

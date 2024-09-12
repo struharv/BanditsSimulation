@@ -31,8 +31,12 @@ class NodeTest(unittest.TestCase):
         self.assertEqual(0.5, node.green_at(15))
 
 
+    def test_node_green_advanced(self):
+        node = Node("node1", 1, 1024, 500, [(7 * 60, 0.0), (12 * 60, 0.5), (14 * 60, 0.5), (19 * 60, 0.0)])
 
-
+        #self.assertEqual(0, node.green_at(0))
+        #self.assertEqual(0, node.green_at(7*60-1))
+        self.assertEqual(0, node.green_at(19 * 60 + 1))
 
 
 

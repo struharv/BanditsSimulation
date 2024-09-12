@@ -2,14 +2,8 @@ import sys
 
 
 class Node:
-    cpu = 1.0
-    memory_mb = 1024
-    storage_mb = 5000
 
-    containers = []
     simulator = None
-
-    green_points = []
 
     def __init__(self, name: str, cpu: float, memory_mb: int, storage_mb: int, green_points: list[tuple[int, float]]):
         self.name = name
@@ -17,6 +11,7 @@ class Node:
         self.memory_mb = memory_mb
         self.storage_mb = storage_mb
         self.green_points = green_points
+        self.containers = []
 
     def set_simulator(self, simulator):
         self.simulator = simulator
@@ -30,10 +25,11 @@ class Node:
     def tick(self):
         pass
 
-    def compute_reward(self) -> int:
+    def compute_reward(self) -> float:
         reward = 0
         for container in self.containers:
-            pass
+        #print(f"reward {self.name} {len(self.containers)}\n")
+            reward += container.cpu_req * self.green_at(self.simulator.time)
 
         return reward
 
@@ -59,19 +55,20 @@ class Node:
                 return y
 
             if x < at_time:
-                if x >= pointStart:
-                    pointStart = x
-                    pointStartY = y
+                #if x >= pointStart:
+                pointStart = x
+                pointStartY = y
 
-            if x > at_time:
-                if x < pointEnd:
-                    pointEnd = x
-                    pointEndY = y
+            if x > at_time and pointEnd == sys.maxsize:
+                #if x < pointEnd:
+                pointEnd = x
+                pointEndY = y
 
         if pointEnd == sys.maxsize:
             return pointStartY
 
-        result = pointStartY + (float(pointEndY-pointStartY) / (pointEnd-pointStart)) * at_time
-        print(f"{pointStart}, {pointEnd}, {result}")
+        result = pointStartY + float(pointEndY-pointStartY) / (pointEnd-pointStart) * (at_time-pointStart)
+        #result = pointStartY + float(pointEndY-pointStartY)*at_time / float(pointEnd-pointStart)
+        print(f"start = {pointStart}, {pointStartY}; end = {pointEnd}, {pointEndY} result = {result}")
 
         return result
