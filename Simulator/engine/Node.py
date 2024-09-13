@@ -27,8 +27,8 @@ class Node:
 
     def compute_reward(self) -> float:
         reward = 0
+
         for container in self.containers:
-        #print(f"reward {self.name} {len(self.containers)}\n")
             reward += container.cpu_req * self.green_at(self.simulator.time)
 
         return reward

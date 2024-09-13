@@ -51,7 +51,7 @@ class Visualizer:
                 f.write(f"plot '{self.prefix}{node.name}.pts' with linespoints linestyle 1 linecolor rgb \"green\" notitle\n")
 
             f.write("set yrange[0:*]\n")
-            f.write(f"plot '{self.prefix}reward.pts' with points linestyle 1 title \"reward\"\n")
+            f.write(f"plot '{self.prefix}reward.pts' with points pointtype 0 title \"reward\"\n")
             f.write(f"plot '{self.prefix}reward_cummulative.pts' with lines linestyle 1 title \"cummulative reward\"\n")
             f.write("unset multiplot\n")
 

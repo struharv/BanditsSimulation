@@ -10,7 +10,7 @@ from visual.Visualizer import Visualizer
 
 
 class VisualizerTest(unittest.TestCase):
-    NODES = [Node("node1", 1, 1024, 500, [ (7 * 60, 0.0), (12 * 60, 0.5), (14 * 60, 0.5), (19 * 60, 0.0) ]),
+    NODES = [Node("node1", 1, 1024, 500, [(7 * 60, 0.0), (12 * 60, 0.5), (14 * 60, 0.5), (19 * 60, 0.0)]),
              Node("node2", 1, 1024, 500, [(0, 0.2), (Simulator.TIME_MAX, 0.2)]),
              Node("node3", 1, 1024, 500, [(5 * 60, 0.0), (10 * 60, 0.5), (12 * 60, 0.5), (17 * 60, 0.0)])
              ]
