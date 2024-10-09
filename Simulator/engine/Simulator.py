@@ -4,31 +4,32 @@ from engine.bandits.Bandit import Bandit
 
 
 class Simulator:
-    TIME_MAX = 60*24
-
+    TIME_MAX_MINUTES = 60 * 24
 
     def __init__(self, nodes: list[Node], containers: list[Container]):
         self.nodes = nodes
         self.containers = containers
-        self.bandit = None
+        self.orchestrator = None
         self.time = 0
 
         self.reward_history: list[tuple[int, float]] = []
         for node in nodes:
             node.set_simulator(self)
 
-    def add_bandit(self, bandit: Bandit):
-        self.bandit = bandit
-        bandit.set_simulator(self)
+    def set_orchestrator(self, orchestrator: Bandit):
+        self.orchestrator = orchestrator
+        orchestrator.set_simulator(self)
 
     def orchestrate(self):
-        if not self.bandit:
+        if not self.orchestrator:
             return
 
-        self.bandit.tick(self.time)
+        self.orchestrator.tick(self.time)
 
     def tick(self):
+
         self.orchestrate()
+
         reward = self.compute_reward()
         self.reward_history += [(self.time, reward)]
 
@@ -50,7 +51,7 @@ class Simulator:
 
     def simulate(self):
 
-        for self.time in range(self.TIME_MAX):
+        for self.time in range(self.TIME_MAX_MINUTES):
             self.tick()
 
     def total_reward(self) -> float:

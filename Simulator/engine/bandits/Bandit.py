@@ -1,7 +1,4 @@
-
-
-
-class Bandit:
+class Orchestrator:
     def __init__(self):
         self.simulator = None
 
@@ -10,3 +7,9 @@ class Bandit:
 
     def tick(self, time_s: int):
         pass
+
+class Bandit(Orchestrator):
+    pass
+
+
+

@@ -10,7 +10,7 @@ class RandomBandit(Bandit):
         pass
 
     def tick(self, time_s: int):
-        print("BANDIT tick!", self.simulator.TIME_MAX)
+        print("BANDIT tick!", self.simulator.TIME_MAX_MINUTES)
 
         self.simulator.reset()
         for container in self.simulator.containers:

@@ -7,6 +7,6 @@ plot 'node1.pts' with linespoints linestyle 1 linecolor rgb "green" notitle
 plot 'node2.pts' with linespoints linestyle 1 linecolor rgb "green" notitle
 plot 'node3.pts' with linespoints linestyle 1 linecolor rgb "green" notitle
 set yrange[0:*]
-plot 'reward.pts' with points linestyle 1 title "reward"
+plot 'reward.pts' with points pointtype 0 title "reward"
 plot 'reward_cummulative.pts' with lines linestyle 1 title "cummulative reward"
 unset multiplot

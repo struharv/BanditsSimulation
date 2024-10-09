@@ -9,8 +9,3 @@ class Container:
         self.cpu_req = cpu_req
         self.memory_req = memory_req
         self.storage_req = storage_req
-
-
-
-
-

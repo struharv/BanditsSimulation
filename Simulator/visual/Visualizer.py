@@ -1,6 +1,6 @@
 from engine.Node import Node
 from engine.Simulator import Simulator
-from PIL import Image, ImageDraw
+
 
 class Visualizer:
     NODE_WIDTH = 500
@@ -19,10 +19,8 @@ class Visualizer:
             for green_point in node.green_points:
                 f.write(f"{green_point[0]} {green_point[1]}\n")
 
-
-            if len(node.green_points) > 0 and node.green_points[len(node.green_points)-1][0] != self.simulator.TIME_MAX:
-                f.write(f"{self.simulator.TIME_MAX} 0\n")
-
+            if len(node.green_points) > 0 and node.green_points[len(node.green_points)-1][0] != self.simulator.TIME_MAX_MINUTES:
+                f.write(f"{self.simulator.TIME_MAX_MINUTES} 0\n")
 
     def draw(self, title="Bandit experiment" ):
 
@@ -45,7 +43,7 @@ class Visualizer:
             f.write(f"set multiplot layout {len(self.simulator.nodes)+2},1 title \"{title}\" font \",20\"\n")
 
             f.write("set yrange [0:1]\n")
-            f.write(f"set xrange [0:{Simulator.TIME_MAX}]\n")
+            f.write(f"set xrange [0:{Simulator.TIME_MAX_MINUTES}]\n")
 
             for node in self.simulator.nodes:
                 f.write(f"plot '{self.prefix}{node.name}.pts' with linespoints linestyle 1 linecolor rgb \"green\" notitle\n")

@@ -20,6 +20,10 @@ class Node:
         self.containers += [container]
 
     def reset_containers(self):
+        """
+        Undeploy all containers
+        :return:
+        """
         self.containers = []
 
     def tick(self):

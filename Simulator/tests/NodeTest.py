@@ -27,7 +27,7 @@ class NodeTest(unittest.TestCase):
 
 
     def test_node_green_two_points(self):
-        node = Node("abcx", 0, 0, 0, [(0, 0.5), (Simulator.TIME_MAX, 0.5)])
+        node = Node("abcx", 0, 0, 0, [(0, 0.5), (Simulator.TIME_MAX_MINUTES, 0.5)])
         self.assertEqual(0.5, node.green_at(15))
 
 

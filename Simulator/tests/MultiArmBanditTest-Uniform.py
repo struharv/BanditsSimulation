@@ -9,9 +9,9 @@ from visual.Visualizer import Visualizer
 
 
 class MultiArmBanditTest(unittest.TestCase):
-    NODES = [Node("node1", 1, 1024, 500, [(0, 0.1), (Simulator.TIME_MAX, 0.1)]),
-             Node("node2", 1, 1024, 500, [(0, 0.2), (Simulator.TIME_MAX, 0.2)]),
-             Node("node3", 1, 1024, 500, [(0, 0.5), (Simulator.TIME_MAX, 0.5)])
+    NODES = [Node("node1", 1, 1024, 500, [(0, 0.1), (Simulator.TIME_MAX_MINUTES, 0.1)]),
+             Node("node2", 1, 1024, 500, [(0, 0.2), (Simulator.TIME_MAX_MINUTES, 0.2)]),
+             Node("node3", 1, 1024, 500, [(0, 0.5), (Simulator.TIME_MAX_MINUTES, 0.5)])
              ]
 
     CONTAINERS = [Container("container1", 0.5, 256, 100),
@@ -35,7 +35,7 @@ class MultiArmBanditTest(unittest.TestCase):
         #self.NODES[0].deploy(self.CONTAINERS[0])
         #self.NODES[2].deploy(self.CONTAINERS[1])
 
-        simulator.add_bandit(MultiArmBandit(self.sets))
+        simulator.set_orchestrator(MultiArmBandit(self.sets))
         simulator.simulate()
 
         visualizer = Visualizer(simulator, prefix="MultiArmBandit-uniform_")

@@ -6,6 +6,7 @@ from engine.Node import Node
 from engine.Simulator import Simulator
 from engine.bandits.Bandit import Bandit
 
+
 def simple_max(Q, N, t):
     return np.random.choice(np.flatnonzero(Q == Q.max())) # breaking ties randomly
 
@@ -17,15 +18,15 @@ class MultiArmBandit(Bandit):
         self.alpha  = 0.1
 
         self.k = len(self.sets)
-        self.Q = np.ones(self.k) #* initial_Q  # initial Q
+        self.Q = np.ones(self.k) # initial Q
         self.N = np.zeros(self.k)  # initalize number of rewards given
 
-        self.rewards = np.zeros(Simulator.TIME_MAX)
-        self.actions = np.zeros(Simulator.TIME_MAX)
+        self.rewards = np.zeros(Simulator.TIME_MAX_MINUTES)
+        self.actions = np.zeros(Simulator.TIME_MAX_MINUTES)
 
 
     def tick(self, time_s: int):
-        print("BANDIT tick!", self.simulator.TIME_MAX)
+        print("BANDIT tick!", self.simulator.TIME_MAX_MINUTES)
 
         self.simulator.reset()
 
