@@ -1,81 +1,45 @@
-class User:
-    def __init__(self, name: str, processor):
-        self.name = name
-        self.processor = processor
+from random import random
 
-        self.task_size  = None
-        self.deadline = None
+import numpy as np
 
-
-    def generate(self, size=100, deadline = 100):
-        self.task_size = size
-        self.deadline = deadline
-
-    def process_locally(self):
-        return self.processor.process(self.task_size)
-
-    def proces_remotely(self, processor):
-        max_size_local = self.deadline * self.processor.computation_capacity / self.processor.d
-
-        if max_size_local >= self.task_size:
-            return self.process_locally()
-        else:
-
-            remote = self.task_size - max_size_local
-
-            return self.deadline + processor.process(remote)
+from Processor import Processor
+from Simulator import Simulator
+from User import User
 
 
-
-
-class Processor:
-    def __init__(self, name: str, computation_capacity: float):
-        self.name = name
-        self.computation_capacity = computation_capacity
-        self.d = 1
-
-    def process(self, task_size):
-        return task_size / self.computation_capacity
+def simple_max(Q, N, t):
+    return np.random.choice(np.flatnonzero(Q == Q.max()))  # breaking ties randomly
 
 
 class Bandit:
-    pass
+    def __init__(self, sets):
+        self.sets = sets
 
+        self.epsilon = 0.2
+        self.alpha = 0.1
 
-class Simulator:
-    def __init__(self, users : list[User] = None, servers : list[Processor] = [None]):
-        self.users = users
-        self.servers = servers
+        self.k = len(self.sets)
+        self.Q = np.ones(self.k)  # initial Q
+        self.N = np.zeros(self.k)  # initalize number of rewards given
 
-    def simulate(self):
+        self.rewards = np.zeros(Simulator.MAX_STEPS)
+        self.actions = np.zeros(Simulator.MAX_STEPS)
 
-        for t in range(100):
+    def tick(self, time_s: int):
+        print("BANDIT tick!", self.simulator.TIME_MAX_MINUTES)
 
-            for user in self.users:
-                user.generate()
+        # explore
+        arm = 0
+        if np.random.rand() < self.epsilon:
+            arm = random.randint(0, len(self.sets) - 1)
+        else:  # exploit
+            arm = simple_max(self.Q, self.N, 0)
 
-    def reward(self, action: list[int]):
-        result = 0
+        self.N[arm] += 1
+        self.deploy_set(self.sets[arm])
+        reward = self.simulator.compute_reward()
 
-        for ac in range(len(action)):
-
-            k = action[ac]
-            if k == -1: # process locally
-                latency = self.users[ac].process_locally()
-            else:
-                latency = self.users[ac].proces_remotely(self.servers[k])
-
-            result = max(result, latency)
-
-
-
-        return result
-
-
-
-
-
-
-
-
-
+        if self.alpha > 0:
+            self.Q[arm] = self.Q[arm] + (reward - self.Q[arm]) * self.alpha
+        else:
+            self.Q[arm] = self.Q[arm] + (reward - self.Q[arm]) / self.N[arm]

@@ -1,6 +1,7 @@
 import unittest
 
-from main import Simulator, User, Processor
+from Processor import Processor
+from main import Simulator, User
 
 
 class SimulatorTest(unittest.TestCase):
