@@ -7,7 +7,7 @@ from engine.bandits.RandomBandit import RandomBandit
 from visual.Visualizer import Visualizer
 
 
-class BanditTest(unittest.TestCase):
+class RandomBanditTest(unittest.TestCase):
 
     def create(self):
         self.NODES = [Node("node1", 1, 1024, 500, [(7 * 60, 0.0), (12 * 60, 0.5), (14 * 60, 0.5), (19 * 60, 0.0)]),

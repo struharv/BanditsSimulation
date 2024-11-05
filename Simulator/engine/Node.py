@@ -1,5 +1,7 @@
 import sys
 
+from engine.Container import Container
+
 
 class Node:
 
@@ -11,12 +13,12 @@ class Node:
         self.memory_mb = memory_mb
         self.storage_mb = storage_mb
         self.green_points = green_points
-        self.containers = []
+        self.containers: list[Container] = []
 
     def set_simulator(self, simulator):
         self.simulator = simulator
 
-    def deploy(self, container):
+    def deploy(self, container: Container):
         self.containers += [container]
 
     def reset_containers(self):
