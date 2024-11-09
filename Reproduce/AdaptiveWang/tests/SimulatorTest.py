@@ -2,6 +2,7 @@ import unittest
 
 from Processor import Processor
 from main import Simulator, User
+from optimizers.Optimizer import Optimizer
 
 
 class SimulatorTest(unittest.TestCase):
@@ -26,7 +27,6 @@ class SimulatorTest(unittest.TestCase):
                  User("user3", Processor("processor3", 10)),
                  ]
 
-
         servers = [Processor("server1", 100),
                    Processor("server2", 100),
                    Processor("server3", 100)]
@@ -35,21 +35,21 @@ class SimulatorTest(unittest.TestCase):
         users[1].generate(10)
         users[2].generate(10)
 
-        simulator = Simulator(users, servers)
-        reward = simulator.reward([-1, -1, -1])
+        optimizer = Optimizer(users, servers, None)
+
+        reward = optimizer.reward([-1, -1, -1])
         self.assertEqual(1, reward)
 
-        reward = simulator.reward([0, 0, 0])
+        reward = optimizer.reward([0, 0, 0])
         self.assertEqual(1, reward)
 
         users[0].generate(100, deadline=1)
         users[1].generate(100, deadline=1)
         users[2].generate(100, deadline=1)
 
-        reward = simulator.reward([0, 0, 0])
+        reward = optimizer.reward([-1, -1, -1])
+        self.assertEqual(10, reward)
+
+        reward = optimizer.reward([0, 0, 0])
         self.assertEqual(1.9, reward)
 
-
-
-if __name__ == '__main__':
-    unittest.main()
