@@ -6,6 +6,7 @@ from optimizers.Optimizer import Optimizer
 
 
 class SimulatorTest(unittest.TestCase):
+
     def test_processing(self):
         user1 = User("user1", Processor("processor1", 10))
         user1.generate(10)

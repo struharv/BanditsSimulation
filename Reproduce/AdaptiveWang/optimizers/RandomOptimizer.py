@@ -11,4 +11,7 @@ class RandomOptimizer(Optimizer):
         print("RandomOptimizer: tick")
 
         arm = self.arms[0]
-        print(arm)
+
+        res_reward = self.reward(arm)
+
+        return res_reward

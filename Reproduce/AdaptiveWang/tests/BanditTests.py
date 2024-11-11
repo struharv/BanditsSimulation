@@ -1,8 +1,10 @@
 import unittest
 
 from Simulator import Simulator
+from generators.RandomTaskGenerator import RandomTaskGenerator
 from main import User, Processor
 from optimizers.RandomOptimizer import RandomOptimizer
+from visualizer.Visualizer import Visualizer
 
 
 class BanditTest(unittest.TestCase):
@@ -45,9 +47,17 @@ class BanditTest(unittest.TestCase):
             [-1, -1, 0],
         ]
 
+        users[0].generate(10)
+        users[1].generate(10)
+        users[2].generate(10)
+
+        generator = RandomTaskGenerator(users, 1, 5, 100)
         optimizer = RandomOptimizer(users, servers, arms)
-        simulator = Simulator(optimizer)
+        simulator = Simulator(optimizer, generator)
         simulator.simulate()
+
+        visualizer = Visualizer(simulator)
+        visualizer.visualize()
 
 
 
