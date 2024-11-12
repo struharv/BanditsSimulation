@@ -4,8 +4,8 @@ class Container:
     storage_mb = 0
     name = ""
 
-    def __init__(self, name: str, cpu_req: float, memory_req: int, storage_req: int):
+    def __init__(self, name: str, cpu: float, memory_mb: int, storage_mb: int):
         self.name = name
-        self.cpu = cpu_req
-        self.memory_mb = memory_req
-        self.storage_mb = storage_req
+        self.cpu = cpu
+        self.memory_mb = memory_mb
+        self.storage_mb = storage_mb

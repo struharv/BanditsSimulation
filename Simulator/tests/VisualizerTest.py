@@ -1,3 +1,4 @@
+import inspect
 import unittest
 
 from engine.Container import Container
@@ -29,7 +30,7 @@ class VisualizerTest(unittest.TestCase):
         simulator.set_orchestrator(Orchestrator())
         simulator.simulate()
 
-        visualizer = Visualizer(simulator)
+        visualizer = Visualizer(simulator, inspect.currentframe().f_code.co_name)
         visualizer.draw()
 
 

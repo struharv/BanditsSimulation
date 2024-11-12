@@ -34,9 +34,9 @@ class Node:
         self.containers = []
 
     def tick(self):
-        self.cpu_history += [0]
-        self.memory_mb_history += [0]
-        self.storage_mb_history += [0]
+        self.cpu_history += [self.now_cpu_used()]
+        self.memory_mb_history += [self.now_memory_mb_used()]
+        self.storage_mb_history += [self.now_storage_mb_used()]
 
 
     def compute_reward(self) -> float:
@@ -51,4 +51,20 @@ class Node:
     def now_cpu_used(self):
         res = 0
         for container in self.containers:
-               res += container.cpu
+            res += container.cpu
+
+        return res
+
+    def now_memory_mb_used(self):
+        res = 0
+        for container in self.containers:
+            res += container.memory_mb
+
+        return res
+
+    def now_storage_mb_used(self):
+        res = 0
+        for container in self.containers:
+            res += container.storage_mb
+
+        return res
