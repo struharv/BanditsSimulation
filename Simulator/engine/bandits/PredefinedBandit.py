@@ -2,10 +2,10 @@ import random
 
 from engine.Node import Node
 from engine.Simulator import Simulator
-from engine.bandits.Bandit import Bandit
+from engine.bandits.Orchestrator import Orchestrator
 
 
-class PredefinedBandit(Bandit):
+class PredefinedBandit(Orchestrator):
     def __init__(self, definition: list[tuple[int, int]]):
         self.definition = definition
 

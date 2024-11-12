@@ -2,10 +2,10 @@ import random
 
 from engine.Node import Node
 from engine.Simulator import Simulator
-from engine.bandits.Bandit import Bandit
+from engine.bandits.Orchestrator import Orchestrator
 
 
-class RandomBandit(Bandit):
+class RandomBandit(Orchestrator):
     def __init__(self):
         pass
 

@@ -4,7 +4,7 @@ import numpy as np
 
 from engine.Node import Node
 from engine.Simulator import Simulator
-from engine.bandits.Bandit import Bandit
+from engine.bandits.Orchestrator import Bandit
 
 
 def simple_max(Q, N, t):

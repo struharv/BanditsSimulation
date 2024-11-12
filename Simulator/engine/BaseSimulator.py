@@ -1,9 +1,11 @@
 from engine.Container import Container
 from engine.Node import Node
-from engine.bandits.Bandit import Bandit
+from engine.bandits.Orchestrator import Orchestrator
 
 
 class BaseSimulator:
+    TIME_MAX_MINUTES = 60 * 24
+
     def __init__(self, nodes: list[Node], containers: list[Container]):
         self.nodes = nodes
         self.containers = containers
@@ -14,12 +16,13 @@ class BaseSimulator:
         for node in nodes:
             node.set_simulator(self)
 
-    def set_orchestrator(self, orchestrator: Bandit):
+    def set_orchestrator(self, orchestrator: Orchestrator):
         self.orchestrator = orchestrator
         orchestrator.set_simulator(self)
 
     def tick(self):
-        pass
+        for node in self.nodes:
+            node.tick()
 
     def reset(self):
         for node in self.nodes:
@@ -27,3 +30,6 @@ class BaseSimulator:
 
     def simulate(self):
         pass
+
+    def now(self) -> int:
+        return self.time

@@ -8,8 +8,7 @@ class Orchestrator:
     def tick(self, time_s: int):
         pass
 
-class Bandit(Orchestrator):
-    pass
+
 
 
 
