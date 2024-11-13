@@ -9,7 +9,7 @@ from engine.Simulator import Simulator
 class SimulatorTest(unittest.TestCase):
 
     def test_Simulator(self):
-        nodes = [ElectricNode("node1", 1, 1024, 500, [(7 * 60, 0.0), (12 * 60, 0.5), (14 * 60, 0.5)]),
+        nodes = [ElectricNode("node1", 1, 1024, 500, [(7 * 60 * 60, 0.0), (12 * 60* 60, 0.5), (14 * 60* 60, 0.5)]),
                  ElectricNode("node2", 1, 1024, 500, []),
                  ElectricNode("node3", 1, 1024, 500, [])]
 

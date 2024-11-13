@@ -11,7 +11,7 @@ class Visualizer:
     def __init__(self, simulator: Simulator, prefix: str):
         self.simulator = simulator
         self.prefix = prefix
-        self.test_dir = f"../plots/{self.prefix}"
+        self.test_dir = f"plots/{self.prefix}"
         if not os.path.isdir(self.test_dir):
             os.mkdir(self.test_dir)
 
@@ -32,30 +32,64 @@ class Visualizer:
         for node in self.simulator.nodes:
             self.draw_node(node)
 
-        with open(f"{self.test_dir}/reward.pts", "w") as f:
-            for reward in self.simulator.reward_history:
-                f.write(f"{reward[0]} {reward[1]}\n")
+        self.dump_reward_history()
+        self.dump_reward_cummulative()
+        self.dump_events()
 
+        self.dump_resources()
+
+        self.make_plot(title)
+
+    def dump_resources(self):
+        for node in self.simulator.nodes:
+            with open(f"{self.test_dir}/{node.name}_resources.pts", "w") as f:
+                for time in range(Simulator.TIME_MAX_MINUTES):
+                    f.write(
+                        f"{time} {node.cpu_history[time]} {node.memory_mb_history[time]} {node.storage_mb_history[time]} {node.cpu_history[time]/node.cpu} {node.memory_mb_history[time]/node.memory_mb} {node.storage_mb_history[time]/node.storage_mb}  \n")
+
+    def make_plot(self, title):
+        with open(f"{self.test_dir}/simulation.plt", "w") as f:
+            f.write("set terminal pngcairo enhanced font 'Times New Roman,12.0' size 1024,768\n")
+            f.write("set output 'output.png\n")
+
+            f.write("set key left top\n")
+            f.write(f"set multiplot layout {len(self.simulator.nodes) + 1}, 2 title \"{title}\" font \",20\"\n")
+
+            f.write("set yrange [0:1]\n")
+            f.write(f"set xrange [0:{Simulator.TIME_MAX_MINUTES}]\n")
+            f.write("set format x \" \" \n")
+
+            for node in self.simulator.nodes:
+                f.write("set ylabel 'xlabel'\n")
+                f.write(f"set title 'Green Energy {node.name}'\n")
+                f.write(f"plot '{node.name}.pts' with linespoints linestyle 1 linecolor rgb \"green\" notitle\n")
+                f.write(f"set title 'Resources {node.name}'\n")
+                f.write(f"plot '{node.name}_resources.pts' using 1:4  with points pointtype 0 linecolor rgb \"black\" notitle, "
+                        f"     '{node.name}_resources.pts' using 1:5  with points pointtype 0 linecolor rgb \"black\" notitle, \n")
+
+
+            f.write("set yrange[0:*]\n")
+            f.write(f"set title 'Reward'\n")
+            f.write(f"plot 'reward.pts' with points pointtype 0 title \"reward\"\n")
+            f.write(f"set title 'Cumulative reward'\n")
+            f.write(f"plot 'reward_cummulative.pts' with lines linestyle 1 title \"cumulative reward\"\n")
+            f.write("unset multiplot\n")
+
+    def dump_reward_cummulative(self):
         with open(f"{self.test_dir}/reward_cummulative.pts", "w") as f:
             cummulative_reward = 0
             for reward in self.simulator.reward_history:
                 cummulative_reward += reward[1]
                 f.write(f"{reward[0]} {cummulative_reward}\n")
 
-        with open(f"{self.test_dir}/simulation.plt", "w") as f:
-            f.write("set margins 10,10,0,0\n")
-            f.write("set key left top\n")
-            f.write(f"set multiplot layout {len(self.simulator.nodes)+2},1 title \"{title}\" font \",20\"\n")
+    def dump_reward_history(self):
+        with open(f"{self.test_dir}/reward.pts", "w") as f:
+            for reward in self.simulator.reward_history:
+                f.write(f"{reward[0]} {reward[1]}\n")
 
-            f.write("set yrange [0:1]\n")
-            f.write(f"set xrange [0:{Simulator.TIME_MAX_MINUTES}]\n")
-
-            for node in self.simulator.nodes:
-                f.write(f"plot '{node.name}.pts' with linespoints linestyle 1 linecolor rgb \"green\" notitle\n")
-
-            f.write("set yrange[0:*]\n")
-            f.write(f"plot 'reward.pts' with points pointtype 0 title \"reward\"\n")
-            f.write(f"plot 'reward_cummulative.pts' with lines linestyle 1 title \"cummulative reward\"\n")
-            f.write("unset multiplot\n")
+    def dump_events(self):
+        with open(f"{self.test_dir}/events.pts", "w") as f:
+            for event in self.simulator.orchestration_events:
+                f.write(f"{event[0]} {event[1]} {event[2]} \n")
 
 

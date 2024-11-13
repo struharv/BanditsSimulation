@@ -1,16 +1,17 @@
+import logging
 import random
 
 import numpy as np
 
 from engine.Node import Node
 from engine.Simulator import Simulator
-from engine.bandits.Orchestrator import Bandit
+from engine.bandits.Orchestrator import Orchestrator
 
 
 def simple_max(Q, N, t):
     return np.random.choice(np.flatnonzero(Q == Q.max())) # breaking ties randomly
 
-class MultiArmBandit(Bandit):
+class MultiArmBandit(Orchestrator):
     def __init__(self, sets):
         self.sets = sets
 
@@ -26,7 +27,7 @@ class MultiArmBandit(Bandit):
 
 
     def tick(self, time_s: int):
-        print("BANDIT tick!", self.simulator.TIME_MAX_MINUTES)
+        logging.debug("BANDIT tick!", self.simulator.TIME_MAX_MINUTES)
 
         self.simulator.reset()
 

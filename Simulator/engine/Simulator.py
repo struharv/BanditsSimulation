@@ -1,3 +1,5 @@
+import logging
+
 from engine.BaseSimulator import BaseSimulator
 from engine.Container import Container
 from engine.Node import Node
@@ -22,7 +24,7 @@ class Simulator(BaseSimulator):
         reward = self.compute_reward()
         self.reward_history += [(self.time, reward)]
 
-        print(f"tick {self.time}")
+        logging.debug(f"tick {self.time}")
 
     def compute_reward(self) -> float:
         reward = 0

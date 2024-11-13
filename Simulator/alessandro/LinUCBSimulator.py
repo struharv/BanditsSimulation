@@ -1,3 +1,6 @@
+import logging
+from logging import Logger
+
 from engine.BaseSimulator import BaseSimulator
 from engine.Container import Container
 from engine.ElectricNode import ElectricNode
@@ -11,8 +14,11 @@ class LinUCBSimulator(BaseSimulator):
 
 
     def tick(self):
-        print("LinUCBSimulator.tick")
+        super().tick()
 
+        logging.debug("LinUCBSimulator.tick")
+        if self.now() % 10:
+            self.orchestration_event(self.nodes[0].name, "XXX")
 
     def update_nodes(self):
         for node in self.nodes:
@@ -26,5 +32,3 @@ class LinUCBSimulator(BaseSimulator):
             self.update_nodes()
             self.tick()
 
-        # observe context
-        pass

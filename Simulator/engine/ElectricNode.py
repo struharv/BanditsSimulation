@@ -1,3 +1,4 @@
+import logging
 import sys
 
 from engine.Container import Container
@@ -19,11 +20,11 @@ class ElectricNode(Node):
 
     def tick(self):
         super().tick()
-        print(f"Node {self.name} tick")
+        logging.debug(f"Node {self.name} tick")
         if self.simulator:
             self.green_energy_history += [self.green_at(self.simulator.now())]
         else:
-            print(f"WARNING: No simulator assigned to node {self.name}")
+            logging.debug(f"WARNING: No simulator assigned to node {self.name}")
 
 
 
@@ -62,6 +63,6 @@ class ElectricNode(Node):
 
         result = pointStartY + float(pointEndY-pointStartY) / (pointEnd-pointStart) * (at_time-pointStart)
         #result = pointStartY + float(pointEndY-pointStartY)*at_time / float(pointEnd-pointStart)
-        print(f"start = {pointStart}, {pointStartY}; end = {pointEnd}, {pointEndY} result = {result}")
+        logging.debug(f"start = {pointStart}, {pointStartY}; end = {pointEnd}, {pointEndY} result = {result}")
 
         return result

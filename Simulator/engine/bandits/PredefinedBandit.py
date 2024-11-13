@@ -1,4 +1,6 @@
+import logging
 import random
+from logging import Logger
 
 from engine.Node import Node
 from engine.Simulator import Simulator
@@ -10,7 +12,7 @@ class PredefinedBandit(Orchestrator):
         self.definition = definition
 
     def tick(self, time_s: int):
-        print("BANDIT tick!", self.simulator.TIME_MAX_MINUTES)
+        logging.debug("BANDIT tick!", self.simulator.TIME_MAX_MINUTES)
         self.simulator.reset()
 
         for container in self.simulator.containers:
