@@ -29,7 +29,11 @@ class NewSimulator(BaseSimulator):
 
     def simulate(self):
         # init
+        print("xxxx")
         super().init()
+
+        if self.orchestrator:
+            self.orchestrator.init()
         super().simulate()
 
         for self.time in range(self.TIME_MAX_SECONDS):

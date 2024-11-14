@@ -1,7 +1,10 @@
+import random
 import unittest
+
 
 from alessandro.NewSimulator import NewSimulator
 from alessandro.tests.Infrastructure import Infrastructure
+from engine.Simulator import Simulator
 from visual.Visualizer import Visualizer
 from parameterized import parameterized
 
@@ -24,3 +27,13 @@ class JustTest(unittest.TestCase):
 
         visualizer = Visualizer(simulatorUCB, test_name)
         visualizer.draw()
+
+    @staticmethod
+    def random_init(simulator: Simulator):
+        buf_containers = []
+        for cont in simulator.containers:
+            buf_containers += [cont]
+
+        while len(buf_containers) > 0:
+            if simulator.migrate(buf_containers[0].name, random.choice(simulator.nodes).name):
+                del buf_containers[0]

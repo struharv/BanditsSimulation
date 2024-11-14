@@ -16,14 +16,7 @@ from parameterized import parameterized
 
 
 
-def random_init(simulator: Simulator):
-    buf_containers = []
-    for cont in simulator.containers:
-        buf_containers += [cont]
 
-    while len(buf_containers) > 0:
-        if simulator.migrate(buf_containers[0].name, random.choice(simulator.nodes).name):
-            del buf_containers[0]
 
 
 class HeuristicTest(JustTest):
@@ -37,7 +30,7 @@ class HeuristicTest(JustTest):
             if simulator.now() % HeuristicTest.DECISION_EACH_SEC == 0:
                 simulator.migrate(random.choice(containers).name,  random.choice(nodes).name)
 
-        self.do_simulation(nodes, containers, random_init, do_tick, inspect.currentframe().f_code.co_name+"_"+name)
+        self.do_simulation(nodes, containers, JustTest.random_init, do_tick, inspect.currentframe().f_code.co_name+"_"+name)
 
     def test_random_lowest_reward_first(self):
         nodes, containers = Infrastructure.make_infrastructure()
@@ -49,5 +42,5 @@ class HeuristicTest(JustTest):
 
                 simulator.migrate(random.choice(containers).name, random.choice(nodes).name)
 
-        self.do_simulation(nodes, containers, random_init, do_tick, inspect.currentframe().f_code.co_name)
+        self.do_simulation(nodes, containers, JustTest.random_init, do_tick, inspect.currentframe().f_code.co_name)
 

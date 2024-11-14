@@ -66,3 +66,6 @@ class ElectricNode(Node):
         logging.debug(f"start = {pointStart}, {pointStartY}; end = {pointEnd}, {pointEndY} result = {result}")
 
         return result
+
+    def get_context(self, time_s: int):
+        return [self.green_at(time_s), 0, 0]

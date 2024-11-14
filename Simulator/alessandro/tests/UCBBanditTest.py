@@ -48,20 +48,12 @@ class NaiveBanditTest(JustTest):
 
         return nodes, containers
 
+    @parameterized.expand(JustTest.TEST_SUITE)
+    def test_UCB_bandit(self, name, infrastructure):
 
-    def test_UCB_bandit(self):
-        name = "base"
-        nodes, containers = self.make_infrastructure()
+        nodes, containers = infrastructure
 
-        sets = [
-            [(nodes[0], [containers[0], containers[1], containers[2], containers[3], containers[4]]), ],
-            [(nodes[1], [containers[0], containers[1], containers[2], containers[3], containers[4]]), ],
-            [(nodes[2], [containers[0], containers[1], containers[2], containers[3], containers[4]]), ],
-            [(nodes[0], [containers[0], containers[1]]), (nodes[1], [containers[1], containers[3], containers[4]])],
-            [(nodes[1], [containers[0], containers[1]]), (nodes[2], [containers[1], containers[3], containers[4]])],
-            [(nodes[0], [containers[0], containers[1]]), (nodes[2], [containers[1], containers[3], containers[4]])]
-        ]
 
         bandit = UCBBandit()
-        self.do_simulation(nodes, containers, None, None, inspect.currentframe().f_code.co_name + "_" + name,
+        self.do_simulation(nodes, containers, JustTest.random_init, None, inspect.currentframe().f_code.co_name + "_" + name,
                            orchestrator=bandit)

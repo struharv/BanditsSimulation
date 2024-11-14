@@ -89,3 +89,6 @@ class Node:
             return False
 
         return True
+
+    def get_context(self):
+        pass

@@ -1,3 +1,5 @@
 
 *.pyc
 /Simulator/.idea
+/LinUCB/data/ml-100k
+/LinUCB/data/ml-100k
