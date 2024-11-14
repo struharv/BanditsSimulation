@@ -16,19 +16,14 @@ class LinUCBSimulator(BaseSimulator):
     def tick(self):
         super().tick()
 
-        logging.debug("LinUCBSimulator.tick")
-        if self.now() % 10:
-            self.orchestration_event(self.nodes[0].name, "XXX")
+        reward = self.compute_reward()
+        self.reward_history += [(self.time, reward)]
 
-    def update_nodes(self):
-        for node in self.nodes:
-            node.tick()
 
 
     def simulate(self):
         # init
 
-        for self.time in range(self.TIME_MAX_MINUTES):
-            self.update_nodes()
+        for self.time in range(self.TIME_MAX_SECONDS):
             self.tick()
 

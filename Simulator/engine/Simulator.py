@@ -26,26 +26,15 @@ class Simulator(BaseSimulator):
 
         logging.debug(f"tick {self.time}")
 
-    def compute_reward(self) -> float:
-        reward = 0
-        for node in self.nodes:
-            reward += node.compute_reward()
 
-        return reward
 
     def max_reward(self):
         pass
 
     def simulate(self):
 
-        for self.time in range(self.TIME_MAX_MINUTES):
+        for self.time in range(self.TIME_MAX_SECONDS):
             self.tick()
 
-    def total_reward(self) -> float:
-        result = 0
-        for reward in self.reward_history:
-            result += reward
-
-        return result
 
 

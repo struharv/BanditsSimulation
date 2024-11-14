@@ -2,12 +2,17 @@ import logging
 from logging import Logger
 
 from engine.Container import Container
+from engine.Exceptions.NoElementFoundException import NoElementFoundException
 from engine.Node import Node
 from engine.bandits.Orchestrator import Orchestrator
 
 
 class BaseSimulator:
-    TIME_MAX_MINUTES = 24*60*60
+    HOUR_SECONDS = 60*60
+    TIME_MAX_SECONDS = 24 * HOUR_SECONDS
+
+
+
     EVENT_MIGRATE = "migration"
 
     def __init__(self, nodes: list[Node], containers: list[Container]):
@@ -57,4 +62,65 @@ class BaseSimulator:
 
     def orchestration_event(self, node_name: str, event: str):
         self.orchestration_events += [(self.now(), node_name, event)]
+
+    def can_migrate(self, container, node):
+
+        pass
+
+    def migrate(self, container_name, node_name) -> bool:
+        old_node = self.find_container_in_node(container_name)
+        container = self.find_container(container_name)
+        if not container:
+            raise NoElementFoundException(f"Container {container_name} is not found.")
+
+        new_node = self.find_node(node_name)
+        if not new_node:
+            raise NoElementFoundException(f"Node {node_name} is not found.")
+
+        if not new_node.can_accommodate(container):
+            return False
+
+        if old_node:
+            old_node.undeploy(container_name)
+
+        new_node.deploy(container)
+
+        return True
+
+
+    def find_container_in_node(self, container_name: str) -> Node:
+        for node in self.nodes:
+            for container in node.containers:
+                if container.name == container_name:
+                    return node
+
+        return None
+
+    def find_node(self, node_name: str) -> Node:
+        for node in self.nodes:
+            if node_name == node.name:
+                return node
+
+        return None
+
+    def find_container(self, container_name: str) -> Container:
+        for container in self.containers:
+            if container_name == container.name:
+                return container
+
+        return None
+
+    def compute_reward(self) -> float:
+        reward = 0
+        for node in self.nodes:
+            reward += node.compute_reward()
+
+        return reward
+
+    def total_reward(self) -> float:
+        result = 0
+        for reward in self.reward_history:
+            result += reward
+
+        return result
 

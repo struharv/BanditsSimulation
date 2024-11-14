@@ -26,6 +26,16 @@ class Node:
     def deploy(self, container: Container):
         self.containers += [container]
 
+    def undeploy(self, container_name) -> bool:
+        for index_container in range(len(self.containers)):
+            if container_name == self.containers[index_container].name:
+                del self.containers[index_container]
+
+                return True
+
+        return False
+
+
     def reset_containers(self):
         """
         Undeploy all containers
@@ -47,7 +57,6 @@ class Node:
 
         return reward
 
-
     def now_cpu_used(self):
         res = 0
         for container in self.containers:
@@ -68,3 +77,15 @@ class Node:
             res += container.storage_mb
 
         return res
+
+    def can_accommodate(self, container: Container) -> bool:
+        if self.now_cpu_used() + container.cpu > self.cpu:
+            return False
+
+        if self.now_memory_mb_used() + container.memory_mb > self.memory_mb:
+            return False
+
+        if self.now_storage_mb_used() + container.storage_mb > self.storage_mb:
+            return False
+
+        return True

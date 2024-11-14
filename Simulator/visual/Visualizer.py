@@ -24,8 +24,8 @@ class Visualizer:
             for green_point in node.green_points:
                 f.write(f"{green_point[0]} {green_point[1]}\n")
 
-            if len(node.green_points) > 0 and node.green_points[len(node.green_points)-1][0] != self.simulator.TIME_MAX_MINUTES:
-                f.write(f"{self.simulator.TIME_MAX_MINUTES} 0\n")
+            if len(node.green_points) > 0 and node.green_points[len(node.green_points)-1][0] != self.simulator.TIME_MAX_SECONDS:
+                f.write(f"{self.simulator.TIME_MAX_SECONDS} 0\n")
 
     def draw(self, title="Bandit experiment" ):
 
@@ -43,9 +43,9 @@ class Visualizer:
     def dump_resources(self):
         for node in self.simulator.nodes:
             with open(f"{self.test_dir}/{node.name}_resources.pts", "w") as f:
-                for time in range(Simulator.TIME_MAX_MINUTES):
-                    f.write(
-                        f"{time} {node.cpu_history[time]} {node.memory_mb_history[time]} {node.storage_mb_history[time]} {node.cpu_history[time]/node.cpu} {node.memory_mb_history[time]/node.memory_mb} {node.storage_mb_history[time]/node.storage_mb}  \n")
+                for time in range(Simulator.TIME_MAX_SECONDS):
+                        f.write(
+                            f"{time} {node.cpu_history[time]} {node.memory_mb_history[time]} {node.storage_mb_history[time]} {node.cpu_history[time]/node.cpu} {node.memory_mb_history[time]/node.memory_mb} {node.storage_mb_history[time]/node.storage_mb}  \n")
 
     def make_plot(self, title):
         with open(f"{self.test_dir}/simulation.plt", "w") as f:
@@ -56,7 +56,7 @@ class Visualizer:
             f.write(f"set multiplot layout {len(self.simulator.nodes) + 1}, 2 title \"{title}\" font \",20\"\n")
 
             f.write("set yrange [0:1]\n")
-            f.write(f"set xrange [0:{Simulator.TIME_MAX_MINUTES}]\n")
+            f.write(f"set xrange [0:{Simulator.TIME_MAX_SECONDS}]\n")
             f.write("set format x \" \" \n")
 
             for node in self.simulator.nodes:
@@ -64,8 +64,9 @@ class Visualizer:
                 f.write(f"set title 'Green Energy {node.name}'\n")
                 f.write(f"plot '{node.name}.pts' with linespoints linestyle 1 linecolor rgb \"green\" notitle\n")
                 f.write(f"set title 'Resources {node.name}'\n")
-                f.write(f"plot '{node.name}_resources.pts' using 1:4  with points pointtype 0 linecolor rgb \"black\" notitle, "
-                        f"     '{node.name}_resources.pts' using 1:5  with points pointtype 0 linecolor rgb \"black\" notitle, \n")
+                f.write(f"plot '{node.name}_resources.pts' using 1:5  with points pointtype 0 linecolor rgb \"black\" title 'CPU', "
+                        f"     '{node.name}_resources.pts' using 1:6  with points pointtype 0 linecolor rgb \"brown\" title 'memory', "
+                        f"     '{node.name}_resources.pts' using 1:7  with points pointtype 0 linecolor rgb \"magenta\" title 'storage' \n")
 
 
             f.write("set yrange[0:*]\n")
