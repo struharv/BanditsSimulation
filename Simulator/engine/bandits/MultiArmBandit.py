@@ -16,7 +16,7 @@ class MultiArmBandit(Orchestrator):
         self.sets = sets
 
         self.epsilon = 0.2
-        self.alpha  = 0.1
+        self.alpha = 0.1
 
         self.k = len(self.sets)
         self.Q = np.ones(self.k) # initial Q
@@ -27,7 +27,9 @@ class MultiArmBandit(Orchestrator):
 
 
     def tick(self, time_s: int):
-        logging.debug("BANDIT tick!", self.simulator.TIME_MAX_SECONDS)
+        if time_s % 30 != 0:
+            return
+        print("BANDIT tick!", self.simulator.TIME_MAX_SECONDS)
 
         self.simulator.reset()
 
@@ -47,18 +49,12 @@ class MultiArmBandit(Orchestrator):
         else:
             self.Q[arm] = self.Q[arm] + (reward - self.Q[arm]) / self.N[arm]
 
-
-
-
     def deploy_set(self, deploy_set):
         for deploy in deploy_set:
             node = deploy[0]
 
             for container in deploy[1]:
                 node.deploy(container)
-
-
-
 
     def random_node(self) -> Node:
         nodes_len = len(self.simulator.nodes)

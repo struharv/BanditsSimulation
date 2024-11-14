@@ -49,7 +49,7 @@ class Visualizer:
 
     def make_plot(self, title):
         with open(f"{self.test_dir}/simulation.plt", "w") as f:
-            f.write("set terminal pngcairo enhanced font 'Times New Roman,12.0' size 1024,768\n")
+            f.write("set terminal pngcairo enhanced font 'Times New Roman,12.0' size 1724,768\n")
             f.write("set output 'output.png\n")
 
             f.write("set key left top\n")
@@ -60,18 +60,20 @@ class Visualizer:
             f.write("set format x \" \" \n")
 
             for node in self.simulator.nodes:
-                f.write("set ylabel 'xlabel'\n")
                 f.write(f"set title 'Green Energy {node.name}'\n")
+                f.write("set ylabel 'Green Energy %'\n")
                 f.write(f"plot '{node.name}.pts' with linespoints linestyle 1 linecolor rgb \"green\" notitle\n")
+
                 f.write(f"set title 'Resources {node.name}'\n")
-                f.write(f"plot '{node.name}_resources.pts' using 1:5  with points pointtype 0 linecolor rgb \"black\" title 'CPU', "
-                        f"     '{node.name}_resources.pts' using 1:6  with points pointtype 0 linecolor rgb \"brown\" title 'memory', "
-                        f"     '{node.name}_resources.pts' using 1:7  with points pointtype 0 linecolor rgb \"magenta\" title 'storage' \n")
+                f.write("set ylabel 'CPU %'\n")
+                f.write(f"plot '{node.name}_resources.pts' using 1:5  with points pointtype 0 linecolor rgb \"black\" title 'CPU'\n")
+                        #f"     '{node.name}_resources.pts' using 1:6  with points pointtype 0 linecolor rgb \"brown\" title 'memory', "
+                        #f"     '{node.name}_resources.pts' using 1:7  with points pointtype 0 linecolor rgb \"magenta\" title 'storage' \n")
 
 
             f.write("set yrange[0:*]\n")
             f.write(f"set title 'Reward'\n")
-            f.write(f"plot 'reward.pts' with points pointtype 0 title \"reward\"\n")
+            f.write(f"plot 'reward.pts'  with points pointtype 0 title \"reward\"\n")
             f.write(f"set title 'Cumulative reward'\n")
             f.write(f"plot 'reward_cummulative.pts' with lines linestyle 1 title \"cumulative reward\"\n")
             f.write("unset multiplot\n")

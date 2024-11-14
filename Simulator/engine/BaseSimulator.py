@@ -33,7 +33,9 @@ class BaseSimulator:
 
     def set_orchestrator(self, orchestrator: Orchestrator):
         self.orchestrator = orchestrator
-        orchestrator.set_simulator(self)
+
+        if self.orchestrator:
+            orchestrator.set_simulator(self)
 
     def set_action_tick(self, action_tick):
         self.action_tick = action_tick
@@ -55,7 +57,8 @@ class BaseSimulator:
             node.reset_containers()
 
     def simulate(self):
-        pass
+        if self.action_init:
+            self.action_init(self)
 
     def now(self) -> int:
         return self.time

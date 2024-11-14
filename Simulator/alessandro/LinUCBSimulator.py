@@ -16,6 +16,9 @@ class LinUCBSimulator(BaseSimulator):
     def tick(self):
         super().tick()
 
+        if self.orchestrator:
+            self.orchestrator.tick(self.now())
+
         reward = self.compute_reward()
         self.reward_history += [(self.time, reward)]
 
@@ -23,6 +26,7 @@ class LinUCBSimulator(BaseSimulator):
 
     def simulate(self):
         # init
+        super().simulate()
 
         for self.time in range(self.TIME_MAX_SECONDS):
             self.tick()
