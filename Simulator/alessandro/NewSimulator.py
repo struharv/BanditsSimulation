@@ -7,10 +7,13 @@ from engine.ElectricNode import ElectricNode
 from engine.Node import Node
 
 
-class LinUCBSimulator(BaseSimulator):
+class NewSimulator(BaseSimulator):
 
     def __init__(self, nodes: list[ElectricNode], containers: list[Container]):
         super().__init__(nodes, containers)
+
+        if self.action_tick:
+            self.action_init()
 
 
     def tick(self):
@@ -26,6 +29,7 @@ class LinUCBSimulator(BaseSimulator):
 
     def simulate(self):
         # init
+        super().init()
         super().simulate()
 
         for self.time in range(self.TIME_MAX_SECONDS):

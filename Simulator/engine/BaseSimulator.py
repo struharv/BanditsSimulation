@@ -56,6 +56,9 @@ class BaseSimulator:
         for node in self.nodes:
             node.reset_containers()
 
+    def init(self):
+        pass
+
     def simulate(self):
         if self.action_init:
             self.action_init(self)
