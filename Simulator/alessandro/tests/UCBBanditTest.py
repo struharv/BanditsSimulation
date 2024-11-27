@@ -55,5 +55,5 @@ class NaiveBanditTest(JustTest):
 
 
         bandit = UCBBandit()
-        self.do_simulation(nodes, containers, JustTest.random_init, None, inspect.currentframe().f_code.co_name + "_" + name,
+        self.do_simulation(nodes, containers, JustTest.random_init, None, inspect.currentframe().f_code.co_name + "_" + name,f"UCB - {name}",
                            orchestrator=bandit)

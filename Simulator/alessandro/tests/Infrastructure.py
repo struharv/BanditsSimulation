@@ -13,9 +13,9 @@ class Infrastructure:
     def make_infrastructure():
         nodes = [ElectricNode("node1", 1, 1024, 500,
 
-                              [(0.8 * Simulator.HOUR_SECONDS, 0.0),
+                              [(0.4 * Simulator.HOUR_SECONDS, 0.0),
                                (1.0 * Simulator.HOUR_SECONDS, 0.9),
-                               (1.2 * Simulator.HOUR_SECONDS, 0.0),
+                               (1.6 * Simulator.HOUR_SECONDS, 0.0),
                                (7 * Simulator.HOUR_SECONDS, 0.0),
 
                                (12 * Simulator.HOUR_SECONDS, 0.5),

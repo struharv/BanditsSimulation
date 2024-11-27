@@ -71,6 +71,7 @@ class Visualizer:
                         #f"     '{node.name}_resources.pts' using 1:7  with points pointtype 0 linecolor rgb \"magenta\" title 'storage' \n")
 
 
+            f.write("set ylabel ' '\n")
             f.write("set yrange[0:*]\n")
             f.write(f"set title 'Reward'\n")
             f.write(f"plot 'reward.pts'  with points pointtype 0 title \"reward\"\n")

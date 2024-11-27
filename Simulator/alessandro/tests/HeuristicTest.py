@@ -30,7 +30,7 @@ class HeuristicTest(JustTest):
             if simulator.now() % HeuristicTest.DECISION_EACH_SEC == 0:
                 simulator.migrate(random.choice(containers).name,  random.choice(nodes).name)
 
-        self.do_simulation(nodes, containers, JustTest.random_init, do_tick, inspect.currentframe().f_code.co_name+"_"+name)
+        self.do_simulation(nodes, containers, JustTest.random_init, do_tick, inspect.currentframe().f_code.co_name+"_"+name, f"Random Reschedule - {name}")
 
     def test_random_lowest_reward_first(self):
         nodes, containers = Infrastructure.make_infrastructure()
@@ -42,5 +42,5 @@ class HeuristicTest(JustTest):
 
                 simulator.migrate(random.choice(containers).name, random.choice(nodes).name)
 
-        self.do_simulation(nodes, containers, JustTest.random_init, do_tick, inspect.currentframe().f_code.co_name)
+        self.do_simulation(nodes, containers, JustTest.random_init, do_tick, inspect.currentframe().f_code.co_name, "xxx")
 

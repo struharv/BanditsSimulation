@@ -17,7 +17,7 @@ class JustTest(unittest.TestCase):
     ]
 
     DECISION_EACH_SEC = 30
-    def do_simulation(self, nodes, containers, do_init, do_tick, test_name: str, orchestrator=None):
+    def do_simulation(self, nodes, containers, do_init, do_tick, test_file_name: str, title: str, orchestrator=None):
         simulatorUCB = NewSimulator(nodes, containers)
         simulatorUCB.set_orchestrator(orchestrator)
         simulatorUCB.set_action_tick(do_tick)
@@ -25,8 +25,8 @@ class JustTest(unittest.TestCase):
 
         simulatorUCB.simulate()
 
-        visualizer = Visualizer(simulatorUCB, test_name)
-        visualizer.draw()
+        visualizer = Visualizer(simulatorUCB, test_file_name)
+        visualizer.draw(title)
 
     @staticmethod
     def random_init(simulator: Simulator):
