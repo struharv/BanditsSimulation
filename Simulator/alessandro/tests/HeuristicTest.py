@@ -44,3 +44,6 @@ class HeuristicTest(JustTest):
 
         self.do_simulation(nodes, containers, JustTest.random_init, do_tick, inspect.currentframe().f_code.co_name, "xxx")
 
+
+if __name__ == '__main__':
+    unittest.main()

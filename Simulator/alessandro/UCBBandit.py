@@ -13,7 +13,7 @@ def simple_max(Q, N, t):
 class UCBBandit(Orchestrator):
     CONTEXT_DIM = 3
 
-    def __init__(self):
+    def __init__(self, alpha=0.5):
         self.b = None
         self.A = None
         print("UCBBandit.__init__")
@@ -33,13 +33,16 @@ class UCBBandit(Orchestrator):
         print(self.A)
         print(self.b)
 
-
-
-
     def worstNodeWithContainer(self) -> Node:
         result_node = None
         minEnergy = None
+        shuffled = []
         for node in self.simulator.nodes:
+            shuffled += [node]
+
+        random.shuffle(shuffled)
+
+        for node in shuffled:
             energy = node.green_at(self.simulator.now())
             if result_node == None or energy < minEnergy:
                 result_node = node

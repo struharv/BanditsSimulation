@@ -14,6 +14,8 @@ class JustTest(unittest.TestCase):
         ["basic", Infrastructure.make_infrastructure()],
         ["still", Infrastructure.make_infrastructure_still()],
         ["spikey", Infrastructure.make_infrastructure_spikey()],
+        ["bigspikey", Infrastructure.make_infrastructure_bigspikey()],
+        ["spikey5", Infrastructure.make_infrastructure_spikey5()],
     ]
 
     DECISION_EACH_SEC = 30
