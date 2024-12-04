@@ -1,14 +1,14 @@
 import os
 
+from alessandro.NewSimulator import NewSimulator
 from engine.Node import Node
-from engine.Simulator import Simulator
 
 
 class Visualizer:
     NODE_WIDTH = 500
     NODE_HEIGHT = 200
 
-    def __init__(self, simulator: Simulator, prefix: str):
+    def __init__(self, simulator: NewSimulator, prefix: str):
         self.simulator = simulator
         self.prefix = prefix
         self.test_dir = f"plots/{self.prefix}"
@@ -43,7 +43,7 @@ class Visualizer:
     def dump_resources(self):
         for node in self.simulator.nodes:
             with open(f"{self.test_dir}/{node.name}_resources.pts", "w") as f:
-                for time in range(Simulator.TIME_MAX_SECONDS):
+                for time in range(NewSimulator.TIME_MAX_SECONDS):
                         f.write(
                             f"{time} {node.cpu_history[time]} {node.memory_mb_history[time]} {node.storage_mb_history[time]} {node.cpu_history[time]/node.cpu} {node.memory_mb_history[time]/node.memory_mb} {node.storage_mb_history[time]/node.storage_mb}  \n")
 
@@ -56,7 +56,7 @@ class Visualizer:
             f.write(f"set multiplot layout {len(self.simulator.nodes) + 2}, 1 title \"{title}\" font \",20\"\n")
 
             f.write("set yrange [0:1]\n")
-            f.write(f"set xrange [0:{Simulator.TIME_MAX_SECONDS}]\n")
+            f.write(f"set xrange [0:{NewSimulator.TIME_MAX_SECONDS}]\n")
             f.write("set format x \" \" \n")
 
             for node in self.simulator.nodes:

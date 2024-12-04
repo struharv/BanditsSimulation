@@ -3,7 +3,6 @@ import random
 from logging import Logger
 
 from engine.Node import Node
-from engine.Simulator import Simulator
 from engine.bandits.Orchestrator import Orchestrator
 
 

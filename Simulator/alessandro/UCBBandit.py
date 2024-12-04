@@ -4,7 +4,6 @@ import random
 import numpy as np
 
 from engine.Node import Node
-from engine.Simulator import Simulator
 from engine.bandits.Orchestrator import Orchestrator
 
 def simple_max(Q, N, t):

@@ -3,8 +3,8 @@ import random
 
 import numpy as np
 
+from alessandro.NewSimulator import NewSimulator
 from engine.Node import Node
-from engine.Simulator import Simulator
 from engine.bandits.Orchestrator import Orchestrator
 
 
@@ -22,8 +22,8 @@ class MultiArmBandit(Orchestrator):
         self.Q = np.ones(self.k) # initial Q
         self.N = np.zeros(self.k)  # initalize number of rewards given
 
-        self.rewards = np.zeros(Simulator.TIME_MAX_SECONDS)
-        self.actions = np.zeros(Simulator.TIME_MAX_SECONDS)
+        self.rewards = np.zeros(NewSimulator.TIME_MAX_SECONDS)
+        self.actions = np.zeros(NewSimulator.TIME_MAX_SECONDS)
 
 
     def tick(self, time_s: int):

@@ -5,7 +5,6 @@ from alessandro.NewSimulator import NewSimulator
 from engine.Container import Container
 from engine.ElectricNode import ElectricNode
 from engine.Node import Node
-from engine.Simulator import Simulator
 from engine.bandits.Orchestrator import Orchestrator
 
 from engine.bandits.PredefinedBandit import PredefinedBandit
@@ -14,9 +13,9 @@ from visual.Visualizer import Visualizer
 
 
 class VisualizerTest(unittest.TestCase):
-    NODES = [ElectricNode("node1", 1, 1024, 500, [(7 * Simulator.HOUR_SECONDS, 0.0), (12 * Simulator.HOUR_SECONDS, 0.5), (14 * Simulator.HOUR_SECONDS, 0.5), (19 * Simulator.HOUR_SECONDS, 0.0)]),
-             ElectricNode("node2", 1, 1024, 500, [(0, 0.2), (Simulator.TIME_MAX_SECONDS, 0.2)]),
-             ElectricNode("node3", 1, 1024, 500, [(5 * Simulator.HOUR_SECONDS, 0.0), (10 * Simulator.HOUR_SECONDS, 0.5), (12 * Simulator.HOUR_SECONDS, 0.5), (17 * Simulator.HOUR_SECONDS, 0.0)])
+    NODES = [ElectricNode("node1", 1, 1024, 500, [(7 * NewSimulator.HOUR_SECONDS, 0.0), (12 * NewSimulator.HOUR_SECONDS, 0.5), (14 * NewSimulator.HOUR_SECONDS, 0.5), (19 * NewSimulator.HOUR_SECONDS, 0.0)]),
+             ElectricNode("node2", 1, 1024, 500, [(0, 0.2), (NewSimulator.TIME_MAX_SECONDS, 0.2)]),
+             ElectricNode("node3", 1, 1024, 500, [(5 * NewSimulator.HOUR_SECONDS, 0.0), (10 * NewSimulator.HOUR_SECONDS, 0.5), (12 * NewSimulator.HOUR_SECONDS, 0.5), (17 * NewSimulator.HOUR_SECONDS, 0.0)])
              ]
 
     CONTAINERS = [Container("container1", 0.5, 256, 100),

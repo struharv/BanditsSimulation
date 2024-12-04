@@ -2,7 +2,7 @@ import unittest
 
 from engine.ElectricNode import ElectricNode
 from engine.Node import Node
-from engine.Simulator import Simulator
+
 
 
 class NodeTest(unittest.TestCase):

@@ -123,10 +123,10 @@ class BaseSimulator:
 
         return reward
 
-    def total_reward(self) -> float:
+    def cumulative_reward(self) -> float:
         result = 0
         for reward in self.reward_history:
-            result += reward
+            result += reward[1]
 
         return result
 

@@ -1,0 +1,8 @@
+test_random,still,0,cumulative reward,10916.519999999598,
+test_random,still,1,cumulative reward,10868.310000000636,
+test_random,spikey,0,cumulative reward,4906.3029041666805,
+test_random,spikey,1,cumulative reward,4605.8824041666785,
+test_random,bigspikey,0,cumulative reward,21546.315000000002,
+test_random,bigspikey,1,cumulative reward,21546.315000000002,
+test_random,spikey5,0,cumulative reward,13158.61923333335,
+test_random,spikey5,1,cumulative reward,12860.515483333398,

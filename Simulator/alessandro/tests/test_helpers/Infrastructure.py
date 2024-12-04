@@ -1,15 +1,15 @@
+from alessandro.NewSimulator import NewSimulator
 from engine.Container import Container
 from engine.ElectricNode import ElectricNode
-from engine.Simulator import Simulator
 
 
 def spikes(amount, height):
     res = []
     for i in range(amount):
-        peak = (Simulator.TIME_MAX_SECONDS / amount) * i
-        res += [(peak - 1 * Simulator.HOUR_SECONDS, 0.0)]
+        peak = (NewSimulator.TIME_MAX_SECONDS / amount) * i
+        res += [(peak - 1 * NewSimulator.HOUR_SECONDS, 0.0)]
         res += [(peak, height)]
-        res += [(peak + 1 * Simulator.HOUR_SECONDS, 0.0)]
+        res += [(peak + 1 * NewSimulator.HOUR_SECONDS, 0.0)]
     return res
 
 
@@ -19,26 +19,26 @@ class Infrastructure:
     def make_infrastructure():
         nodes = [ElectricNode("node1", 1, 1024, 500,
 
-                              [(0.4 * Simulator.HOUR_SECONDS, 0.0),
-                               (1.0 * Simulator.HOUR_SECONDS, 0.9),
-                               (1.6 * Simulator.HOUR_SECONDS, 0.9),
-                               (3 * Simulator.HOUR_SECONDS, 0.0),
-                               (7 * Simulator.HOUR_SECONDS, 0.0),
+                              [(0.4 * NewSimulator.HOUR_SECONDS, 0.0),
+                               (1.0 * NewSimulator.HOUR_SECONDS, 0.9),
+                               (1.6 * NewSimulator.HOUR_SECONDS, 0.9),
+                               (3 * NewSimulator.HOUR_SECONDS, 0.0),
+                               (7 * NewSimulator.HOUR_SECONDS, 0.0),
 
-                               (12 * Simulator.HOUR_SECONDS, 0.5),
-                               (14 * Simulator.HOUR_SECONDS, 0.5)]),
+                               (12 * NewSimulator.HOUR_SECONDS, 0.5),
+                               (14 * NewSimulator.HOUR_SECONDS, 0.5)]),
 
                  ElectricNode("node2", 1, 1024, 500,
-                              [(7 * Simulator.HOUR_SECONDS, 0.0),
-                               (12 * Simulator.HOUR_SECONDS, 0.4),
-                               (15 * Simulator.HOUR_SECONDS, 0.8),
-                               (17 * Simulator.HOUR_SECONDS, 0.0),
-                               (20 * Simulator.HOUR_SECONDS, 0.4)]),
+                              [(7 * NewSimulator.HOUR_SECONDS, 0.0),
+                               (12 * NewSimulator.HOUR_SECONDS, 0.4),
+                               (15 * NewSimulator.HOUR_SECONDS, 0.8),
+                               (17 * NewSimulator.HOUR_SECONDS, 0.0),
+                               (20 * NewSimulator.HOUR_SECONDS, 0.4)]),
 
                  ElectricNode("node3", 1, 1024, 500,
-                              [(0 * Simulator.HOUR_SECONDS, 0.1),
-                               (12 * Simulator.HOUR_SECONDS, 0.4),
-                               (24 * Simulator.HOUR_SECONDS, 0.1)])]
+                              [(0 * NewSimulator.HOUR_SECONDS, 0.1),
+                               (12 * NewSimulator.HOUR_SECONDS, 0.4),
+                               (24 * NewSimulator.HOUR_SECONDS, 0.1)])]
 
         containers = [Container("container1", 0.1, 25, 10),
                       Container("container2", 0.2, 25, 10),
@@ -53,16 +53,16 @@ class Infrastructure:
     def make_infrastructure_still():
         nodes = [ElectricNode("node1", 1, 1024, 500,
 
-                              [(0 * Simulator.HOUR_SECONDS, 0.1),
-                               (24 * Simulator.HOUR_SECONDS, 0.1)]),
+                              [(0 * NewSimulator.HOUR_SECONDS, 0.1),
+                               (24 * NewSimulator.HOUR_SECONDS, 0.1)]),
 
                  ElectricNode("node2", 1, 1024, 500,
-                              [(0 * Simulator.HOUR_SECONDS, 0.2),
-                               (24 * Simulator.HOUR_SECONDS, 0.2)]),
+                              [(0 * NewSimulator.HOUR_SECONDS, 0.2),
+                               (24 * NewSimulator.HOUR_SECONDS, 0.2)]),
 
                  ElectricNode("node3", 1, 1024, 500,
-                              [(0 * Simulator.HOUR_SECONDS, 0.3),
-                               (24 * Simulator.HOUR_SECONDS, 0.3)])]
+                              [(0 * NewSimulator.HOUR_SECONDS, 0.3),
+                               (24 * NewSimulator.HOUR_SECONDS, 0.3)])]
 
         containers = [Container("container1", 0.1, 25, 10),
                       Container("container2", 0.2, 25, 10),

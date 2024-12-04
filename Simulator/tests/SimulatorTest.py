@@ -4,13 +4,12 @@ from alessandro.NewSimulator import NewSimulator
 from engine.Container import Container
 from engine.ElectricNode import ElectricNode
 from engine.Node import Node
-from engine.Simulator import Simulator
 
 
 class SimulatorTest(unittest.TestCase):
 
     def test_Simulator(self):
-        nodes = [ElectricNode("node1", 1, 1024, 500, [(7 * Simulator.HOUR_SECONDS, 0.0), (12 * Simulator.HOUR_SECONDS, 0.5), (14 * Simulator.HOUR_SECONDS, 0.5)]),
+        nodes = [ElectricNode("node1", 1, 1024, 500, [(7 * NewSimulator.HOUR_SECONDS, 0.0), (12 * NewSimulator.HOUR_SECONDS, 0.5), (14 * NewSimulator.HOUR_SECONDS, 0.5)]),
                  ElectricNode("node2", 1, 1024, 500, []),
                  ElectricNode("node3", 1, 1024, 500, [])]
 
@@ -20,10 +19,10 @@ class SimulatorTest(unittest.TestCase):
         simulator = NewSimulator(nodes, containers)
         simulator.simulate()
 
-        self.assertEqual(Simulator.TIME_MAX_SECONDS, len(nodes[0].cpu_history))
-        self.assertEqual(Simulator.TIME_MAX_SECONDS, len(nodes[0].memory_mb_history))
-        self.assertEqual(Simulator.TIME_MAX_SECONDS, len(nodes[0].storage_mb_history))
-        self.assertEqual(Simulator.TIME_MAX_SECONDS, len(nodes[0].green_energy_history))
+        self.assertEqual(NewSimulator.TIME_MAX_SECONDS, len(nodes[0].cpu_history))
+        self.assertEqual(NewSimulator.TIME_MAX_SECONDS, len(nodes[0].memory_mb_history))
+        self.assertEqual(NewSimulator.TIME_MAX_SECONDS, len(nodes[0].storage_mb_history))
+        self.assertEqual(NewSimulator.TIME_MAX_SECONDS, len(nodes[0].green_energy_history))
 
     def test_deploy_undeploy(self):
         nodes = [ElectricNode("node1", 1, 1024, 500, []),

@@ -39,3 +39,6 @@ class NewSimulator(BaseSimulator):
         for self.time in range(self.TIME_MAX_SECONDS):
             self.tick()
 
+    def results(self):
+        return {"cumulative reward": self.cumulative_reward()}
+
