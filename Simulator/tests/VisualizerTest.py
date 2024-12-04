@@ -1,6 +1,7 @@
 import inspect
 import unittest
 
+from alessandro.NewSimulator import NewSimulator
 from engine.Container import Container
 from engine.ElectricNode import ElectricNode
 from engine.Node import Node
@@ -23,7 +24,7 @@ class VisualizerTest(unittest.TestCase):
 
     def test_visualize(self):
 
-        simulator = Simulator(self.NODES, self.CONTAINERS)
+        simulator = NewSimulator(self.NODES, self.CONTAINERS)
         #self.NODES[0].deploy(self.CONTAINERS[0])
         #self.NODES[2].deploy(self.CONTAINERS[1])
 

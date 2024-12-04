@@ -1,5 +1,6 @@
 import unittest
 
+from alessandro.NewSimulator import NewSimulator
 from engine.Container import Container
 from engine.ElectricNode import ElectricNode
 from engine.Node import Node
@@ -16,7 +17,7 @@ class SimulatorTest(unittest.TestCase):
         containers = [Container("container1", 0.5, 256, 100),
                       Container("container2", 0.5, 256, 100)]
 
-        simulator = Simulator(nodes, containers)
+        simulator = NewSimulator(nodes, containers)
         simulator.simulate()
 
         self.assertEqual(Simulator.TIME_MAX_SECONDS, len(nodes[0].cpu_history))
@@ -32,7 +33,7 @@ class SimulatorTest(unittest.TestCase):
         containers = [Container("container1", 0.5, 256, 100),
                       Container("container2", 0.5, 256, 100)]
 
-        simulator = Simulator(nodes, containers)
+        simulator = NewSimulator(nodes, containers)
 
         self.assertIsNone(simulator.find_container_in_node("nonsence"))
         self.assertIsNone(simulator.find_container_in_node("container1"))

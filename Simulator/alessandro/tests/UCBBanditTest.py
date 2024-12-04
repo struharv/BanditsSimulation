@@ -26,10 +26,19 @@ class UCBBanditTest(JustTest):
                            orchestrator=bandit)
 
     @parameterized.expand(JustTest.TEST_SUITE)
-    def test_UCB_bandit_alpha0_1(self, name, infrastructure):
+    def test_UCB_bandit_alpha___0_1(self, name, infrastructure):
         nodes, containers = infrastructure
 
         bandit = UCBBandit(alpha=0.1)
+        self.do_simulation(nodes, containers, JustTest.random_init, None,
+                           inspect.currentframe().f_code.co_name + "_" + name, f"UCB - {name}",
+                           orchestrator=bandit)
+
+    @parameterized.expand(JustTest.TEST_SUITE)
+    def test_UCB_bandit_alpha___0_9(self, name, infrastructure):
+        nodes, containers = infrastructure
+
+        bandit = UCBBandit(alpha=0.9)
         self.do_simulation(nodes, containers, JustTest.random_init, None,
                            inspect.currentframe().f_code.co_name + "_" + name, f"UCB - {name}",
                            orchestrator=bandit)

@@ -3,15 +3,13 @@ import unittest
 
 
 from alessandro.NewSimulator import NewSimulator
-from alessandro.tests.Infrastructure import Infrastructure
+from alessandro.tests.test_helpers.Infrastructure import Infrastructure
 from engine.Simulator import Simulator
 from visual.Visualizer import Visualizer
-from parameterized import parameterized
 
 
 class JustTest(unittest.TestCase):
     TEST_SUITE = [
-        ["basic", Infrastructure.make_infrastructure()],
         ["still", Infrastructure.make_infrastructure_still()],
         ["spikey", Infrastructure.make_infrastructure_spikey()],
         ["bigspikey", Infrastructure.make_infrastructure_bigspikey()],

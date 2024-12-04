@@ -76,7 +76,7 @@ class Visualizer:
             f.write(f"set title 'Reward'\n")
             f.write(f"plot 'reward.pts'  with points pointtype 0 title \"reward\"\n")
             f.write(f"set title 'Cumulative reward'\n")
-            f.write("set yrange [0:20000]\n")
+            f.write("set yrange [0:25000]\n")
             f.write(f"plot 'reward_cummulative.pts' with lines linestyle 1 title \"cumulative reward\"\n")
             f.write("unset multiplot\n")
 

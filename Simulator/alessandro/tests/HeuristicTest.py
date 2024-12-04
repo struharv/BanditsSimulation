@@ -1,22 +1,11 @@
 import inspect
-import logging
 import random
 import unittest
-from logging import Logger
 
-
-from alessandro.NewSimulator import NewSimulator
-from alessandro.tests.Infrastructure import Infrastructure
+from alessandro.tests.test_helpers.Infrastructure import Infrastructure
 from alessandro.tests.JustTest import JustTest
-from engine.Container import Container
-from engine.ElectricNode import ElectricNode
 from engine.Simulator import Simulator
-from visual.Visualizer import Visualizer
 from parameterized import parameterized
-
-
-
-
 
 
 class HeuristicTest(JustTest):
