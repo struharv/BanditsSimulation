@@ -43,7 +43,11 @@ class NaiveBanditTest(JustTest):
             [(nodes[2], [containers[0]]), (nodes[0], [containers[1], containers[2], containers[3], containers[4]])],
 
             [(nodes[1], [containers[0]]), (nodes[2], [containers[1], containers[2], containers[3], containers[4]])],
-            [(nodes[2], [containers[0]]), (nodes[1], [containers[1], containers[2], containers[3], containers[4]])]
+            [(nodes[2], [containers[0]]), (nodes[1], [containers[1], containers[2], containers[3], containers[4]])],
+
+
+            [(nodes[0], [containers[0]]), (nodes[1], [containers[1]]), (nodes[2], [containers[2], containers[3], containers[4]])],
+            [(nodes[0], [containers[1]]), (nodes[1], [containers[0]]), (nodes[2], [containers[2], containers[3], containers[4]])],
 
         ]
 
