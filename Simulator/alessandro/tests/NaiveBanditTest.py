@@ -19,6 +19,9 @@ class NaiveBanditTest(JustTest):
     def test_naive_bandit(self, name, infrastructure):
         self.case_naive_bandit(name, infrastructure)
 
+    def test_naive_bandit_STATS(self):
+        self.perform_stats("test_naive_bandit", self.case_naive_bandit, JustTest.TEST_SUITE)
+
     def case_naive_bandit(self, name, infrastructure):
         nodes, containers = infrastructure
 
@@ -52,9 +55,6 @@ class NaiveBanditTest(JustTest):
         ]
 
         bandit = MultiArmBandit(sets)
-        result = self.do_simulation(nodes, containers, None, None, inspect.currentframe().f_code.co_name + "_" + name,
+        result = self.simulate(nodes, containers, None, None, inspect.currentframe().f_code.co_name + "_" + name,
                            f"Naive Bandit - {name}", orchestrator=bandit)
         return result
-
-    def test_naive_bandit(self):
-        self.do_test_stats("test_naive_bandit", self.case_naive_bandit, JustTest.TEST_SUITE)

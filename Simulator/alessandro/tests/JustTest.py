@@ -9,7 +9,7 @@ from visual.Visualizer import Visualizer
 
 
 class JustTest(unittest.TestCase):
-    WANT_REPETITIONS = 2
+    STATS_REPETITIONS = 2
 
     TEST_SUITE = [
         ["still", Infrastructure.make_infrastructure_still()],
@@ -18,31 +18,31 @@ class JustTest(unittest.TestCase):
         ["spikey5", Infrastructure.make_infrastructure_spikey5()],
     ]
 
-    def do_simulation(self, nodes, containers, do_init, do_tick, test_file_name: str, title: str, orchestrator=None, visualize = True):
-        simulatorUCB = NewSimulator(nodes, containers)
-        simulatorUCB.set_orchestrator(orchestrator)
-        simulatorUCB.set_action_tick(do_tick)
-        simulatorUCB.set_action_init(do_init)
+    def simulate(self, nodes, containers, do_init, do_tick, test_file_name: str, title: str, orchestrator=None, visualize=True):
+        simulator = NewSimulator(nodes, containers)
+        simulator.set_orchestrator(orchestrator)
+        simulator.set_action_tick(do_tick)
+        simulator.set_action_init(do_init)
 
-        simulatorUCB.simulate()
+        simulator.simulate()
 
         if visualize:
-            visualizer = Visualizer(simulatorUCB, test_file_name)
+            visualizer = Visualizer(simulator, test_file_name)
             visualizer.draw(title)
 
-        return simulatorUCB.results()
+        return simulator.results()
 
-    def do_test_stats(self, test_name, case_function, test_suite):
+    def perform_stats(self, test_name, case_function, test_suite):
         stat = Stats()
-        for instance in range(JustTest.WANT_REPETITIONS):
+        for instance in range(JustTest.STATS_REPETITIONS):
 
             for param in test_suite:
                 print(instance, test_name, param[0])
                 result = case_function(param[0], param[1])
                 stat.add_result(test_name, param[0], instance, result)
 
-        stat.export(f"plots/{test_name}.csv")
-        stat.summary(f"plots/{test_name}_summary.csv")
+        stat.export_raw(f"plots/stats_{test_name}.csv")
+        stat.export_summary(f"plots/stats_{test_name}_summary.csv")
 
 
     @staticmethod

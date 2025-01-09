@@ -6,12 +6,12 @@ class Stats:
     def add_result(self, test_name, case, instance, results):
         key = f"{test_name}:{case}"
 
-        if not key in self.result_storage:
+        if key not in self.result_storage:
             self.result_storage[key] = []
 
         self.result_storage[key] += [[instance, results]]
 
-    def export(self, file_name):
+    def export_raw(self, file_name):
         with (open(file_name, "w") as f):
             for key, values in self.result_storage.items():
                 split = key.split(":")
@@ -27,7 +27,7 @@ class Stats:
 
                     f.write(f"{test_name},{case},{instance},{summary}\n")
 
-    def summary(self, file_name):
+    def export_summary(self, file_name):
         with (open(file_name, "w") as f):
             for key, values in self.result_storage.items():
                 split = key.split(":")
@@ -42,12 +42,11 @@ class Stats:
                 f.write(f"{test_name},{case},cumulative reward,{summ}\n")
 
 
-class StatsComposer:
+class StatsCombiner:
     def __init__(self):
         self.db = []
 
-
-    def compose(self,file_name, cases = ["still", "spikey", "bigspikey"]):
+    def compose(self, file_name, cases=["still", "spikey", "bigspikey"]):
         with open(file_name, "w") as f:
             f.write("Title ")
             for column in self.get_test_cases():
@@ -66,16 +65,15 @@ class StatsComposer:
 
                 f.write("\n")
 
-
-
     def get_test_cases(self):
         columns = []
+
         for item in self.db:
             case = item[0]
-            if not case in columns:
+            if case not in columns:
                 columns += [case]
-        return columns
 
+        return columns
 
     def add_file(self, file_name):
         with open(file_name, "r") as f:
@@ -85,11 +83,10 @@ class StatsComposer:
 
 
 if __name__ == "__main__":
+    combiner = StatsCombiner()
 
-    composer = StatsComposer()
-    composer.add_file("../plots/test_random_summary.csv")
-    composer.add_file("../plots/test_naive_bandit_summary.csv")
-    composer.add_file("../plots/test_UCB_bandit_summary.csv")
+    combiner.add_file("../plots/test_random_summary.csv")
+    combiner.add_file("../plots/test_naive_bandit_summary.csv")
+    combiner.add_file("../plots/test_UCB_bandit_summary.csv")
 
-    composer.compose("../plots/summary.dat")
-
+    combiner.compose("../plots/summary.dat")

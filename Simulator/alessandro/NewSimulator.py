@@ -4,7 +4,6 @@ from logging import Logger
 from engine.BaseSimulator import BaseSimulator
 from engine.Container import Container
 from engine.ElectricNode import ElectricNode
-from engine.Node import Node
 
 
 class NewSimulator(BaseSimulator):
@@ -29,7 +28,7 @@ class NewSimulator(BaseSimulator):
 
     def simulate(self):
         # init
-        print("xxxx")
+        print("Simulation start")
         super().init()
 
         if self.orchestrator:
