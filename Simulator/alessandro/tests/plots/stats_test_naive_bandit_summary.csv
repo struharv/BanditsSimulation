@@ -1,4 +1,4 @@
-test_naive_bandit,still,cumulative reward,29370.390000028332
-test_naive_bandit,spikey,cumulative reward,13565.734241666725
-test_naive_bandit,bigspikey,cumulative reward,43092.630000000005
-test_naive_bandit,spikey5,cumulative reward,22936.38016666658
+test_naive_bandit,still,cumulative reward,146992.17000014195
+test_naive_bandit,spikey,cumulative reward,68895.39522083335
+test_naive_bandit,bigspikey,cumulative reward,146362.17366666676
+test_naive_bandit,spikey5,cumulative reward,113702.27333333352

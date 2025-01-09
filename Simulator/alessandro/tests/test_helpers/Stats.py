@@ -83,7 +83,8 @@ class StatsCombiner:
                     f"set style fill solid border -1\n"
                     f"set boxwidth 0.9\n"
                     f"set xtic scale 0\n"
-                    f"set ylabel 'Average Cumulative award '\n\n")
+                    f"set ylabel 'Average Cumulative reward '\n"
+                    f"set xlabel 'Scenario'\n\n")
 
                    # f"plot 'summary.dat' using 2:xtic(1) ti col fc rgb C, '' u 3 ti col fc rgb Cpp, '' u 4 ti col fc rgb Java")
 

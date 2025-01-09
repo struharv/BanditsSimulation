@@ -3,13 +3,13 @@ from engine.Container import Container
 from engine.ElectricNode import ElectricNode
 
 
-def spikes(amount, height):
+def spikes(amount, height, shift=0):
     res = []
     for i in range(amount):
         peak = (NewSimulator.TIME_MAX_SECONDS / amount) * i
-        res += [(peak - 1 * NewSimulator.HOUR_SECONDS, 0.0)]
+        res += [(peak - 1 * NewSimulator.HOUR_SECONDS-shift, 0.0)]
         res += [(peak, height)]
-        res += [(peak + 1 * NewSimulator.HOUR_SECONDS, 0.0)]
+        res += [(peak + 1 * NewSimulator.HOUR_SECONDS-shift, 0.0)]
     return res
 
 
@@ -116,13 +116,13 @@ class Infrastructure:
 
         nodes = [ElectricNode("node1", 1, 1024, 500,
 
-                              spikes(10, 1)),
+                              spikes(5, 1)),
 
                  ElectricNode("node2", 1, 1024, 500,
-                              spikes(10, 1)),
+                              spikes(8, 0.8)),
 
                  ElectricNode("node3", 1, 1024, 500,
-                              spikes(10, 1))]
+                              spikes(10, 0.2))]
 
         containers = [Container("container1", 0.1, 25, 10),
                       Container("container2", 0.2, 25, 10),

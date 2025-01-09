@@ -1,4 +1,4 @@
-test_UCB_bandit,still,cumulative reward,31704.780000010414
-test_UCB_bandit,spikey,cumulative reward,16445.213858333314
-test_UCB_bandit,bigspikey,cumulative reward,43092.630000000005
-test_UCB_bandit,spikey5,cumulative reward,33309.36799999996
+test_UCB_bandit,still,cumulative reward,150491.6400001132
+test_UCB_bandit,spikey,cumulative reward,86080.50362916662
+test_UCB_bandit,bigspikey,cumulative reward,166983.27795
+test_UCB_bandit,spikey5,cumulative reward,164275.20213333343

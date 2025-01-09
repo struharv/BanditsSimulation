@@ -9,7 +9,7 @@ from visual.Visualizer import Visualizer
 
 
 class JustTest(unittest.TestCase):
-    STATS_REPETITIONS = 2
+    STATS_REPETITIONS = 10
 
     TEST_SUITE = [
         ["still", Infrastructure.make_infrastructure_still()],
