@@ -47,7 +47,7 @@ class StatsCombiner:
         self.db = []
 
     def compose(self, file_name, cases=["still", "spikey", "bigspikey"]):
-        with open(file_name, "w") as f:
+        with open(f"{file_name}.dat", "w") as f:
             f.write("Title ")
             for column in self.get_test_cases():
                 f.write(f"\"{column.replace("_", "\\\\\\_")}\" ")
@@ -65,6 +65,50 @@ class StatsCombiner:
 
                 f.write("\n")
 
+        self.write_plt(file_name)
+
+    def write_plt(self, file_name):
+        with open(f"{file_name}.plt", "w") as f:
+            f.write("set term png size 1500,600\n"
+                    f"set output 'summary.png'\n")
+
+            f.write(f"set title 'Deployment Comparison'\n")
+            colors = ["#99ffff", "#4671d5", "#ff0000", "#f36e00"]
+            for i in range(len(colors)):
+                f.write(f"COLOR{i}='{colors[i]}'\n")
+
+            f.write(f"\n\nset auto x\n"
+                    f"set style data histogram\n"
+                    f"set style histogram cluster gap 1\n"
+                    f"set style fill solid border -1\n"
+                    f"set boxwidth 0.9\n"
+                    f"set xtic scale 0\n"
+                    f"set ylabel 'Average Cumulative award '\n\n")
+
+                   # f"plot 'summary.dat' using 2:xtic(1) ti col fc rgb C, '' u 3 ti col fc rgb Cpp, '' u 4 ti col fc rgb Java")
+
+            f.write(f"plot ")
+            for i in range(len(self.get_test_cases())):
+                f.write(f"'summary.dat' using {i+2}:xtic(1) ti col fc rgb COLOR{i}")
+                if i < len(self.get_test_cases())-1:
+                    f.write(", ")
+
+            f.write("\n")
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
     def get_test_cases(self):
         columns = []
 
@@ -81,12 +125,18 @@ class StatsCombiner:
                 splitted = line.strip().split(",")
                 self.db += [splitted]
 
-
-if __name__ == "__main__":
+def combine(dir):
     combiner = StatsCombiner()
 
-    combiner.add_file("../plots/test_random_summary.csv")
-    combiner.add_file("../plots/test_naive_bandit_summary.csv")
-    combiner.add_file("../plots/test_UCB_bandit_summary.csv")
+    combiner.add_file(f"{dir}stats_test_random_summary.csv")
+    combiner.add_file(f"{dir}stats_test_random_1_summary.csv")
+    combiner.add_file(f"{dir}stats_test_naive_bandit_summary.csv")
+    combiner.add_file(f"{dir}stats_test_UCB_bandit_summary.csv")
 
-    combiner.compose("../plots/summary.dat")
+    combiner.compose(f"{dir}summary")
+
+
+
+
+if __name__ == "__main__":
+    combine("../plots/")

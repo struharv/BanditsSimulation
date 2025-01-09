@@ -1,16 +1,9 @@
 import inspect
-import unittest
-import random
 
 from parameterized import parameterized
 
-from alessandro.NewSimulator import NewSimulator
-from alessandro.UCBBandit import UCBBandit
 from alessandro.tests.JustTest import JustTest
-from engine.Container import Container
-from engine.ElectricNode import ElectricNode
-from engine.bandits.MultiArmBandit import MultiArmBandit
-from visual.Visualizer import Visualizer
+from engine.bandits.UCBBandit import UCBBandit
 
 
 class UCBBanditTest(JustTest):

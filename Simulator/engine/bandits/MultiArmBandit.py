@@ -29,7 +29,7 @@ class MultiArmBandit(Orchestrator):
     def tick(self, time_s: int):
         if time_s % 30 != 0:
             return
-        print("BANDIT tick!", self.simulator.TIME_MAX_SECONDS)
+        # print("BANDIT tick!", self.simulator.TIME_MAX_SECONDS)
 
         self.simulator.reset()
 
