@@ -25,7 +25,7 @@ class HeuristicTest(JustTest):
     def test_random_STATS(self):
         self.perform_stats("test_random", self.case_random, JustTest.TEST_SUITE)
 
-    def test_random_STATS_1(self):
+    def xtest_random_STATS_1(self):
         self.perform_stats("test_random_1", self.case_random_1, JustTest.TEST_SUITE)
 
     def case_random(self, name, infrastructure):

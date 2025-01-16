@@ -73,7 +73,7 @@ class StatsCombiner:
                     f"set output 'summary.png'\n")
 
             f.write(f"set title 'Deployment Comparison'\n")
-            colors = ["#99ffff", "#4671d5", "#ff0000", "#f36e00"]
+            colors = ["#99ffff", "#4671d5", "#ff0000", "#f36e00", "#f36e00", "#f36e00", "#f36e00"]
             for i in range(len(colors)):
                 f.write(f"COLOR{i}='{colors[i]}'\n")
 
@@ -86,7 +86,6 @@ class StatsCombiner:
                     f"set ylabel 'Average Cumulative reward '\n"
                     f"set xlabel 'Scenario'\n\n")
 
-                   # f"plot 'summary.dat' using 2:xtic(1) ti col fc rgb C, '' u 3 ti col fc rgb Cpp, '' u 4 ti col fc rgb Java")
 
             f.write(f"plot ")
             for i in range(len(self.get_test_cases())):
@@ -130,9 +129,12 @@ def combine(dir):
     combiner = StatsCombiner()
 
     combiner.add_file(f"{dir}stats_test_random_summary.csv")
-    combiner.add_file(f"{dir}stats_test_random_1_summary.csv")
+    #combiner.add_file(f"{dir}stats_test_random_1_summary.csv")
     combiner.add_file(f"{dir}stats_test_naive_bandit_summary.csv")
     combiner.add_file(f"{dir}stats_test_UCB_bandit_summary.csv")
+    #combiner.add_file(f"{dir}stats_test_UCB_bandit_1_summary.csv")
+    #combiner.add_file(f"{dir}stats_test_UCB_bandit_2_summary.csv")
+
 
     combiner.compose(f"{dir}summary")
 

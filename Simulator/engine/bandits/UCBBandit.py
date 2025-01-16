@@ -10,13 +10,14 @@ def simple_max(Q, N, t):
     return np.random.choice(np.flatnonzero(Q == Q.max())) # breaking ties randomly
 
 class UCBBandit(Orchestrator):
-    CONTEXT_DIM = 3
+
 
     def __init__(self, alpha=0.5):
+        self.CONTEXT_DIM = None
         self.b = None
         self.A = None
         print("UCBBandit.__init__")
-        self.alpha = 0.5
+        self.alpha = alpha
 
     def init(self):
         print("init")
@@ -25,9 +26,11 @@ class UCBBandit(Orchestrator):
         self.A = []
         self.b = []
         
+        self.CONTEXT_DIM = len(self.simulator.nodes)
+        
         for node in self.simulator.nodes:
-            self.A += [np.identity(UCBBandit.CONTEXT_DIM)]
-            self.b += [np.zeros([UCBBandit.CONTEXT_DIM, 1])]
+            self.A += [np.identity(self.CONTEXT_DIM)]
+            self.b += [np.zeros([self.CONTEXT_DIM, 1])]
 
         print(self.A)
         print(self.b)
