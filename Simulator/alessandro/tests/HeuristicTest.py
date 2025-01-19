@@ -8,8 +8,6 @@ from alessandro.NewSimulator import NewSimulator
 from alessandro.tests.test_helpers.Infrastructure import Infrastructure
 from alessandro.tests.JustTest import JustTest
 
-
-
 class HeuristicTest(JustTest):
     DECISION_EACH_SEC = 30
 
@@ -20,7 +18,6 @@ class HeuristicTest(JustTest):
     @parameterized.expand(JustTest.TEST_SUITE)
     def test_random_1(self, name, infrastructure):
         self.case_random_1(name, infrastructure)
-
 
     def test_random_STATS(self):
         self.perform_stats("test_random", self.case_random, JustTest.TEST_SUITE)
