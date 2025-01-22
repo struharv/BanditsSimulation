@@ -3,7 +3,7 @@ import random
 
 import numpy as np
 
-from alessandro.NewSimulator import NewSimulator
+from bandits.NewSimulator import NewSimulator
 from engine.Node import Node
 from engine.bandits.Orchestrator import Orchestrator
 

@@ -1,6 +1,6 @@
 import os
 
-from alessandro.NewSimulator import NewSimulator
+from bandits.NewSimulator import NewSimulator
 from engine.Node import Node
 
 
