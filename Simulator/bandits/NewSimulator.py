@@ -33,6 +33,7 @@ class NewSimulator(BaseSimulator):
 
         if self.orchestrator:
             self.orchestrator.init()
+
         super().simulate()
 
         for self.time in range(self.TIME_MAX_SECONDS):

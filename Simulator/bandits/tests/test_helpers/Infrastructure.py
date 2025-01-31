@@ -74,6 +74,30 @@ class Infrastructure:
         return nodes, containers
 
     @staticmethod
+    def make_infrastructure_extreme_still():
+        nodes = [ElectricNode("node1", 1, 1024, 500,
+
+                              [(0 * NewSimulator.HOUR_SECONDS, 0.1),
+                               (24 * NewSimulator.HOUR_SECONDS, 0.1)]),
+
+                 ElectricNode("node2", 1, 1024, 500,
+                              [(0 * NewSimulator.HOUR_SECONDS, 0.1),
+                               (24 * NewSimulator.HOUR_SECONDS, 0.1)]),
+
+                 ElectricNode("node3", 1, 1024, 500,
+                              [(0 * NewSimulator.HOUR_SECONDS, 0.8),
+                               (24 * NewSimulator.HOUR_SECONDS, 0.8)])]
+
+        containers = [Container("container1", 0.1, 25, 10),
+                      Container("container2", 0.2, 25, 10),
+                      Container("container3", 0.15, 25, 10),
+                      Container("container4", 0.11, 25, 10),
+                      Container("container5", 0.07, 25, 10),
+                      ]
+
+        return nodes, containers
+
+    @staticmethod
     def make_infrastructure_spikey():
         nodes = [ElectricNode("node1", 1, 1024, 500,
 

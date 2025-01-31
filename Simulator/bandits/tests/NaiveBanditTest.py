@@ -2,17 +2,18 @@ import inspect
 
 from parameterized import parameterized
 
-from bandits.tests.JustTest import TestBase
+from bandits.tests.TestBase import TestBase
 from engine.bandits.MultiArmBandit import MultiArmBandit
+from helpers.Permutations import Permutations
 
 
-class NaiveBanditTestBase(TestBase):
+class NaiveBanditTest(TestBase):
 
     @parameterized.expand(TestBase.TEST_SUITE)
     def test_naive_bandit(self, name, infrastructure):
         self.case_naive_bandit(name, infrastructure)
 
-    def xtest_naive_bandit_STATS(self):
+    def test_naive_bandit_STATS(self):
         self.perform_stats("test_naive_bandit", self.case_naive_bandit, TestBase.TEST_SUITE)
 
     def case_naive_bandit(self, name, infrastructure):
@@ -47,8 +48,10 @@ class NaiveBanditTestBase(TestBase):
             #  (nodes[2], [containers[2], containers[3], containers[4]])],
 
         ]
+        permutations = Permutations(nodes, containers)
+        sets = permutations.make_permutations()
 
         bandit = MultiArmBandit(sets)
-        result = self.simulate(nodes, containers, None, None, inspect.currentframe().f_code.co_name + "_" + name,
+        result = self.simulate(nodes, containers, None, None, inspect.currentframe().f_code.co_name, name,
                                f"Naive Bandit - {name}", orchestrator=bandit)
         return result

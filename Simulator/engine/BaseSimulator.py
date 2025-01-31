@@ -73,6 +73,17 @@ class BaseSimulator:
 
         pass
 
+    def deploy_as(self, deployment):
+        for node_index in range(len(self.nodes)):
+            node = self.nodes[node_index]
+            node.undeploy_all()
+
+            for container in deployment[node_index][1]:
+                node.deploy(container)
+
+
+
+
     def migrate(self, container_name, node_name) -> bool:
         old_node = self.find_container_in_node(container_name)
         container = self.find_container(container_name)
@@ -120,6 +131,17 @@ class BaseSimulator:
         reward = 0
         for node in self.nodes:
             reward += node.compute_reward()
+
+        return reward
+
+    def compute_possible_reward(self, deployment, time) -> float:
+        #print("computing possible reward")
+        reward = 0
+        for deployment_item in deployment:
+            node = deployment_item[0]
+            containers = deployment_item[1]
+            for container in containers:
+                reward += node.compute_reward_at(container.cpu, time)
 
         return reward
 

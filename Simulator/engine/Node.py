@@ -26,6 +26,9 @@ class Node:
     def deploy(self, container: Container):
         self.containers += [container]
 
+    def undeploy_all(self):
+        self.containers = []
+
     def undeploy(self, container_name) -> bool:
         for index_container in range(len(self.containers)):
             if container_name == self.containers[index_container].name:
@@ -48,14 +51,19 @@ class Node:
         self.memory_mb_history += [self.now_memory_mb_used()]
         self.storage_mb_history += [self.now_storage_mb_used()]
 
-
     def compute_reward(self) -> float:
+        return self.compute_posible_reward(self.containers)
+
+    def compute_posible_reward(self, containers):
         reward = 0
 
-        for container in self.containers:
-            reward += container.cpu * self.green_at(self.simulator.time)
+        for container in containers:
+            reward += self.compute_reward_at(container.cpu, self.simulator.time)
 
         return reward
+
+    def compute_reward_at(self, cpu, time):
+        return cpu * self.green_at(time)
 
     def now_cpu_used(self):
         res = 0

@@ -2,11 +2,11 @@ import inspect
 
 from parameterized import parameterized
 
-from bandits.tests.JustTest import TestBase
+from bandits.tests.TestBase import TestBase
 from engine.bandits.UCBBandit import UCBBandit
 
 
-class UCBBanditTestBase(TestBase):
+class UCBBanditTest(TestBase):
 
     @parameterized.expand(TestBase.TEST_SUITE)
     def test_UCB_bandit(self, name, infrastructure):
@@ -26,7 +26,7 @@ class UCBBanditTestBase(TestBase):
 
         bandit = UCBBandit()
         result = self.simulate(nodes, containers, TestBase.random_init, None,
-                               inspect.currentframe().f_code.co_name + "_" + name, f"UCB - {name}",
+                               inspect.currentframe().f_code.co_name, name, f"UCB - {name}",
                                orchestrator=bandit)
         return result
 
@@ -36,7 +36,7 @@ class UCBBanditTestBase(TestBase):
 
         bandit = UCBBandit(alpha=0.4)
         result = self.simulate(nodes, containers, TestBase.random_init, None,
-                               inspect.currentframe().f_code.co_name + "_" + name, f"UCB - {name}",
+                               inspect.currentframe().f_code.co_name, name, f"UCB - {name}",
                                orchestrator=bandit)
         return result
 

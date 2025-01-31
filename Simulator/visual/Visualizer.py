@@ -11,7 +11,7 @@ class Visualizer:
     def __init__(self, simulator: NewSimulator, prefix: str):
         self.simulator = simulator
         self.prefix = prefix
-        self.test_dir = f"plots/{self.prefix}"
+        self.test_dir = prefix
         if not os.path.isdir(self.test_dir):
             os.mkdir(self.test_dir)
 

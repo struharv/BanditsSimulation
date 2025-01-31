@@ -8,7 +8,7 @@ from bandits.NewSimulator import NewSimulator
 from bandits.tests.TestBase import TestBase
 
 
-class RandomTestBase(TestBase):
+class RandomTest(TestBase):
     DECISION_EACH_SEC = 30
 
     @parameterized.expand(TestBase.TEST_SUITE)
@@ -29,11 +29,11 @@ class RandomTestBase(TestBase):
         nodes, containers = infrastructure
 
         def do_tick(simulator: NewSimulator):
-            if simulator.now() % RandomTestBase.DECISION_EACH_SEC == 0:
+            if simulator.now() % RandomTest.DECISION_EACH_SEC == 0:
                 simulator.migrate(random.choice(containers).name, random.choice(nodes).name)
 
         results = self.simulate(nodes, containers, TestBase.random_init, do_tick,
-                                inspect.currentframe().f_code.co_name + "_" + name, f"Random Reschedule - {name}")
+                                inspect.currentframe().f_code.co_name, name, f"Random Reschedule - {name}")
 
         return results
 
@@ -41,11 +41,11 @@ class RandomTestBase(TestBase):
         nodes, containers = infrastructure
 
         def do_tick(simulator: NewSimulator):
-            if simulator.now() % RandomTestBase.DECISION_EACH_SEC == 0:
+            if simulator.now() % RandomTest.DECISION_EACH_SEC == 0:
                 simulator.migrate(random.choice(containers).name, random.choice(nodes).name)
 
         results = self.simulate(nodes, containers, TestBase.random_init, do_tick,
-                                inspect.currentframe().f_code.co_name + "_" + name, f"Random Reschedule 1- {name}")
+                                inspect.currentframe().f_code.co_name, name, f"Random Reschedule 1- {name}")
 
         return results
 

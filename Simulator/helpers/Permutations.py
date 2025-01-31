@@ -14,9 +14,9 @@ class Permutations:
 
     def make_permutations(self):
         self.results = []
-        self.do_permuatate([], 0)
+        self.do_permutate([], 0)
 
-        self.make_sets()
+        return self.make_sets()
 
     def assignment_to_set(self, assignment):
         res_set = []
@@ -27,26 +27,26 @@ class Permutations:
             node = assignment[cont_i]
             res_set[node] += [self.containers[cont_i]]
 
+        #
+        nice_set = []
+        for set_item in range(len(res_set)):
+            nice_set += [(self.nodes[set_item], res_set[set_item])]
 
-        return res_set
-
-
-
+        return nice_set
 
 
     def make_sets(self):
         result_sets = []
         for assignment in self.results:
             res = self.assignment_to_set(assignment)
+            result_sets += [res]
             print(assignment, res)
-            for sets in res:
-                if
 
         return result_sets
 
 
 
-    def do_permuatate(self, assignments, position):
+    def do_permutate(self, assignments, position):
         if position >= len(self.containers):
             print("done", assignments)
             self.results += [assignments]
@@ -56,7 +56,7 @@ class Permutations:
 
             new_assignments = copy.deepcopy(assignments)
             new_assignments += [node]
-            self.do_permuatate(new_assignments, position+1)
+            self.do_permutate(new_assignments, position + 1)
 
 
 

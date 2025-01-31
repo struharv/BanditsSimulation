@@ -128,7 +128,7 @@ class StatsCombiner:
 def combine(dir):
     combiner = StatsCombiner()
 
-    combiner.add_file(f"{dir}stats_test_random_summary.csv")
+    combiner.add_file(f"{dir}stats_test_random_0_summary.csv")
     #combiner.add_file(f"{dir}stats_test_random_1_summary.csv")
     combiner.add_file(f"{dir}stats_test_naive_bandit_summary.csv")
     combiner.add_file(f"{dir}stats_test_UCB_bandit_summary.csv")
