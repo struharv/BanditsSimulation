@@ -37,6 +37,13 @@ class NewSimulator(BaseSimulator):
         super().simulate()
 
         for self.time in range(self.TIME_MAX_SECONDS):
+            '''
+            if self.time % 10 == 0 or self.time > 86000:
+                print("tick", self.time)
+                for node in self.nodes:
+                    print("\t", len(node.performance_history))
+            '''
+
             self.tick()
 
     def results(self):

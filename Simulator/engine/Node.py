@@ -14,11 +14,10 @@ class Node:
         self.storage_mb = storage_mb
         self.containers: list[Container] = []
 
-
         self.cpu_history: list[float] = []
         self.memory_mb_history: list[int] = []
         self.storage_mb_history: list[int] = []
-
+        self.performance_history: list[int] = []
 
     def set_simulator(self, simulator):
         self.simulator = simulator
@@ -50,6 +49,7 @@ class Node:
         self.cpu_history += [self.now_cpu_used()]
         self.memory_mb_history += [self.now_memory_mb_used()]
         self.storage_mb_history += [self.now_storage_mb_used()]
+        self.performance_history += [self.compute_performance()]
 
     def compute_reward(self) -> float:
         return self.compute_posible_reward(self.containers)
@@ -62,8 +62,15 @@ class Node:
 
         return reward
 
+    def compute_performance(self):
+        performance = 1.0
+        for container in self.containers:
+            performance *= (1.0-container.performance_slowdown)
+
+        return performance
+
     def compute_reward_at(self, cpu, time):
-        return cpu * self.green_at(time)
+        return cpu * self.green_at(time) + self.compute_performance()
 
     def now_cpu_used(self):
         res = 0

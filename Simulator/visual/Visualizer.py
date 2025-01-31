@@ -45,7 +45,7 @@ class Visualizer:
             with open(f"{self.test_dir}/{node.name}_resources.pts", "w") as f:
                 for time in range(NewSimulator.TIME_MAX_SECONDS):
                         f.write(
-                            f"{time} {node.cpu_history[time]} {node.memory_mb_history[time]} {node.storage_mb_history[time]} {node.cpu_history[time]/node.cpu} {node.memory_mb_history[time]/node.memory_mb} {node.storage_mb_history[time]/node.storage_mb}  \n")
+                            f"{time} {node.cpu_history[time]} {node.memory_mb_history[time]} {node.storage_mb_history[time]} {node.cpu_history[time]/node.cpu} {node.memory_mb_history[time]/node.memory_mb} {node.storage_mb_history[time]/node.storage_mb} {node.performance_history[time]}\n")
 
     def make_plot(self, title):
         with open(f"{self.test_dir}/simulation.plt", "w") as f:
@@ -62,7 +62,7 @@ class Visualizer:
             for node in self.simulator.nodes:
                 f.write(f"set title 'Green Energy {node.name}'\n")
                 f.write("set ylabel 'Green Energy %'\n")
-                f.write(f"plot '{node.name}.pts' with linespoints linestyle 1 linecolor rgb \"green\" notitle, '{node.name}_resources.pts' using 1:5  with points pointtype 0 linecolor rgb \"black\" title 'CPU'\n" )
+                f.write(f"plot '{node.name}.pts' with linespoints linestyle 1 linecolor rgb \"green\" notitle, '{node.name}_resources.pts' using 1:5  with points pointtype 0 linecolor rgb \"black\" title 'CPU', '{node.name}_resources.pts' using 1:8 with lines linestyle 1 linecolor rgb 'gray' notitle\n" )
 
                 #f.write(f"set title 'Resources {node.name}'\n")
                 #f.write("set ylabel 'CPU %'\n")
@@ -76,7 +76,7 @@ class Visualizer:
             f.write(f"set title 'Reward'\n")
             f.write(f"plot 'reward.pts'  with points pointtype 0 title \"reward\"\n")
             f.write(f"set title 'Cumulative reward'\n")
-            f.write("set yrange [0:25000]\n")
+            f.write("set yrange [0:*]\n")
             f.write(f"plot 'reward_cummulative.pts' with lines linestyle 1 title \"cumulative reward\"\n")
             f.write("unset multiplot\n")
 

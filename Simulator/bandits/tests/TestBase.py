@@ -12,7 +12,7 @@ from visual.Visualizer import Visualizer
 
 class TestBase(unittest.TestCase):
     STATS_REPETITIONS = 5
-    ENABLE_STATS = True
+    ENABLE_STATS = False
     OUT_DIR = "plots/"
 
     TEST_SUITE = [
