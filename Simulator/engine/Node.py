@@ -70,7 +70,7 @@ class Node:
         return performance
 
     def compute_reward_at(self, cpu, time):
-        return cpu * self.green_at(time) + self.compute_performance()
+        return cpu * self.green_at(time) + 0.3*self.compute_performance()
 
     def now_cpu_used(self):
         res = 0

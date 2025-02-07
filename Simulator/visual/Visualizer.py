@@ -60,9 +60,9 @@ class Visualizer:
             f.write("set format x \" \" \n")
 
             for node in self.simulator.nodes:
-                f.write(f"set title 'Green Energy {node.name}'\n")
-                f.write("set ylabel 'Green Energy %'\n")
-                f.write(f"plot '{node.name}.pts' with linespoints linestyle 1 linecolor rgb \"green\" notitle, '{node.name}_resources.pts' using 1:5  with points pointtype 0 linecolor rgb \"black\" title 'CPU', '{node.name}_resources.pts' using 1:8 with lines linestyle 1 linecolor rgb 'gray' notitle\n" )
+                f.write(f"set title 'Green Energy, Performance {node.name}'\n")
+                #f.write("set ylabel 'Green Energy %, Performance %'\n")
+                f.write(f"plot '{node.name}.pts' with linespoints linestyle 1 linecolor rgb \"green\" notitle, '{node.name}_resources.pts' using 1:8 with lines linestyle 1 linecolor rgb 'gray' notitle, '{node.name}_resources.pts' using 1:5  with points pointtype 0 linecolor rgb \"black\" notitle\n")
 
                 #f.write(f"set title 'Resources {node.name}'\n")
                 #f.write("set ylabel 'CPU %'\n")
