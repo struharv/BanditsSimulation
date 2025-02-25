@@ -15,7 +15,7 @@ class MultiArmBandit(Orchestrator):
     def __init__(self, sets):
         self.sets = sets
 
-        self.epsilon = 0.1
+        self.epsilon = 0.05
         self.alpha = 0.1
 
         self.k = len(self.sets)
@@ -26,7 +26,7 @@ class MultiArmBandit(Orchestrator):
         self.actions = np.zeros(NewSimulator.TIME_MAX_SECONDS)
 
 
-    def tick(self, time_s: int, decisioneach_s = 60):
+    def tick(self, time_s: int, decisioneach_s = 10):
         if time_s % decisioneach_s != 0:
             return
         # print("BANDIT tick!", self.simulator.TIME_MAX_SECONDS)

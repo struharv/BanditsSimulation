@@ -7,7 +7,7 @@ class Node:
 
     simulator = None
 
-    PARAM_PERFORMANCE = 0.00
+    PARAM_PERFORMANCE = 0.1
     PARAM_ENERGY = 0.9
     PARAM_COLOCATION = 0.0
 
@@ -63,7 +63,7 @@ class Node:
     def compute_posible_reward(self, containers, time_at=None):
         reward = 0
         #print(self.name)
-        if time_at==None:
+        if not time_at:
             time_at = self.simulator.time
 
         reward += self.compute_reward_at(time_at, containers)
@@ -86,6 +86,7 @@ class Node:
         reward = 0
         for container in containers:
             reward += self.PARAM_ENERGY * container.cpu * self.green_at(time) + self.PARAM_PERFORMANCE * self.compute_performance(containers) + self.PARAM_COLOCATION* self.compute_colocation(containers)
+            #reward += self.PARAM_ENERGY * container.cpu * self.green_at(time)
 
         return reward
 

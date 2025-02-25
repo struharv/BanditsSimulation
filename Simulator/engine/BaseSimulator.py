@@ -11,8 +11,6 @@ class BaseSimulator:
     HOUR_SECONDS = 60*60
     TIME_MAX_SECONDS = 24 * HOUR_SECONDS
 
-
-
     EVENT_MIGRATE = "migration"
 
     def __init__(self, nodes: list[Node], containers: list[Container]):

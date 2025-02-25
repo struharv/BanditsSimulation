@@ -18,6 +18,50 @@ class Permutations:
 
         return self.make_sets()
 
+    def index_container(self, container):
+        for i in range(len(self.containers)):
+            if container == self.containers[i]:
+                return i
+        return -1
+
+    def index_node(self, node):
+        for i in range(len(self.nodes)):
+            if node == self.nodes[i]:
+                return i
+        return -1
+
+    def print_permutations(self):
+        self.results = []
+        self.do_permutate([], 0)
+
+        sets = self.make_sets()
+        text = ""
+        full_coma = ""
+        for set in sets:
+
+            #print(set)
+            text += full_coma
+            text += "["
+            node_coma = ""
+            for assignment in set:
+                text += node_coma
+                node:Node = assignment[0]
+                text += f"(nodes[{self.index_node(node)}], ["
+                container_coma = ""
+                for container in assignment[1]:
+
+                    text += container_coma
+                    text += f"containers[{self.index_container(container)}]"
+                    container_coma = ", "
+
+                text += "])"
+                node_coma = ", "
+            text += "]"
+            full_coma = ",\n"
+
+        print(text)
+
+
     def assignment_to_set(self, assignment):
         res_set = []
         for _ in self.nodes:
@@ -40,7 +84,6 @@ class Permutations:
         for assignment in self.results:
             res = self.assignment_to_set(assignment)
             result_sets += [res]
-            print(assignment, res)
 
         return result_sets
 
@@ -48,7 +91,7 @@ class Permutations:
 
     def do_permutate(self, assignments, position):
         if position >= len(self.containers):
-            print("done", assignments)
+            #print("done", assignments)
             self.results += [assignments]
             return
 

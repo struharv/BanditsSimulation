@@ -16,11 +16,15 @@ class TestBase(unittest.TestCase):
     OUT_DIR = "plots/"
 
     TEST_SUITE = [
-        ["superstill", Infrastructure.make_infrastructure_superstill()],
+        #["superstill", Infrastructure.make_infrastructure_superstill()],
         ["still", Infrastructure.make_infrastructure_still()],
+        ["still_3_container", Infrastructure.make_infrastructure_still_containers(3, 0.2, 10, 10)],
+        ["still_4_container", Infrastructure.make_infrastructure_still_containers(4, 0.2, 10, 10)],
+        ["still_5_container", Infrastructure.make_infrastructure_still_containers(5, 0.2, 10, 10)],
+
         #["extreme_still", Infrastructure.make_infrastructure_extreme_still()],
 
-        ["spikey", Infrastructure.make_infrastructure_spikey()],
+        #["spikey", Infrastructure.make_infrastructure_spikey()],
         #["bigspikey", Infrastructure.make_infrastructure_bigspikey()],
         #["spikey5", Infrastructure.make_infrastructure_spikey5()],
     ]

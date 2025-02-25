@@ -1,4 +1,5 @@
 import inspect
+import unittest
 
 from parameterized import parameterized
 
@@ -19,39 +20,16 @@ class NaiveBanditTest(TestBase):
     def case_naive_bandit(self, name, infrastructure):
         nodes, containers = infrastructure
 
-        sets = [
-            [(nodes[0], [containers[0], containers[1], containers[2], containers[3], containers[4]]), ],
-            [(nodes[1], [containers[0], containers[1], containers[2], containers[3], containers[4]]), ],
-            [(nodes[2], [containers[0], containers[1], containers[2], containers[3], containers[4]]), ],
-
-            [(nodes[0], [containers[0], containers[1]]), (nodes[1], [containers[2], containers[3], containers[4]])],
-            [(nodes[1], [containers[0], containers[1]]), (nodes[0], [containers[2], containers[3], containers[4]])],
-
-            [(nodes[1], [containers[0], containers[1]]), (nodes[2], [containers[2], containers[3], containers[4]])],
-            [(nodes[2], [containers[0], containers[1]]), (nodes[1], [containers[2], containers[3], containers[4]])],
-
-            [(nodes[0], [containers[0], containers[1]]), (nodes[2], [containers[2], containers[3], containers[4]])],
-            [(nodes[2], [containers[0], containers[1]]), (nodes[0], [containers[2], containers[3], containers[4]])],
-
-            [(nodes[0], [containers[0]]), (nodes[1], [containers[1], containers[2], containers[3], containers[4]])],
-            [(nodes[1], [containers[0]]), (nodes[0], [containers[1], containers[2], containers[3], containers[4]])],
-
-            [(nodes[0], [containers[0]]), (nodes[2], [containers[1], containers[2], containers[3], containers[4]])],
-            [(nodes[2], [containers[0]]), (nodes[0], [containers[1], containers[2], containers[3], containers[4]])],
-
-            # [(nodes[1], [containers[0]]), (nodes[2], [containers[1], containers[2], containers[3], containers[4]])],
-            # [(nodes[2], [containers[0]]), (nodes[1], [containers[1], containers[2], containers[3], containers[4]])],
-
-            # [(nodes[0], [containers[0]]), (nodes[1], [containers[1]]),
-            #  (nodes[2], [containers[2], containers[3], containers[4]])],
-            # [(nodes[0], [containers[1]]), (nodes[1], [containers[0]]),
-            #  (nodes[2], [containers[2], containers[3], containers[4]])],
-
-        ]
         permutations = Permutations(nodes, containers)
+        permutations.print_permutations()
         sets = permutations.make_permutations()
 
         bandit = MultiArmBandit(sets)
         result = self.simulate(nodes, containers, None, None, inspect.currentframe().f_code.co_name, name,
                                f"Naive Bandit - {name}", orchestrator=bandit)
         return result
+    
+if __name__ == '__main__':
+    unittest.main()
+
+
