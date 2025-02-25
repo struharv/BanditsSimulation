@@ -45,7 +45,7 @@ class UCBBandit(Orchestrator):
         random.shuffle(shuffled)
 
         for node in shuffled:
-            energy = node.green_at(self.simulator.now())
+            energy = node.compute_reward_at(self.simulator.now(), node.containers)# node.green_at(self.simulator.now())
             if result_node == None or energy < minEnergy:
                 result_node = node
                 minEnergy = energy

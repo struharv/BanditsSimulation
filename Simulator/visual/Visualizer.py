@@ -27,7 +27,7 @@ class Visualizer:
             if len(node.green_points) > 0 and node.green_points[len(node.green_points)-1][0] != self.simulator.TIME_MAX_SECONDS:
                 f.write(f"{self.simulator.TIME_MAX_SECONDS} 0\n")
 
-    def draw(self, title="Bandit experiment" ):
+    def draw(self, title="Bandit experiment"):
 
         for node in self.simulator.nodes:
             self.draw_node(node)

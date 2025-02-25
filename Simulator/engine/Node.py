@@ -7,6 +7,12 @@ class Node:
 
     simulator = None
 
+    PARAM_PERFORMANCE = 0.00
+    PARAM_ENERGY = 0.9
+    PARAM_COLOCATION = 0.0
+
+    colocation = 0.0
+
     def __init__(self, name: str, cpu: float, memory_mb: int, storage_mb: int):
         self.name = name
         self.cpu = cpu
@@ -49,28 +55,39 @@ class Node:
         self.cpu_history += [self.now_cpu_used()]
         self.memory_mb_history += [self.now_memory_mb_used()]
         self.storage_mb_history += [self.now_storage_mb_used()]
-        self.performance_history += [self.compute_performance()]
+        self.performance_history += [self.compute_performance(self.containers)]
 
     def compute_reward(self) -> float:
         return self.compute_posible_reward(self.containers)
 
-    def compute_posible_reward(self, containers):
+    def compute_posible_reward(self, containers, time_at=None):
         reward = 0
+        #print(self.name)
+        if time_at==None:
+            time_at = self.simulator.time
 
-        for container in containers:
-            reward += self.compute_reward_at(container.cpu, self.simulator.time)
+        reward += self.compute_reward_at(time_at, containers)
+        #    print(reward)
 
         return reward
 
-    def compute_performance(self):
+    def compute_performance(self, containers=[]):
         performance = 1.0
-        for container in self.containers:
+
+        for container in containers:
             performance *= (1.0-container.performance_slowdown)
 
         return performance
 
-    def compute_reward_at(self, cpu, time):
-        return cpu * self.green_at(time) + 0.3*self.compute_performance()
+    def compute_colocation(self, containers):
+        return self.colocation ** (len(containers)+1)
+
+    def compute_reward_at(self, time, containers):
+        reward = 0
+        for container in containers:
+            reward += self.PARAM_ENERGY * container.cpu * self.green_at(time) + self.PARAM_PERFORMANCE * self.compute_performance(containers) + self.PARAM_COLOCATION* self.compute_colocation(containers)
+
+        return reward
 
     def now_cpu_used(self):
         res = 0

@@ -26,7 +26,7 @@ class MultiArmBandit(Orchestrator):
         self.actions = np.zeros(NewSimulator.TIME_MAX_SECONDS)
 
 
-    def tick(self, time_s: int, decisioneach_s = 20):
+    def tick(self, time_s: int, decisioneach_s = 60):
         if time_s % decisioneach_s != 0:
             return
         # print("BANDIT tick!", self.simulator.TIME_MAX_SECONDS)

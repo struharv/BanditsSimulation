@@ -140,8 +140,14 @@ class BaseSimulator:
         for deployment_item in deployment:
             node = deployment_item[0]
             containers = deployment_item[1]
-            for container in containers:
-                reward += node.compute_reward_at(container.cpu, time)
+
+            reward += node.compute_posible_reward(containers, time)
+
+            #for container in containers:
+            #    #tmp = node.compute_reward_at(container.cpu, time)
+
+            #    print(tmp)
+            #    reward += tmp
 
         return reward
 

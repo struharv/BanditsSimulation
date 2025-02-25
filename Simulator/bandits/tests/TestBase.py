@@ -16,6 +16,7 @@ class TestBase(unittest.TestCase):
     OUT_DIR = "plots/"
 
     TEST_SUITE = [
+        ["superstill", Infrastructure.make_infrastructure_superstill()],
         ["still", Infrastructure.make_infrastructure_still()],
         #["extreme_still", Infrastructure.make_infrastructure_extreme_still()],
 
@@ -53,8 +54,6 @@ class TestBase(unittest.TestCase):
         repetitions = TestBase.STATS_REPETITIONS
         if explicit_repetitions:
             repetitions = explicit_repetitions
-
-
 
         for instance in range(repetitions):
 
