@@ -7,7 +7,7 @@ from engine.Node import Node
 class Visualizer:
     NODE_WIDTH = 500
     NODE_HEIGHT = 200
-    SHOW_PERFORMANCE = True
+    SHOW_PERFORMANCE = False
 
 
     def __init__(self, simulator: NewSimulator, prefix: str):

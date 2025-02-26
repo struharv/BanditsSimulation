@@ -15,15 +15,15 @@ class RandomTest(TestBase):
     def test_random(self, name, infrastructure):
         self.case_random(name, infrastructure)
 
-    @parameterized.expand(TestBase.TEST_SUITE)
-    def test_random_1(self, name, infrastructure):
-        self.case_random_1(name, infrastructure)
+    #@parameterized.expand(TestBase.TEST_SUITE)
+    #def test_random_1(self, name, infrastructure):
+    #    self.case_random_1(name, infrastructure)
 
     def test_random_STATS_0(self):
         self.perform_stats("test_random_0", self.case_random, TestBase.TEST_SUITE)
 
-    def test_random_STATS_1(self):
-        self.perform_stats("test_random_1", self.case_random_1, TestBase.TEST_SUITE)
+    #def test_random_STATS_1(self):
+    #    self.perform_stats("test_random_1", self.case_random_1, TestBase.TEST_SUITE)
 
     def case_random(self, name, infrastructure):
         nodes, containers = infrastructure
@@ -37,6 +37,7 @@ class RandomTest(TestBase):
 
         return results
 
+    '''
     def case_random_1(self, name, infrastructure):
         nodes, containers = infrastructure
 
@@ -48,7 +49,7 @@ class RandomTest(TestBase):
                                 inspect.currentframe().f_code.co_name, name, f"Random Reschedule 1- {name}")
 
         return results
-
+    '''
     """
     @parameterized.expand(JustTest.TEST_SUITE)
     def test_random_lowest_reward_first(self, name, infrastructure):

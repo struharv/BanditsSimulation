@@ -17,14 +17,17 @@ class TestBase(unittest.TestCase):
 
     TEST_SUITE = [
         #["superstill", Infrastructure.make_infrastructure_superstill()],
-        ["still", Infrastructure.make_infrastructure_still()],
+        #["still", Infrastructure.make_infrastructure_still()],
         ["still_3_container", Infrastructure.make_infrastructure_still_containers(3, 0.2, 10, 10)],
-        ["still_4_container", Infrastructure.make_infrastructure_still_containers(4, 0.2, 10, 10)],
-        ["still_5_container", Infrastructure.make_infrastructure_still_containers(5, 0.2, 10, 10)],
+        #["still_4_container", Infrastructure.make_infrastructure_still_containers(4, 0.2, 10, 10)],
+        #["still_5_container", Infrastructure.make_infrastructure_still_containers(5, 0.2, 10, 10)],
+        ["increasing_3_container", Infrastructure.make_infrastructure_increasing_containers(3, 0.2, 10, 10)],
+        #["increasing_4_container", Infrastructure.make_infrastructure_increasing_containers(4, 0.2, 10, 10)],
+        #["increasing_5_container", Infrastructure.make_infrastructure_increasing_containers(5, 0.2, 10, 10)],
 
         #["extreme_still", Infrastructure.make_infrastructure_extreme_still()],
 
-        #["spikey", Infrastructure.make_infrastructure_spikey()],
+        ["spikey", Infrastructure.make_infrastructure_spikey(3, 0.2, 10, 10)],
         #["bigspikey", Infrastructure.make_infrastructure_bigspikey()],
         #["spikey5", Infrastructure.make_infrastructure_spikey5()],
     ]

@@ -28,7 +28,8 @@ class NaiveBanditTest(TestBase):
         result = self.simulate(nodes, containers, None, None, inspect.currentframe().f_code.co_name, name,
                                f"Naive Bandit - {name}", orchestrator=bandit)
         return result
-    
+
+
 if __name__ == '__main__':
     unittest.main()
 

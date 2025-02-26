@@ -86,7 +86,7 @@ class Infrastructure:
 
                  ElectricNode("node3", 1, 1024, 500,
                               [(0 * NewSimulator.HOUR_SECONDS, 0.8),
-                               (24 * NewSimulator.HOUR_SECONDS, 0.3)])]
+                               (24 * NewSimulator.HOUR_SECONDS, 0.8)])]
 
         containers = []
         for i in range(container_cnt):
@@ -106,8 +106,8 @@ class Infrastructure:
                                (24 * NewSimulator.HOUR_SECONDS, 0.2)]),
 
                  ElectricNode("node3", 1, 1024, 500,
-                              [(0 * NewSimulator.HOUR_SECONDS, 0.8),
-                               (24 * NewSimulator.HOUR_SECONDS, 0.3)])]
+                              [(0 * NewSimulator.HOUR_SECONDS, 0.1),
+                               (24 * NewSimulator.HOUR_SECONDS, 0.9)])]
 
         containers = []
         for i in range(container_cnt):
@@ -163,7 +163,7 @@ class Infrastructure:
         return nodes, containers
 
     @staticmethod
-    def make_infrastructure_spikey():
+    def make_infrastructure_spikey(container_cnt: int, cpu: float, memory: int, storage: int):
         nodes = [ElectricNode("node1", 1, 1024, 500,
 
                               spikes(3, 0.8)),
@@ -174,12 +174,9 @@ class Infrastructure:
                  ElectricNode("node3", 1, 1024, 500,
                               spikes(5, 0.5))]
 
-        containers = [Container("container1", 0.1, 25, 10),
-                      Container("container2", 0.2, 25, 10),
-                      Container("container3", 0.15, 25, 10),
-                      Container("container4", 0.11, 25, 10),
-                      Container("container5", 0.07, 25, 10),
-                      ]
+        containers = []
+        for i in range(container_cnt):
+            containers += [Container(f"containers{containers}", cpu, memory, storage)]
 
         return nodes, containers
 
