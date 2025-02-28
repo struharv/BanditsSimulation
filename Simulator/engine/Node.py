@@ -5,13 +5,15 @@ from engine.Container import Container
 
 class Node:
 
+    # simulator that controls this node
     simulator = None
 
-    PARAM_PERFORMANCE = 0.1
+    # parameters to compute the reward function
+    PARAM_PERFORMANCE = 0
     PARAM_ENERGY = 0.9
     PARAM_COLOCATION = 0.0
 
-    colocation = 0.0
+    colocation = 0.5
 
     def __init__(self, name: str, cpu: float, memory_mb: int, storage_mb: int):
         self.name = name
@@ -44,7 +46,7 @@ class Node:
         return False
 
 
-    def reset_containers(self):
+    def reset_containers(self) -> None:
         """
         Undeploy all containers
         :return:
@@ -52,9 +54,9 @@ class Node:
         self.containers = []
 
     def tick(self):
-        self.cpu_history += [self.now_cpu_used()]
-        self.memory_mb_history += [self.now_memory_mb_used()]
-        self.storage_mb_history += [self.now_storage_mb_used()]
+        self.cpu_history += [self.current_cpu_usage()]
+        self.memory_mb_history += [self.current_memory_mb_usage()]
+        self.storage_mb_history += [self.current_storage_mb_usage()]
         self.performance_history += [self.compute_performance(self.containers)]
 
     def compute_reward(self) -> float:
@@ -90,21 +92,21 @@ class Node:
 
         return reward
 
-    def now_cpu_used(self):
+    def current_cpu_usage(self):
         res = 0
         for container in self.containers:
             res += container.cpu
 
         return res
 
-    def now_memory_mb_used(self):
+    def current_memory_mb_usage(self):
         res = 0
         for container in self.containers:
             res += container.memory_mb
 
         return res
 
-    def now_storage_mb_used(self):
+    def current_storage_mb_usage(self):
         res = 0
         for container in self.containers:
             res += container.storage_mb
@@ -112,13 +114,13 @@ class Node:
         return res
 
     def can_accommodate(self, container: Container) -> bool:
-        if self.now_cpu_used() + container.cpu > self.cpu:
+        if self.current_cpu_usage() + container.cpu > self.cpu:
             return False
 
-        if self.now_memory_mb_used() + container.memory_mb > self.memory_mb:
+        if self.current_memory_mb_usage() + container.memory_mb > self.memory_mb:
             return False
 
-        if self.now_storage_mb_used() + container.storage_mb > self.storage_mb:
+        if self.current_storage_mb_usage() + container.storage_mb > self.storage_mb:
             return False
 
         return True

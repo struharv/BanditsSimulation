@@ -208,7 +208,16 @@ class Infrastructure:
                               spikes(8, 0.8)),
 
                  ElectricNode("node3", 1, 1024, 500,
-                              spikes(10, 0.2))]
+                              spikes(10, 0.2)),
+
+                 ElectricNode("node4", 1, 1024, 500,
+                              [(0 * NewSimulator.HOUR_SECONDS, 0.8),
+                               (24 * NewSimulator.HOUR_SECONDS, 0.2)]),
+
+                 ElectricNode("node5", 1, 1024, 500,
+                              [(0 * NewSimulator.HOUR_SECONDS, 0.1),
+                               (24 * NewSimulator.HOUR_SECONDS, 0.9)])
+                 ]
 
         containers = [Container("container1", 0.1, 25, 10),
                       Container("container2", 0.2, 25, 10),

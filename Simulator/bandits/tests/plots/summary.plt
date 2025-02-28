@@ -19,4 +19,4 @@ set xtic scale 0
 set ylabel 'Average Cumulative reward '
 set xlabel 'Scenario'
 
-plot 'summary.dat' using 2:xtic(1) ti col fc rgb COLOR0, 'summary.dat' using 3:xtic(1) ti col fc rgb COLOR1, 'summary.dat' using 4:xtic(1) ti col fc rgb COLOR2
+plot 'summary.dat' using 2:xtic(1) ti col fc rgb COLOR0, 'summary.dat' using 3:xtic(1) ti col fc rgb COLOR1, 'summary.dat' using 4:xtic(1) ti col fc rgb COLOR2, 'summary.dat' using 5:xtic(1) ti col fc rgb COLOR3

@@ -46,7 +46,7 @@ class StatsCombiner:
     def __init__(self):
         self.db = []
 
-    def compose(self, file_name, cases=["still", "spikey", "bigspikey"]):
+    def compose(self, file_name, cases=["increasing_3_container", "spikey"]):
         with open(f"{file_name}.dat", "w") as f:
             f.write("Title ")
             for column in self.get_test_cases():
@@ -95,20 +95,6 @@ class StatsCombiner:
 
             f.write("\n")
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
     def get_test_cases(self):
         columns = []
 
@@ -128,10 +114,13 @@ class StatsCombiner:
 def combine(dir):
     combiner = StatsCombiner()
 
+    combiner.add_file(f"{dir}stats_test_best_summary.csv")
     combiner.add_file(f"{dir}stats_test_random_0_summary.csv")
-    #combiner.add_file(f"{dir}stats_test_random_1_summary.csv")
     combiner.add_file(f"{dir}stats_test_naive_bandit_summary.csv")
     combiner.add_file(f"{dir}stats_test_UCB_bandit_summary.csv")
+
+
+
     #combiner.add_file(f"{dir}stats_test_UCB_bandit_1_summary.csv")
     #combiner.add_file(f"{dir}stats_test_UCB_bandit_2_summary.csv")
 
