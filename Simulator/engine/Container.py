@@ -11,3 +11,6 @@ class Container:
         self.cpu = cpu
         self.memory_mb = memory_mb
         self.storage_mb = storage_mb
+
+    def __repr__(self):
+        return f"Container.{self.name}{self.cpu, self.memory_mb, self.storage_mb}"

@@ -12,6 +12,7 @@ from visual.Visualizer import Visualizer
 
 class TestBase(unittest.TestCase):
     STATS_REPETITIONS = 5
+    DECISION_EACH_SEC = 30
     ENABLE_STATS = False
     OUT_DIR = "plots/"
 
@@ -75,6 +76,11 @@ class TestBase(unittest.TestCase):
 
     @staticmethod
     def random_init(simulator: NewSimulator):
+        """
+        Randomly assign containers to nodes in the way the containers fullfil the constraints
+        :param simulator:
+        :return:
+        """
         buf_containers = []
         for cont in simulator.containers:
             buf_containers += [cont]

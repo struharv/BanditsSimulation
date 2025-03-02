@@ -1,4 +1,5 @@
 import logging
+import random
 from logging import Logger
 
 from engine.Container import Container
@@ -155,4 +156,19 @@ class BaseSimulator:
             result += reward[1]
 
         return result
+
+    def random_init(self):
+        """
+        Randomly assign containers to nodes in the way the containers fullfil the constraints
+        :param simulator:
+        :return:
+        """
+        buf_containers = []
+        for cont in self.containers:
+            buf_containers += [cont]
+
+        while len(buf_containers) > 0:
+            if self.migrate(buf_containers[0].name, random.choice(self.nodes).name):
+                del buf_containers[0]
+
 

@@ -25,7 +25,6 @@ class NewSimulator(BaseSimulator):
         self.reward_history += [(self.time, reward)]
 
 
-
     def simulate(self):
         # init
         print("Simulation start")

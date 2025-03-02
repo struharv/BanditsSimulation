@@ -26,8 +26,6 @@ class ElectricNode(Node):
         else:
             logging.debug(f"WARNING: No simulator assigned to node {self.name}")
 
-
-
     def green_at(self, at_time) -> float:
 
         # we need at least 2 points
@@ -69,3 +67,6 @@ class ElectricNode(Node):
 
     def get_context(self, time_s: int):
         return [self.green_at(time_s), 0, 0]
+
+    def __repr__(self):
+        return f"Node.{self.name}{self.cpu, self.memory_mb, self.storage_mb}"
