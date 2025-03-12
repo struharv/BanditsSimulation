@@ -1,7 +1,7 @@
 set terminal pdfcairo size 5,8
 set output 'output.pdf'
 set key left top
-set multiplot layout 5, 1 title "Naive Bandit - still_3_container" font ",20"
+set multiplot layout 5, 1 title "Naive Bandit - still\\\_3\\\_container" font ",20"
 set yrange [0:1]
 set xrange [0:86400]
 set format x " " 
