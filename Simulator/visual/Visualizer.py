@@ -79,15 +79,17 @@ class Visualizer:
             f.write(f"set xrange [0:{NewSimulator.TIME_MAX_SECONDS}]\n")
             f.write("set format x \" \" \n")
             f.write("set offsets graph 0, 0, 0.05, 0.05\n")
+
+            # for each node:
             for node in self.simulator.nodes:
                 f.write(f"set title 'Green Energy, Performance {node.name}'\n")
-                #f.write("set ylabel 'Green Energy %, Performance %'\n")
+
                 performance = ""
                 if self.SHOW_PERFORMANCE:
                     performance = f", '{node.name}_resources.pts' using 1:8 with lines linestyle 1 linecolor rgb 'gray' notitle"
 
                 f.write(
-                    f"plot '{node.name}.pts' with linespoints linestyle 1 linecolor rgb \"green\" notitle{performance}, '{node.name}_resources.pts' using 1:5  with points pointtype 0 linecolor rgb \"black\" notitle\n")
+                    f"plot '{node.name}.pts' with linespoints linestyle 1 linecolor rgb \"green\" notitle{performance}, '{node.name}_resources.pts' using 1:($5 == 0 ? NaN:$5)   with points pointtype 0 linecolor rgb \"black\" notitle\n")
 
                 #f.write(f"set title 'Resources {node.name}'\n")
                 #f.write("set ylabel 'CPU %'\n")
@@ -101,8 +103,10 @@ class Visualizer:
             f.write(f"plot 'reward.pts'  with points pointtype 0 title \"reward\"\n")
             f.write(f"set title 'Cumulative reward'\n")
             f.write("set yrange [0:*]\n")
+            f.write("set xlabel 'time'\n")
             f.write(f"plot 'reward_cummulative.pts' with lines linestyle 1 title \"cumulative reward\"\n")
             f.write("unset multiplot\n")
+
 
     def dump_reward_cummulative(self):
         with open(f"{self.test_dir}/reward_cummulative.pts", "w") as f:

@@ -33,7 +33,7 @@ class BestTest(TestBase):
                         best_Reward = reward
                         best_deployment = possible
 
-                print(simulator.now(), best_Reward, best_deployment)
+                # print(simulator.now(), best_Reward, best_deployment)
                 simulator.deploy_as(best_deployment)
 
         results = self.simulate(nodes, containers, TestBase.random_init, do_tick, inspect.currentframe().f_code.co_name, name, f"Best - {name}")

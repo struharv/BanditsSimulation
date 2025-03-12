@@ -10,7 +10,4 @@ print(suites)
 test_suite = unittest.TestSuite(suites)
 test_runner = unittest.TextTestRunner().run(test_suite)
 
-
-
-
-Stats.combine("./plots/")
+#Stats.combine("./plots/")
