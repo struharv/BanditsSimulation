@@ -17,7 +17,6 @@ class Visualizer:
     #OUT_FILENAME = "output.eps"
 
     OUT_TYPE = 'pdfcairo'
-    OUT_FILENAME = "output.pdf"
     OUT_EXTENSION = "pdf"
 
     def __init__(self, simulator: NewSimulator, prefix: str):
