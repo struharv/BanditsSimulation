@@ -19,7 +19,7 @@ class TestBase(unittest.TestCase):
     TEST_SUITE = [
         #["superstill", Infrastructure.make_infrastructure_superstill()],
         #["still", Infrastructure.make_infrastructure_still()],
-        #["still_3_container", Infrastructure.make_infrastructure_still_containers(3, 0.2, 10, 10)],
+        ["still_3_container", Infrastructure.make_infrastructure_still_containers(3, 0.2, 10, 10)],
         #["still_4_container", Infrastructure.make_infrastructure_still_containers(4, 0.2, 10, 10)],
         #["still_5_container", Infrastructure.make_infrastructure_still_containers(5, 0.2, 10, 10)],
         ["increasing_5_container", Infrastructure.make_infrastructure_increasing_containers(5, 0.2, 10, 10)],
@@ -89,7 +89,7 @@ class TestBase(unittest.TestCase):
             if simulator.migrate(buf_containers[0].name, random.choice(simulator.nodes).name):
                 del buf_containers[0]
 
-    def make_possible_deployments(self, nodes, containers):
+    def compute_all_possible_deployments(self, nodes, containers):
         permutations = Permutations(nodes, containers)
         sets = permutations.make_permutations()
 

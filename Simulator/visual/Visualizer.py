@@ -8,9 +8,19 @@ class Visualizer:
     NODE_WIDTH = 500
     NODE_HEIGHT = 200
     SHOW_PERFORMANCE = False
+    FIGURE_WIDHT = 5
+    FIGURE_HEIGHT = 8
+    #OUT_TYPE = 'pngcairo'
+    #OUT_FILENAME = "output.png"
 
+    #OUT_TYPE = 'epscairo'
+    #OUT_FILENAME = "output.eps"
+
+    OUT_TYPE = 'pdfcairo'
+    OUT_FILENAME = "output.pdf"
 
     def __init__(self, simulator: NewSimulator, prefix: str):
+
         self.simulator = simulator
         self.prefix = prefix
         self.test_dir = prefix
@@ -49,10 +59,13 @@ class Visualizer:
                         f.write(
                             f"{time} {node.cpu_history[time]} {node.memory_mb_history[time]} {node.storage_mb_history[time]} {node.cpu_history[time]/node.cpu} {node.memory_mb_history[time]/node.memory_mb} {node.storage_mb_history[time]/node.storage_mb} {node.performance_history[time]}\n")
 
-    def make_plot(self, title):
+    def make_plot(self, title, filename=None):
+        if not filename:
+            filename = self.OUT_FILENAME
+
         with open(f"{self.test_dir}/simulation.plt", "w") as f:
-            f.write("set terminal pngcairo enhanced font 'Times New Roman,12.0' size 800,1000\n")
-            f.write("set output 'output.png\n")
+            f.write(f"set terminal {self.OUT_TYPE} size {self.FIGURE_WIDHT},{self.FIGURE_HEIGHT}\n")
+            f.write(f"set output '{filename}'\n")
 
             f.write("set key left top\n")
             f.write(f"set multiplot layout {len(self.simulator.nodes) + 2}, 1 title \"{title}\" font \",20\"\n")

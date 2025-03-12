@@ -1,7 +1,7 @@
-set terminal pngcairo enhanced font 'Times New Roman,12.0' size 800,1000
-set output 'output.png
+set terminal pdfcairo size 5,8
+set output 'output.pdf'
 set key left top
-set multiplot layout 5, 1 title "Random Reschedule - still_3_container" font ",20"
+set multiplot layout 5, 1 title "Random - still_3_container" font ",20"
 set yrange [0:1]
 set xrange [0:86400]
 set format x " " 

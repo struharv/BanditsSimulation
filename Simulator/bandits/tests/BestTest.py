@@ -10,7 +10,6 @@ from bandits.tests.TestBase import TestBase
 
 class BestTest(TestBase):
 
-
     @parameterized.expand(TestBase.TEST_SUITE)
     def test_best(self, name, infrastructure):
         self.case_best(name, infrastructure)
@@ -20,7 +19,7 @@ class BestTest(TestBase):
 
     def case_best(self, name, infrastructure):
         nodes, containers = infrastructure
-        possible_deployments = self.make_possible_deployments(nodes, containers)
+        possible_deployments = self.compute_all_possible_deployments(nodes, containers)
 
         def do_tick(simulator: NewSimulator):
 
@@ -37,7 +36,7 @@ class BestTest(TestBase):
                 print(simulator.now(), best_Reward, best_deployment)
                 simulator.deploy_as(best_deployment)
 
-        results = self.simulate(nodes, containers, TestBase.random_init, do_tick, inspect.currentframe().f_code.co_name, name, f"Best Reschedule - {name}")
+        results = self.simulate(nodes, containers, TestBase.random_init, do_tick, inspect.currentframe().f_code.co_name, name, f"Best - {name}")
 
         return results
 
