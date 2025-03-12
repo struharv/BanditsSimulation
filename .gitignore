@@ -3,6 +3,5 @@
 /Simulator/.idea
 /LinUCB/data/ml-100k
 /LinUCB/data/ml-100k
-/Simulator/bandits/tests/plots
 *.pts
-/Simulator/bandits/tests/plots
+
