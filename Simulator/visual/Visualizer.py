@@ -18,6 +18,7 @@ class Visualizer:
 
     OUT_TYPE = 'pdfcairo'
     OUT_FILENAME = "output.pdf"
+    OUT_EXTENSION = "pdf"
 
     def __init__(self, simulator: NewSimulator, prefix: str):
 
@@ -66,7 +67,7 @@ class Visualizer:
 
     def make_plot(self, title, filename=None):
         if not filename:
-            filename = self.OUT_FILENAME
+            filename = f"{title}.{Visualizer.OUT_EXTENSION}"
 
         with open(f"{self.test_dir}/simulation.plt", "w") as f:
             f.write(f"set terminal {self.OUT_TYPE} size {self.FIGURE_WIDHT},{self.FIGURE_HEIGHT}\n")

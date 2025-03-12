@@ -1,5 +1,5 @@
 set terminal pdfcairo size 5,8
-set output 'output.pdf'
+set output 'Best - still_3_container.pdf'
 set key left top
 set multiplot layout 5, 1 title "Best - still\\\_3\\\_container" font ",20"
 set yrange [0:1]

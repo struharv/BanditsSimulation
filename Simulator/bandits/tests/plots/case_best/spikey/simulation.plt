@@ -1,5 +1,5 @@
 set terminal pdfcairo size 5,8
-set output 'output.pdf'
+set output 'Best - spikey.pdf'
 set key left top
 set multiplot layout 5, 1 title "Best - spikey" font ",20"
 set yrange [0:1]
