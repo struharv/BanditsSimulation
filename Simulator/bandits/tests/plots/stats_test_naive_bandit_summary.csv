@@ -1,2 +1,2 @@
-test_naive_bandit,increasing_3_container,cumulative reward,181034.39984999868
-test_naive_bandit,spikey,cumulative reward,121240.05502503442
+test_naive_bandit,still_3_container,cumulative reward,32004.720000036057
+test_naive_bandit,spikey,cumulative reward,6204.590100000019

@@ -21,7 +21,7 @@ class RandomTest(TestBase):
         nodes, containers = infrastructure
 
         def do_tick(simulator: NewSimulator):
-            if simulator.now() % RandomTest.DECISION_EACH_SEC == 0:
+            if simulator.now() % RandomTest.DECISION_PERIOD_SEC == 0:
                 simulator.migrate(random.choice(containers).name, random.choice(nodes).name)
 
         results = self.simulate(nodes, containers, TestBase.random_init, do_tick,

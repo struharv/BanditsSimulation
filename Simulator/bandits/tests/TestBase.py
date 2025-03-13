@@ -11,9 +11,9 @@ from visual.Visualizer import Visualizer
 
 
 class TestBase(unittest.TestCase):
-    STATS_REPETITIONS = 5
-    DECISION_EACH_SEC = 30
-    ENABLE_STATS = False
+    STATS_REPETITIONS = 1
+    DECISION_PERIOD_SEC = 30
+    ENABLE_STATS = True
     OUT_DIR = "plots/"
 
     TEST_SUITE = [
@@ -22,7 +22,7 @@ class TestBase(unittest.TestCase):
         ["still_3_container", Infrastructure.make_infrastructure_still_containers(3, 0.2, 10, 10)],
         #["still_4_container", Infrastructure.make_infrastructure_still_containers(4, 0.2, 10, 10)],
         #["still_5_container", Infrastructure.make_infrastructure_still_containers(5, 0.2, 10, 10)],
-        ["increasing_5_container", Infrastructure.make_infrastructure_increasing_containers(5, 0.2, 10, 10)],
+        #["increasing_5_container", Infrastructure.make_infrastructure_increasing_containers(5, 0.2, 10, 10)],
         #["increasing_4_container", Infrastructure.make_infrastructure_increasing_containers(4, 0.2, 10, 10)],
         #["increasing_5_container", Infrastructure.make_infrastructure_increasing_containers(5, 0.2, 10, 10)],
 

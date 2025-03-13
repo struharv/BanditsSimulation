@@ -90,7 +90,7 @@ class Infrastructure:
 
         containers = []
         for i in range(container_cnt):
-            containers += [Container(f"containers{containers}", cpu, memory, storage)]
+            containers += [Container(f"container{i}", cpu, memory, storage)]
 
         return nodes, containers
 

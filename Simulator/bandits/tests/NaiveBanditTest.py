@@ -3,8 +3,9 @@ import unittest
 
 from parameterized import parameterized
 
+from bandits.MultiArmBandit import MultiArmBandit
 from bandits.tests.TestBase import TestBase
-from engine.bandits.MultiArmBandit import MultiArmBandit
+
 from helpers.Permutations import Permutations
 
 

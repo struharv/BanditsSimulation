@@ -66,7 +66,8 @@ class ElectricNode(Node):
         return result
 
     def get_context(self, time_s: int):
-        return [self.green_at(time_s), 0, 0]
+        return self.green_at(time_s)
 
     def __repr__(self):
         return f"Node.{self.name}{self.cpu, self.memory_mb, self.storage_mb}"
+

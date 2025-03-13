@@ -46,7 +46,7 @@ class StatsCombiner:
     def __init__(self):
         self.db = []
 
-    def compose(self, file_name, cases=["increasing_3_container", "spikey"]):
+    def compose(self, file_name, cases=["still_3_container", "spikey"]):
         with open(f"{file_name}.dat", "w") as f:
             f.write("Title ")
             for column in self.get_test_cases():
@@ -54,7 +54,7 @@ class StatsCombiner:
             f.write("\n")
 
             for case in cases:
-                f.write(f"{case} ")
+                f.write(f"{case.replace("_", "\\\\\\_")} ")
 
                 #values = ""
                 for item in self.db:

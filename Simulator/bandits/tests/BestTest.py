@@ -23,7 +23,7 @@ class BestTest(TestBase):
 
         def do_tick(simulator: NewSimulator):
 
-            if simulator.now() % BestTest.DECISION_EACH_SEC == 0:
+            if simulator.now() % BestTest.DECISION_PERIOD_SEC == 0:
 
                 best_Reward = None
                 best_deployment = None

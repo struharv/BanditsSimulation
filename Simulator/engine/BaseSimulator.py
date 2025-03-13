@@ -1,11 +1,10 @@
 import logging
 import random
-from logging import Logger
 
 from engine.Container import Container
 from engine.Exceptions.NoElementFoundException import NoElementFoundException
 from engine.Node import Node
-from engine.bandits.Orchestrator import Orchestrator
+from bandits.Orchestrator import Orchestrator
 
 
 class BaseSimulator:
@@ -86,6 +85,7 @@ class BaseSimulator:
     def migrate(self, container_name, node_name) -> bool:
         old_node = self.find_container_in_node(container_name)
         container = self.find_container(container_name)
+        print(" migrating", container_name, "to", node_name)
         if not container:
             raise NoElementFoundException(f"Container {container_name} is not found.")
 

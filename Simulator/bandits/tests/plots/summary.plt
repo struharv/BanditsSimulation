@@ -1,8 +1,5 @@
-#set term png size 1500,600
-#set output 'summary.png'
-set terminal pdfcairo size 5,3
-set output 'output.pdf'
-
+set term png size 1500,600
+set output 'summary.png'
 set title 'Deployment Comparison'
 COLOR0='#99ffff'
 COLOR1='#4671d5'
