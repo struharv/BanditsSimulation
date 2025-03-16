@@ -58,6 +58,7 @@ class BaseSimulator:
         pass
 
     def simulate(self):
+        print("BaseSimulator.simulate")
         if self.action_init:
             self.action_init(self)
 
@@ -85,7 +86,7 @@ class BaseSimulator:
     def migrate(self, container_name, node_name) -> bool:
         old_node = self.find_container_in_node(container_name)
         container = self.find_container(container_name)
-        print(" migrating", container_name, "to", node_name)
+        # print(" migratingx", container_name, "to", node_name)
         if not container:
             raise NoElementFoundException(f"Container {container_name} is not found.")
 

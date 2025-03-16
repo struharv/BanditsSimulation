@@ -1,2 +1,5 @@
-test_random_0,still_3_container,cumulative reward,16421.40000001481
-test_random_0,spikey,cumulative reward,3825.1505250000223
+test_random_0,still_3_container,cumulative reward,17143.65000001615
+test_random_0,increasing_5_container,cumulative reward,20509.416952501786
+test_random_0,extreme_still,cumulative reward,16634.173499996563
+test_random_0,spikey,cumulative reward,3969.321922500021
+test_random_0,bigspikey,cumulative reward,14777.220130937456

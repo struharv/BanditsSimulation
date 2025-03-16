@@ -11,9 +11,9 @@ from visual.Visualizer import Visualizer
 
 
 class TestBase(unittest.TestCase):
-    STATS_REPETITIONS = 1
+    STATS_REPETITIONS = 10
     DECISION_PERIOD_SEC = 30
-    ENABLE_STATS = True
+    ENABLE_STATS = False
     OUT_DIR = "plots/"
 
     TEST_SUITE = [
@@ -22,14 +22,14 @@ class TestBase(unittest.TestCase):
         ["still_3_container", Infrastructure.make_infrastructure_still_containers(3, 0.2, 10, 10)],
         #["still_4_container", Infrastructure.make_infrastructure_still_containers(4, 0.2, 10, 10)],
         #["still_5_container", Infrastructure.make_infrastructure_still_containers(5, 0.2, 10, 10)],
-        #["increasing_5_container", Infrastructure.make_infrastructure_increasing_containers(5, 0.2, 10, 10)],
+        ["increasing_5_container", Infrastructure.make_infrastructure_increasing_containers(5, 0.2, 10, 10)],
         #["increasing_4_container", Infrastructure.make_infrastructure_increasing_containers(4, 0.2, 10, 10)],
         #["increasing_5_container", Infrastructure.make_infrastructure_increasing_containers(5, 0.2, 10, 10)],
 
-        #["extreme_still", Infrastructure.make_infrastructure_extreme_still()],
+        ["extreme_still", Infrastructure.make_infrastructure_extreme_still()],
 
         ["spikey", Infrastructure.make_infrastructure_spikey(3, 0.2, 10, 10)],
-        #["bigspikey", Infrastructure.make_infrastructure_bigspikey()],
+        ["bigspikey", Infrastructure.make_infrastructure_bigspikey()],
         #["spikey5", Infrastructure.make_infrastructure_spikey5()],
     ]
 
@@ -39,7 +39,9 @@ class TestBase(unittest.TestCase):
         simulator.set_action_tick(do_tick)
         simulator.set_action_init(do_init)
 
+        print("about to simulate")
         simulator.simulate()
+        print("simulation is done")
 
         if visualize:
             test_out_dir = f"{self.OUT_DIR}{directory}"

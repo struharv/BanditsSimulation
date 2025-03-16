@@ -1,19 +1,20 @@
 import inspect
 import unittest
 
+from bandits.NewSimulator import NewSimulator
+from bandits.RandomBandit import RandomBandit
 from engine.Container import Container
 from engine.ElectricNode import ElectricNode
-from engine.Simulator import Simulator
-from engine.bandits.RandomBandit import RandomBandit
+
 from visual.Visualizer import Visualizer
 
 
 class RandomBanditTest(unittest.TestCase):
 
     def create(self):
-        self.NODES = [ElectricNode("node1", 1, 1024, 500, [(7 * Simulator.HOUR_SECONDS, 0.0), (12 * Simulator.HOUR_SECONDS, 0.5), (14 * Simulator.HOUR_SECONDS, 0.5), (19 * Simulator.HOUR_SECONDS , 0.0)]),
-                      ElectricNode("node2", 1, 1024, 500, [(0, 0.2), (Simulator.TIME_MAX_SECONDS, 0.2)]),
-                      ElectricNode("node3", 1, 1024, 500, [(5 * Simulator.HOUR_SECONDS, 0.0), (10 * Simulator.HOUR_SECONDS, 0.5), (12 * Simulator.HOUR_SECONDS, 0.5), (17 * Simulator.HOUR_SECONDS , 0.0)])
+        self.NODES = [ElectricNode("node1", 1, 1024, 500, [(7 * NewSimulator.HOUR_SECONDS, 0.0), (12 * NewSimulator.HOUR_SECONDS, 0.5), (14 * NewSimulator.HOUR_SECONDS, 0.5), (19 * NewSimulator.HOUR_SECONDS, 0.0)]),
+                      ElectricNode("node2", 1, 1024, 500, [(0, 0.2), (NewSimulator.TIME_MAX_SECONDS, 0.2)]),
+                      ElectricNode("node3", 1, 1024, 500, [(5 * NewSimulator.HOUR_SECONDS, 0.0), (10 * NewSimulator.HOUR_SECONDS, 0.5), (12 * NewSimulator.HOUR_SECONDS, 0.5), (17 * NewSimulator.HOUR_SECONDS, 0.0)])
                       ]
 
         self.CONTAINERS = [Container("container1", 0.5, 256, 100),
@@ -25,7 +26,7 @@ class RandomBanditTest(unittest.TestCase):
     def test_visualize_random(self):
         self.create()
 
-        simulator = Simulator(self.NODES, self.CONTAINERS)
+        simulator = NewSimulator(self.NODES, self.CONTAINERS)
         #self.NODES[0].deploy(self.CONTAINERS[0])
         #self.NODES[2].deploy(self.CONTAINERS[1])
 

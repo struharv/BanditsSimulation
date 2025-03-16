@@ -35,18 +35,20 @@ class Stats:
                 case = split[1]
 
                 summ = 0
+                occurences = 0
                 for iter_value in values:
                     results = iter_value[1]
+                    occurences += 1
                     summ += results["cumulative reward"]
 
-                f.write(f"{test_name},{case},cumulative reward,{summ}\n")
+                f.write(f"{test_name},{case},cumulative reward,{summ/occurences}\n")
 
 
 class StatsCombiner:
     def __init__(self):
         self.db = []
 
-    def compose(self, file_name, cases=["still_3_container", "spikey"]):
+    def compose(self, file_name, cases=["still_3_container", "increasing_5_container", "extreme_still", "spikey", "bigspikey"]):
         with open(f"{file_name}.dat", "w") as f:
             f.write("Title ")
             for column in self.get_test_cases():
@@ -126,8 +128,6 @@ def combine(dir):
 
 
     combiner.compose(f"{dir}summary")
-
-
 
 
 if __name__ == "__main__":

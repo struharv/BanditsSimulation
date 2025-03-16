@@ -15,7 +15,7 @@ plot 'node3.pts' with linespoints linestyle 1 linecolor rgb "green" notitle, 'no
 set ylabel ' '
 set yrange[0:*]
 set title 'Reward'
-plot 'reward.pts'  with points pointtype 0 title "reward"
+plot 'reward.pts'  with points pointtype 0 title "reward", 'reward_best.pts'  with points pointtype 0 title "reward"
 set title 'Cumulative reward'
 set yrange [0:*]
 set xlabel 'time'

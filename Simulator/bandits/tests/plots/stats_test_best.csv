@@ -1,2 +1,5 @@
 test_best,still_3_container,0,cumulative reward,37324.80000004417,
+test_best,increasing_5_container,0,cumulative reward,39365.6850000002,
+test_best,extreme_still,0,cumulative reward,39191.040000047906,
 test_best,spikey,0,cumulative reward,9176.476724999802,
+test_best,bigspikey,0,cumulative reward,34754.03915093757,

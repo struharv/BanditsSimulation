@@ -52,6 +52,8 @@ class UCBBandit3(Orchestrator):
         # find good node based on the context
         # selected_arm = random.randint(0, len(self.simulator.nodes)-1)
         selected_arm = self.select_arm(x)
+        #if random.random() < 0.1:
+        #    selected_arm = random.randint(0, self.K_arms-1)
 
         # decide which container to migrate & migrate
         worst_node = self.worst_node_with_container()

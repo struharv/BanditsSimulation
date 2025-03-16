@@ -15,7 +15,7 @@ class BestTest(TestBase):
         self.case_best(name, infrastructure)
 
     def test_best_bandit_STATS(self):
-        self.perform_stats("test_best", self.case_best, TestBase.TEST_SUITE)
+        self.perform_stats("test_best", self.case_best, TestBase.TEST_SUITE, explicit_repetitions=1)
 
     def case_best(self, name, infrastructure):
         nodes, containers = infrastructure
