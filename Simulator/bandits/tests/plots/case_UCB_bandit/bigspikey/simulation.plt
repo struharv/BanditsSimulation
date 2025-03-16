@@ -1,7 +1,7 @@
 set terminal pdfcairo size 5,8
-set output 'UCB - bigspikey.pdf'
+set output 'UCB Multi Armed Bandit - bigspikey.pdf'
 set key left top
-set multiplot layout 7, 1 title "UCB - bigspikey" font ",20"
+set multiplot layout 7, 1 title "UCB Multi Armed Bandit - bigspikey" font ",20"
 set yrange [0:1]
 set xrange [0:86400]
 set format x " " 

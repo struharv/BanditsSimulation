@@ -21,7 +21,7 @@ class UCBBandit3Test(TestBase):
 
         bandit = UCBBandit3(len(nodes), len(nodes), alpha=0.1)
         result = self.simulate(nodes, containers, TestBase.random_init, None,
-                               inspect.currentframe().f_code.co_name, name, f"UCB - {name}",
+                               inspect.currentframe().f_code.co_name, name, f"UCB Multi Armed Bandit - {name}",
                                orchestrator=bandit)
         return result
 

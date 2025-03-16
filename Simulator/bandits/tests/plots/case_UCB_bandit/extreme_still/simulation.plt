@@ -1,7 +1,7 @@
 set terminal pdfcairo size 5,8
-set output 'UCB - extreme_still.pdf'
+set output 'UCB Multi Armed Bandit - extreme_still.pdf'
 set key left top
-set multiplot layout 5, 1 title "UCB - extreme\\\_still" font ",20"
+set multiplot layout 5, 1 title "UCB Multi Armed Bandit - extreme\\\_still" font ",20"
 set yrange [0:1]
 set xrange [0:86400]
 set format x " " 

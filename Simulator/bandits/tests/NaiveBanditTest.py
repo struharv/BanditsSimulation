@@ -27,7 +27,7 @@ class NaiveBanditTest(TestBase):
 
         bandit = MultiArmBandit(sets)
         result = self.simulate(nodes, containers, None, None, inspect.currentframe().f_code.co_name, name,
-                               f"Naive Bandit - {name}", orchestrator=bandit)
+                               f"Multi Armed Bandit - {name}", orchestrator=bandit)
         return result
 
 

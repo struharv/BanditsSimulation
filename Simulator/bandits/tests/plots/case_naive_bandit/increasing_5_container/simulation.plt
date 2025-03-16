@@ -1,7 +1,7 @@
 set terminal pdfcairo size 5,8
-set output 'Naive Bandit - increasing_5_container.pdf'
+set output 'Multi Armed Bandit - increasing_5_container.pdf'
 set key left top
-set multiplot layout 5, 1 title "Naive Bandit - increasing\\\_5\\\_container" font ",20"
+set multiplot layout 5, 1 title "Multi Armed Bandit - increasing\\\_5\\\_container" font ",20"
 set yrange [0:1]
 set xrange [0:86400]
 set format x " " 
@@ -15,7 +15,7 @@ plot 'node3.pts' with linespoints linestyle 1 linecolor rgb "green" notitle, 'no
 set ylabel ' '
 set yrange[0:*]
 set title 'Reward'
-plot 'reward_best.pts'  with points pointtype 0 title "reward best", 'reward.pts'  with points pointtype 0 title "reward"
+plot 'reward.pts'  with points pointtype 0 title "reward"
 set title 'Cumulative reward'
 set yrange [0:*]
 set xlabel 'time'
