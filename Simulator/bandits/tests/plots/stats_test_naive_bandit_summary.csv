@@ -1,5 +1,5 @@
-test_naive_bandit,still_3_container,cumulative reward,31924.692000036048
-test_naive_bandit,increasing_5_container,cumulative reward,33746.95250250038
-test_naive_bandit,extreme_still,cumulative reward,30196.01970002948
-test_naive_bandit,spikey,cumulative reward,6319.375237499982
-test_naive_bandit,bigspikey,cumulative reward,14889.01242949997
+test_naive_bandit,Constant_Green_Energy,cumulative reward,32037.948000036216
+test_naive_bandit,increasing_5_container,cumulative reward,33535.188868333724
+test_naive_bandit,extreme_still,cumulative reward,30269.610000029377
+test_naive_bandit,Varying_Green_Energy,cumulative reward,6313.417954999963
+test_naive_bandit,bigspikey,cumulative reward,14846.66077866659

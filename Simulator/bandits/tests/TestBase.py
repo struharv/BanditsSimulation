@@ -11,7 +11,7 @@ from visual.Visualizer import Visualizer
 
 
 class TestBase(unittest.TestCase):
-    STATS_REPETITIONS = 10
+    STATS_REPETITIONS = 15
     DECISION_PERIOD_SEC = 30
     ENABLE_STATS = False
     OUT_DIR = "plots/"
@@ -20,6 +20,8 @@ class TestBase(unittest.TestCase):
         #["superstill", Infrastructure.make_infrastructure_superstill()],
         #["still", Infrastructure.make_infrastructure_still()],
         ["Constant_Green_Energy", Infrastructure.make_infrastructure_still_containers(3, 0.2, 10, 10)],
+        ["Real", Infrastructure.make_infrastructure_real_1()],
+
         #["still_4_container", Infrastructure.make_infrastructure_still_containers(4, 0.2, 10, 10)],
         #["still_5_container", Infrastructure.make_infrastructure_still_containers(5, 0.2, 10, 10)],
         ["increasing_5_container", Infrastructure.make_infrastructure_increasing_containers(5, 0.2, 10, 10)],

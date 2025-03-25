@@ -1,5 +1,5 @@
-test_random_0,still_3_container,cumulative reward,17143.65000001615
-test_random_0,increasing_5_container,cumulative reward,20509.416952501786
-test_random_0,extreme_still,cumulative reward,16634.173499996563
-test_random_0,spikey,cumulative reward,3969.321922500021
-test_random_0,bigspikey,cumulative reward,14777.220130937456
+test_random_0,Constant_Green_Energy,cumulative reward,17073.79200001567
+test_random_0,increasing_5_container,cumulative reward,20852.31252500168
+test_random_0,extreme_still,cumulative reward,16362.851399995941
+test_random_0,Varying_Green_Energy,cumulative reward,4020.120280000016
+test_random_0,bigspikey,cumulative reward,14751.82782583331

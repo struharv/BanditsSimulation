@@ -2,13 +2,12 @@ import inspect
 import unittest
 
 from bandits.NewSimulator import NewSimulator
+from bandits.Orchestrator import Orchestrator
+from electricitymaps.ElectricityMaps import ElectricityMaps
 from engine.Container import Container
 from engine.ElectricNode import ElectricNode
 from engine.Node import Node
-from engine.bandits.Orchestrator import Orchestrator
 
-from engine.bandits.PredefinedBandit import PredefinedBandit
-from engine.bandits.RandomBandit import RandomBandit
 from visual.Visualizer import Visualizer
 
 
@@ -32,6 +31,7 @@ class VisualizerTest(unittest.TestCase):
 
         visualizer = Visualizer(simulator, inspect.currentframe().f_code.co_name)
         visualizer.draw()
+
 
 
 if __name__ == '__main__':
