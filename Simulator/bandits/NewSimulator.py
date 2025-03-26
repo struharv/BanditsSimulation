@@ -8,16 +8,14 @@ from engine.ElectricNode import ElectricNode
 
 class NewSimulator(BaseSimulator):
 
-    def __init__(self, nodes: list[ElectricNode], containers: list[Container]):
-        super().__init__(nodes, containers)
+    def __init__(self, nodes: list[ElectricNode], containers: list[Container], simulation_time=24*BaseSimulator.HOUR_SECONDS):
+        super().__init__(nodes, containers, simulation_time)
         print("NewSimulator")
         if self.action_tick:
             self.action_init()
 
-
     def tick(self):
         super().tick()
-
 
         if self.orchestrator:
             self.orchestrator.tick(self.now())
@@ -38,7 +36,7 @@ class NewSimulator(BaseSimulator):
         print("super.simulate")
         super().simulate()
         print("/super.simulate")
-        for self.time in range(self.TIME_MAX_SECONDS):
+        for self.time in range(self.simulation_time_sec):
             '''
             if self.time % 10 == 0 or self.time > 86000:
                 print("tick", self.time)

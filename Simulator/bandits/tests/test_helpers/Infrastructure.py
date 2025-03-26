@@ -6,7 +6,7 @@ from engine.ElectricNode import ElectricNode
 def spikes(amount, height, shift=0):
     res = []
     for i in range(amount):
-        peak = (NewSimulator.TIME_MAX_SECONDS / amount) * i
+        peak = (NewSimulator.time_max_seconds / amount) * i
         res += [(peak - 1 * NewSimulator.HOUR_SECONDS - shift, 0.0)]
         res += [(peak, height)]
         res += [(peak + 1 * NewSimulator.HOUR_SECONDS - shift, 0.0)]

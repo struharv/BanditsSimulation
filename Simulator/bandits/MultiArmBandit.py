@@ -21,8 +21,8 @@ class MultiArmBandit(Orchestrator):
         self.Q = np.ones(self.k) # initial Q
         self.N = np.zeros(self.k)  # initalize number of rewards given
 
-        self.rewards = np.zeros(NewSimulator.TIME_MAX_SECONDS)
-        self.actions = np.zeros(NewSimulator.TIME_MAX_SECONDS)
+        self.rewards = np.zeros(NewSimulator.time_max_seconds)
+        self.actions = np.zeros(NewSimulator.time_max_seconds)
 
 
     def tick(self, time_s: int, decisioneach_s = 30):

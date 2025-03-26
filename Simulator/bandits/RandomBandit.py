@@ -11,7 +11,7 @@ class RandomBandit(Orchestrator):
         pass
 
     def tick(self, time_s: int):
-        logging.debug("BANDIT tick!", self.simulator.TIME_MAX_SECONDS)
+        logging.debug("BANDIT tick!", self.simulator.simulation_time_sec)
 
         self.simulator.reset()
         for container in self.simulator.containers:

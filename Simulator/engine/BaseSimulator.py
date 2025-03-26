@@ -9,11 +9,12 @@ from bandits.Orchestrator import Orchestrator
 
 class BaseSimulator:
     HOUR_SECONDS = 60*60
-    TIME_MAX_SECONDS = 24 * HOUR_SECONDS
 
     EVENT_MIGRATE = "migration"
 
-    def __init__(self, nodes: list[Node], containers: list[Container]):
+    def __init__(self, nodes: list[Node], containers: list[Container], simulation_time=24*HOUR_SECONDS):
+        self.simulation_time_sec = simulation_time
+
         self.nodes = nodes
         self.containers = containers
         self.orchestrator = None

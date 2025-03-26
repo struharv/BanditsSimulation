@@ -36,9 +36,8 @@ class Visualizer:
             for green_point in node.green_points:
                 f.write(f"{green_point[0]} {green_point[1]}\n")
 
-            if len(node.green_points) > 0 and node.green_points[len(node.green_points) - 1][
-                0] != self.simulator.TIME_MAX_SECONDS:
-                f.write(f"{self.simulator.TIME_MAX_SECONDS} 0\n")
+            if len(node.green_points) > 0 and node.green_points[len(node.green_points) - 1][0] != self.simulator.simulation_time_sec:
+                f.write(f"{self.simulator.simulation_time_sec} 0\n")
 
     def draw(self, title="Bandit experiment"):
 
@@ -56,7 +55,7 @@ class Visualizer:
     def dump_resources(self):
         for node in self.simulator.nodes:
             with open(f"{self.test_dir}/{node.name}_resources.pts", "w") as f:
-                for time in range(NewSimulator.TIME_MAX_SECONDS):
+                for time in range(self.simulator.simulation_time_sec):
                     f.write(
                         f"{time} {node.cpu_history[time]} {node.memory_mb_history[time]} {node.storage_mb_history[time]} {node.cpu_history[time] / node.cpu} {node.memory_mb_history[time] / node.memory_mb} {node.storage_mb_history[time] / node.storage_mb} {node.performance_history[time]}\n")
 
@@ -64,7 +63,7 @@ class Visualizer:
     def escape(text: str) -> str:
         return text.replace("_", "\\\\\\_")
 
-    def make_plot(self, title, filename=None):
+    def make_plot(self, title, filename=None, show_rewards=False):
         if not filename:
             filename = f"{title}.{Visualizer.OUT_EXTENSION}"
 
@@ -73,10 +72,10 @@ class Visualizer:
             f.write(f"set output '{filename}'\n")
 
             f.write("set key left top\n")
-            f.write(f"set multiplot layout {len(self.simulator.nodes) + 2}, 1 title \"{Visualizer.escape(title)}\" font \",20\"\n")
+            f.write(f"set multiplot layout {len(self.simulator.nodes) + (2 if show_rewards else 0) }, 1 title \"{Visualizer.escape(title)}\" font \",20\"\n")
 
             f.write("set yrange [0:1]\n")
-            f.write(f"set xrange [0:{NewSimulator.TIME_MAX_SECONDS}]\n")
+            f.write(f"set xrange [0:{self.simulator.simulation_time_sec}]\n")
             f.write("set format x \" \" \n")
             f.write("set offsets graph 0, 0, 0.05, 0.05\n")
 
@@ -97,14 +96,16 @@ class Visualizer:
                 #f"     '{node.name}_resources.pts' using 1:6  with points pointtype 0 linecolor rgb \"brown\" title 'memory', "
                 #f"     '{node.name}_resources.pts' using 1:7  with points pointtype 0 linecolor rgb \"magenta\" title 'storage' \n")
 
-            f.write("set ylabel ' '\n")
-            f.write("set yrange[0:*]\n")
-            f.write(f"set title 'Reward'\n")
-            f.write(f"plot 'reward.pts'  with points pointtype 0 title \"reward\"\n")
-            f.write(f"set title 'Cumulative reward'\n")
-            f.write("set yrange [0:*]\n")
-            f.write("set xlabel 'time'\n")
-            f.write(f"plot 'reward_cummulative.pts' with lines linestyle 1 title \"cumulative reward\"\n")
+            if show_rewards:
+                f.write("set ylabel ' '\n")
+                f.write("set yrange[0:*]\n")
+                f.write(f"set title 'Reward'\n")
+                f.write(f"plot 'reward.pts'  with points pointtype 0 title \"reward\"\n")
+                f.write(f"set title 'Cumulative reward'\n")
+                f.write("set yrange [0:*]\n")
+                f.write("set xlabel 'time'\n")
+                f.write(f"plot 'reward_cummulative.pts' with lines linestyle 1 title \"cumulative reward\"\n")
+
             f.write("unset multiplot\n")
 
 

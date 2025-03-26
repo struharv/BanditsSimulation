@@ -10,9 +10,13 @@ class ElectricityMaps2:
 
     COUNTRIES = [("AT", "Europe/Vienna"),
                  ("CZ", "Europe/Prague"),
-                 ("ES", "Europe/Madrid"),
+                 ("FR", "Europe/Madrid"),
                  ("HK", "Hongkong"),
-                 ("NZ", "Pacific/Auckland")]
+                 ("HU", "Europe/Budapest"),
+                 ("ES", "Europe/Madrid"),
+                 ("US-NY-NYIS", "Asia/Qatar"),
+                 ("NZ", "Pacific/Auckland"),
+                 ("PT", "Europe/Lisbon")]
 
     default_timezone = "Europe/Prague"
 
@@ -38,6 +42,11 @@ class ElectricityMaps2:
                 hour = int(time_split[0])
                 mins = int(time_split[1])
 
+                try:
+                    renewable = float(row[7]) / 100
+                except:
+                    renewable = 0
+
                 if timezone:
                     year, month, day, hour, mins = ElectricityMaps2.convert_timezone(timezone, year, month, day, hour, mins, self.default_timezone)
 
@@ -47,7 +56,8 @@ class ElectricityMaps2:
 
                          "hour": hour,
                          "min": mins,
-                         "renewable": float(row[7]) / 100}]
+                         "renewable": renewable}]
+
 
         return res
 
@@ -74,12 +84,20 @@ class ElectricityMaps2:
                 int(converted.strftime("%H")),
                 int(converted.strftime("%M")))
 
-    def get_day(self, country, year, month, day):
+    def get_day(self, country, year, month, day, limit=25):
         res = []
+
+        inRead = False
 
         for item in self.database[country]["serie"]:
             if year == item["year"] and month == item["month"] and day == item["day"]:
+                inRead = True
+
+            if inRead:
                 res += [item]
+
+            if len(res) >= limit:
+                return res
 
         return res
 
@@ -87,18 +105,20 @@ class ElectricityMaps2:
 class ElectricityMap2Node:
 
     @staticmethod
-    def toGreen(country, year, month, day):
+    def toGreen(country, year, month, day, limit=25):
         res = []
 
         elMap = ElectricityMaps2()
         elMap.read_all_files()
-        entries = elMap.get_day(country, year, month, day)
+        entries = elMap.get_day(country, year, month, day, limit)
 
-        for entry in entries:
+        for i in range(len(entries)):
+            entry = entries[i]
             #[(7 * NewSimulator.HOUR_SECONDS, 0.0),
             # (12 * NewSimulator.HOUR_SECONDS, 0.5), (14 * NewSimulator.HOUR_SECONDS, 0.5), (19 * NewSimulator.HOUR_SECONDS, 0.0)]
             #print(entry)
-            res += [entry["hour"] * NewSimulator.HOUR_SECONDS, entry["renewable"]]
+
+            res += [[i * NewSimulator.HOUR_SECONDS, entry["renewable"]]]
 
         return res
 
@@ -108,7 +128,8 @@ def main():
     #elMap.get_day("ES", 2024, 8, 20)
     # elMap.export(2024, 8, 20)
 
-    countryEs = ElectricityMap2Node.toGreen("ES", 2024, 8, 20)
+    countryEs = ElectricityMap2Node.toGreen("ES", 2024, 11, 20)
+    pass
 
 if __name__ == "__main__":
     main()
