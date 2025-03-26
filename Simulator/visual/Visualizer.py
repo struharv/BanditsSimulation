@@ -1,6 +1,6 @@
 import os
 
-from bandits.NewSimulator import NewSimulator
+from bandits.Simulator import Simulator
 from engine.Node import Node
 
 
@@ -19,7 +19,7 @@ class Visualizer:
     OUT_TYPE = 'pdfcairo'
     OUT_EXTENSION = "pdf"
 
-    def __init__(self, simulator: NewSimulator, prefix: str):
+    def __init__(self, simulator: Simulator, prefix: str):
 
         self.simulator = simulator
         self.prefix = prefix
@@ -47,7 +47,6 @@ class Visualizer:
         self.dump_reward_history()
         self.dump_reward_cummulative()
         self.dump_events()
-
         self.dump_resources()
 
         self.make_plot(title)
@@ -63,7 +62,7 @@ class Visualizer:
     def escape(text: str) -> str:
         return text.replace("_", "\\\\\\_")
 
-    def make_plot(self, title, filename=None, show_rewards=False):
+    def make_plot(self, title, filename=None, show_rewards=True):
         if not filename:
             filename = f"{title}.{Visualizer.OUT_EXTENSION}"
 

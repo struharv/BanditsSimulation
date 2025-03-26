@@ -6,11 +6,13 @@ class Container:
     performance_slowdown = 0.2
     colocation_factor = 0.1
 
-    def __init__(self, name: str, cpu: float, memory_mb: int, storage_mb: int):
+    def __init__(self, name: str, cpu: float, memory_mb: int, storage_mb: int, perfclass=None):
         self.name = name
         self.cpu = cpu
         self.memory_mb = memory_mb
         self.storage_mb = storage_mb
+
+        self.perfclass = perfclass
 
     def __repr__(self):
         return f"Container.{self.name}({self.cpu}, {self.memory_mb}, {self.storage_mb})"

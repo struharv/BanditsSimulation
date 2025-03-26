@@ -6,8 +6,8 @@ from engine.Node import Node
 
 
 class ElectricNode(Node):
-    def __init__(self, name: str, cpu: float, memory_mb: int, storage_mb: int, green_points: list[tuple[int, float]]):
-        super().__init__(name, cpu, memory_mb, storage_mb)
+    def __init__(self, name: str, cpu: float, memory_mb: int, storage_mb: int, green_points: list[tuple[int, float]], perfclass=None):
+        super().__init__(name, cpu, memory_mb, storage_mb, perfclass=perfclass)
 
         self.green_points = green_points
         self.containers: list[Container] = []

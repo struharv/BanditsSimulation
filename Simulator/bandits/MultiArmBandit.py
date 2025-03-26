@@ -2,7 +2,7 @@ import random
 
 import numpy as np
 
-from bandits.NewSimulator import NewSimulator
+from bandits.Simulator import Simulator
 from engine.Node import Node
 from bandits.Orchestrator import Orchestrator
 
@@ -21,8 +21,8 @@ class MultiArmBandit(Orchestrator):
         self.Q = np.ones(self.k) # initial Q
         self.N = np.zeros(self.k)  # initalize number of rewards given
 
-        self.rewards = np.zeros(NewSimulator.time_max_seconds)
-        self.actions = np.zeros(NewSimulator.time_max_seconds)
+        self.rewards = np.zeros(Simulator.time_max_seconds)
+        self.actions = np.zeros(Simulator.time_max_seconds)
 
 
     def tick(self, time_s: int, decisioneach_s = 30):

@@ -3,7 +3,7 @@ import random
 import unittest
 
 
-from bandits.NewSimulator import NewSimulator
+from bandits.Simulator import Simulator
 from bandits.tests.test_helpers.Infrastructure import Infrastructure
 from bandits.tests.test_helpers.Stats import Stats
 from helpers.Permutations import Permutations
@@ -36,7 +36,7 @@ class TestBase(unittest.TestCase):
     ]
 
     def simulate(self, nodes, containers, do_init, do_tick, directory, test_file_name: str, title: str, orchestrator=None, visualize=True):
-        simulator = NewSimulator(nodes, containers)
+        simulator = Simulator(nodes, containers)
         simulator.set_orchestrator(orchestrator)
         simulator.set_action_tick(do_tick)
         simulator.set_action_init(do_init)
@@ -79,7 +79,7 @@ class TestBase(unittest.TestCase):
 
 
     @staticmethod
-    def random_init(simulator: NewSimulator):
+    def random_init(simulator: Simulator):
         """
         Randomly assign containers to nodes in the way the containers fullfil the constraints
         :param simulator:

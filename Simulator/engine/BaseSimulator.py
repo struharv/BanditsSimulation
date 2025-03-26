@@ -24,11 +24,15 @@ class BaseSimulator:
         self.action_init = None
 
         self.orchestration_events: list[tuple[2]] = []
-
         self.reward_history: list[tuple[int, float]] = []
+
+        self.perfmatrix = None
 
         for node in nodes:
             node.set_simulator(self)
+
+    def set_perfmatrix(self, perfmatrix):
+        self.perfmatrix = perfmatrix
 
     def set_orchestrator(self, orchestrator: Orchestrator):
         self.orchestrator = orchestrator
@@ -70,7 +74,6 @@ class BaseSimulator:
         self.orchestration_events += [(self.now(), node_name, event)]
 
     def can_migrate(self, container, node):
-
         pass
 
     def deploy_as(self, deployment):
@@ -80,9 +83,6 @@ class BaseSimulator:
 
             for container in deployment[node_index][1]:
                 node.deploy(container)
-
-
-
 
     def migrate(self, container_name, node_name) -> bool:
         old_node = self.find_container_in_node(container_name)
@@ -104,7 +104,6 @@ class BaseSimulator:
         new_node.deploy(container)
 
         return True
-
 
     def find_container_in_node(self, container_name: str) -> Node:
         for node in self.nodes:
@@ -172,5 +171,4 @@ class BaseSimulator:
         while len(buf_containers) > 0:
             if self.migrate(buf_containers[0].name, random.choice(self.nodes).name):
                 del buf_containers[0]
-
 

@@ -3,7 +3,7 @@ import os
 from datetime import datetime
 from zoneinfo import ZoneInfo
 
-from bandits.NewSimulator import NewSimulator
+from bandits.Simulator import Simulator
 
 
 class ElectricityMaps2:
@@ -118,7 +118,7 @@ class ElectricityMap2Node:
             # (12 * NewSimulator.HOUR_SECONDS, 0.5), (14 * NewSimulator.HOUR_SECONDS, 0.5), (19 * NewSimulator.HOUR_SECONDS, 0.0)]
             #print(entry)
 
-            res += [[i * NewSimulator.HOUR_SECONDS, entry["renewable"]]]
+            res += [[i * Simulator.HOUR_SECONDS, entry["renewable"]]]
 
         return res
 

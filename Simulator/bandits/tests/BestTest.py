@@ -4,8 +4,25 @@ import unittest
 
 from parameterized import parameterized
 
-from bandits.NewSimulator import NewSimulator
+from bandits.Simulator import Simulator
 from bandits.tests.TestBase import TestBase
+
+possible_deployments = None
+
+
+def do_tick(simulator: Simulator):
+    if simulator.now() % BestTest.DECISION_PERIOD_SEC == 0:
+
+        best_Reward = None
+        best_deployment = None
+        for possible in possible_deployments:
+            reward = simulator.compute_possible_reward(possible, simulator.time)
+            if not best_Reward or reward >= best_Reward:
+                best_Reward = reward
+                best_deployment = possible
+
+        # print(simulator.now(), best_Reward, best_deployment)
+        simulator.deploy_as(best_deployment)
 
 
 class BestTest(TestBase):
@@ -18,23 +35,10 @@ class BestTest(TestBase):
         self.perform_stats("test_best", self.case_best, TestBase.TEST_SUITE, explicit_repetitions=1)
 
     def case_best(self, name, infrastructure):
+        global possible_deployments
+
         nodes, containers = infrastructure
         possible_deployments = self.compute_all_possible_deployments(nodes, containers)
-
-        def do_tick(simulator: NewSimulator):
-
-            if simulator.now() % BestTest.DECISION_PERIOD_SEC == 0:
-
-                best_Reward = None
-                best_deployment = None
-                for possible in possible_deployments:
-                    reward = simulator.compute_possible_reward(possible, simulator.time)
-                    if not best_Reward or reward >= best_Reward:
-                        best_Reward = reward
-                        best_deployment = possible
-
-                # print(simulator.now(), best_Reward, best_deployment)
-                simulator.deploy_as(best_deployment)
 
         results = self.simulate(nodes, containers, TestBase.random_init, do_tick, inspect.currentframe().f_code.co_name, name, f"Best - {name}")
 

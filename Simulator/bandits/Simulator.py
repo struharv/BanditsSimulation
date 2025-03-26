@@ -6,11 +6,12 @@ from engine.Container import Container
 from engine.ElectricNode import ElectricNode
 
 
-class NewSimulator(BaseSimulator):
+class Simulator(BaseSimulator):
 
     def __init__(self, nodes: list[ElectricNode], containers: list[Container], simulation_time=24*BaseSimulator.HOUR_SECONDS):
         super().__init__(nodes, containers, simulation_time)
-        print("NewSimulator")
+        print("Simulator")
+
         if self.action_tick:
             self.action_init()
 

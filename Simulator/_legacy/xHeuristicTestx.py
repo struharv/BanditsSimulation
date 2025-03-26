@@ -3,7 +3,7 @@ from random import random
 
 from parameterized import parameterized
 
-from bandits.NewSimulator import NewSimulator
+from bandits.Simulator import Simulator
 from bandits.tests import TestBase
 
 
@@ -17,7 +17,7 @@ class HeuriticTest(TestBase):
     def case_heuristic(self, name, infrastructure):
         nodes, containers = infrastructure
 
-        def do_tick(simulator: NewSimulator):
+        def do_tick(simulator: Simulator):
             if simulator.now() % HeuriticTest.DECISION_EACH_SEC == 0:
                 simulator.migrate(random.choice(containers).name, random.choice(nodes).name)
 

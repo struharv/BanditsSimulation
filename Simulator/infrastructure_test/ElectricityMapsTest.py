@@ -1,7 +1,7 @@
 import inspect
 import unittest
 
-from bandits.NewSimulator import NewSimulator
+from bandits.Simulator import Simulator
 from bandits.Orchestrator import Orchestrator
 from electricitymaps.ElectricityMaps2 import ElectricityMap2Node
 from engine.Container import Container
@@ -23,7 +23,7 @@ class ElectricityMapsTest(unittest.TestCase):
         CONTAINERS = [Container("container1", 0.5, 256, 100),
                       Container("container2", 0.5, 256, 100)]
 
-        simulator = NewSimulator(NODES, CONTAINERS, simulation_time=24*days*NewSimulator.HOUR_SECONDS)
+        simulator = Simulator(NODES, CONTAINERS, simulation_time=24 * days * Simulator.HOUR_SECONDS)
 
         simulator.set_orchestrator(Orchestrator())
         simulator.simulate()
