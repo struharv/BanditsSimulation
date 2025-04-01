@@ -10,7 +10,8 @@ class Node:
 
     # parameters to compute the reward value
     PARAM_PERFORMANCE = 0
-    PARAM_ENERGY = 0.9
+    PARAM_PERFORMANCE_PERFMATRIX = 0
+    PARAM_ENERGY = 1.0
     PARAM_COLOCATION = 0.0
 
     colocation = 0.5
@@ -21,7 +22,6 @@ class Node:
         self.memory_mb = memory_mb
         self.storage_mb = storage_mb
         self.perfclass = perfclass
-
 
         self.containers: list[Container] = []
         self.cpu_history: list[float] = []
@@ -88,8 +88,10 @@ class Node:
     def get_perf(self, container: Container):
         perfmatrix = self.simulator.perfmatrix
 
-        if not perfmatrix or not container.perfclass or not self.perfclass:
+        if not perfmatrix or container.perfclass is None or self.perfclass is None:
             return 1.0
+
+        return self.simulator.perfmatrix[self.perfclass][container.perfclass]
 
     def compute_reward_at(self, time, containers):
         reward = 0
@@ -100,6 +102,9 @@ class Node:
 
             # performance:
             reward += self.PARAM_PERFORMANCE * self.compute_performance(containers)
+
+            # performance: perfmatrix
+            reward += self.PARAM_PERFORMANCE_PERFMATRIX * self.get_perf(container)
 
             # colocation: more containers deployed, the less reward
             reward += self.PARAM_COLOCATION * self.compute_colocation(containers)
@@ -145,4 +150,4 @@ class Node:
         return True
 
     def get_context(self):
-        pass
+        return []

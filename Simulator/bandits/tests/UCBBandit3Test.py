@@ -19,10 +19,14 @@ class UCBBandit3Test(TestBase):
     def case_UCB_bandit(self, name, infrastructure):
         nodes, containers = infrastructure
 
-        bandit = UCBBandit3(len(nodes), len(nodes), alpha=0.1)
+        perfmatrix = [[1.0, 1.0, 0.1],
+                      [1.0, 1.0, 0.1],
+                      [0.1, 0.1, 1.0]]
+
+        bandit = UCBBandit3(len(nodes), len(nodes) * len(nodes[0].get_context(0)), alpha=0.1)
         result = self.simulate(nodes, containers, TestBase.random_init, None,
                                inspect.currentframe().f_code.co_name, name, f"UCB Multi Armed Bandit - {name}",
-                               orchestrator=bandit)
+                               orchestrator=bandit, perfmatrix=perfmatrix)
         return result
 
 

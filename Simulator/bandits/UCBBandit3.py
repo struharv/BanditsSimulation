@@ -44,10 +44,10 @@ class UCBBandit3(Orchestrator):
             return
 
         print("------", time_s, "------")
-        print("context", self.make_array(time_s))
+        print("context", self.make_array_context(time_s))
 
         # observe context
-        x = np.array(self.make_array(time_s))
+        x = np.array(self.make_array_context(time_s))
 
         # find good node based on the context
         # selected_arm = random.randint(0, len(self.simulator.nodes)-1)
@@ -69,10 +69,13 @@ class UCBBandit3(Orchestrator):
             # update arm
             self.linucb_arms[selected_arm].reward_update(reward, x)
 
-    def make_array(self, time_s: int):
+    def make_array_context(self, time_s: int):
         res = []
+
         for node in self.simulator.nodes:
-            res += [node.get_context(time_s)]
+            context = node.get_context(time_s)
+            for context_item in context:
+                res += [context_item]
 
         return res
 

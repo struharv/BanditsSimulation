@@ -24,10 +24,13 @@ class NaiveBanditTest(TestBase):
         permutations = Permutations(nodes, containers)
         permutations.print_permutations()
         sets = permutations.make_permutations()
+        perfmatrix = [[1.0, 1.0, 0.1],
+                      [1.0, 1.0, 0.1],
+                      [0.1, 0.1, 1.0]]
 
         bandit = MultiArmBandit(sets)
         result = self.simulate(nodes, containers, None, None, inspect.currentframe().f_code.co_name, name,
-                               f"Multi Armed Bandit - {name}", orchestrator=bandit)
+                               f"Multi Armed Bandit - {name}", orchestrator=bandit, perfmatrix=perfmatrix)
         return result
 
 

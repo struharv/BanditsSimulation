@@ -14,25 +14,19 @@ class MultiArmBandit(Orchestrator):
     def __init__(self, sets):
         self.sets = sets
 
-        self.epsilon = 0.25
+        self.epsilon = 0.1
         self.alpha = 0.5
 
         self.k = len(self.sets)
         self.Q = np.ones(self.k) # initial Q
         self.N = np.zeros(self.k)  # initalize number of rewards given
 
-        self.rewards = np.zeros(Simulator.time_max_seconds)
-        self.actions = np.zeros(Simulator.time_max_seconds)
-
+        #self.rewards = np.zeros(Si  mulator.DEFAULT_SIMULATION_TIME)
+        #self.actions = np.zeros(Simulator.DEFAULT_SIMULATION_TIME)
 
     def tick(self, time_s: int, decisioneach_s = 30):
         if time_s % decisioneach_s != 0:
             return
-
-
-
-
-        arm = 0
 
         if np.random.rand() < self.epsilon:
             # explore
@@ -53,6 +47,7 @@ class MultiArmBandit(Orchestrator):
 
     def deploy_set(self, deploy_set):
         self.simulator.reset()
+
         for deploy in deploy_set:
             node = deploy[0]
 
@@ -62,6 +57,4 @@ class MultiArmBandit(Orchestrator):
     def random_node(self) -> Node:
         nodes_len = len(self.simulator.nodes)
         return self.simulator.nodes[random.randint(0, nodes_len-1)]
-
-
 

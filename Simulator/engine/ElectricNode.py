@@ -4,6 +4,7 @@ import sys
 from engine.Container import Container
 from engine.Node import Node
 
+import numpy
 
 class ElectricNode(Node):
     def __init__(self, name: str, cpu: float, memory_mb: int, storage_mb: int, green_points: list[tuple[int, float]], perfclass=None):
@@ -66,7 +67,7 @@ class ElectricNode(Node):
         return result
 
     def get_context(self, time_s: int):
-        return self.green_at(time_s)
+        return [self.green_at(time_s), 1.0-self.current_cpu_usage()]
 
     def __repr__(self):
         return f"Node.{self.name}{self.cpu, self.memory_mb, self.storage_mb}"

@@ -9,6 +9,7 @@ from bandits.Orchestrator import Orchestrator
 
 class BaseSimulator:
     HOUR_SECONDS = 60*60
+    DEFAULT_SIMULATION_TIME = 24*HOUR_SECONDS
 
     EVENT_MIGRATE = "migration"
 

@@ -6,6 +6,7 @@ from parameterized import parameterized
 
 from bandits.Simulator import Simulator
 from bandits.tests.TestBase import TestBase
+from bandits.tests.test_helpers.Infrastructure import Infrastructure
 
 possible_deployments = None
 
@@ -44,6 +45,25 @@ class BestTest(TestBase):
 
         return results
 
+    def test_best_perfmatrix_big_spikey(self):
+        name = "best_perfmat"
+        infrastructure = Infrastructure.make_infrastructure_bigspikey()
+
+        self.case_best_perf1(name, infrastructure)
+
+    def case_best_perf1(self, name, infrastructure):
+        global possible_deployments
+
+        nodes, containers = infrastructure
+        possible_deployments = self.compute_all_possible_deployments(nodes, containers)
+        perfmatrix = [[1.0, 1.0, 0.1],
+                      [1.0, 1.0, 0.1],
+                      [0.1, 0.1, 1.0]]
+
+
+        results = self.simulate(nodes, containers, TestBase.random_init, do_tick, inspect.currentframe().f_code.co_name, name, f"Best - {name}", perfmatrix=perfmatrix)
+
+        return results
 
 if __name__ == '__main__':
     unittest.main()
