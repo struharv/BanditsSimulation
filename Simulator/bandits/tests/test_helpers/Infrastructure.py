@@ -142,21 +142,21 @@ class Infrastructure:
         nodes = [ElectricNode("node1", 1, 1024, 500,
 
                               [(0 * Simulator.HOUR_SECONDS, 0.1),
-                               (24 * Simulator.HOUR_SECONDS, 0.1)]),
+                               (24 * Simulator.HOUR_SECONDS, 0.1)], perfclass=0),
 
                  ElectricNode("node2", 1, 1024, 500,
                               [(0 * Simulator.HOUR_SECONDS, 0.1),
-                               (24 * Simulator.HOUR_SECONDS, 0.1)]),
+                               (24 * Simulator.HOUR_SECONDS, 0.1)], perfclass=1),
 
                  ElectricNode("node3", 1, 1024, 500,
                               [(0 * Simulator.HOUR_SECONDS, 0.8),
-                               (24 * Simulator.HOUR_SECONDS, 0.8)])]
+                               (24 * Simulator.HOUR_SECONDS, 0.8)], perfclass=2)]
 
-        containers = [Container("container1", 0.1, 25, 10),
-                      Container("container2", 0.2, 25, 10),
-                      Container("container3", 0.15, 25, 10),
-                      Container("container4", 0.11, 25, 10),
-                      Container("container5", 0.07, 25, 10),
+        containers = [Container("container1", 0.1, 25, 10, perfclass=1),
+                      Container("container2", 0.2, 25, 10, perfclass=1),
+                      Container("container3", 0.15, 25, 10, perfclass=0),
+                      Container("container4", 0.11, 25, 10, perfclass=0),
+                      Container("container5", 0.07, 25, 10, perfclass=0),
                       ]
 
         return nodes, containers
@@ -225,7 +225,7 @@ class Infrastructure:
                           (21 * Simulator.HOUR_SECONDS, 0.16870000000000002),
                           (22 * Simulator.HOUR_SECONDS, 0.15259999999999999),
                           (23 * Simulator.HOUR_SECONDS, 0.1465)
-                          ],perfclass=0),
+                          ], perfclass=0),
             # sweden
             ElectricNode("node2", 1, 1024, 500,
                          [(0 * Simulator.HOUR_SECONDS, 0.1697),
@@ -251,7 +251,7 @@ class Infrastructure:
                           (20 * Simulator.HOUR_SECONDS, 0.21660000000000001),
                           (21 * Simulator.HOUR_SECONDS, 0.1474),
                           (22 * Simulator.HOUR_SECONDS, 0.0931),
-                          (23 * Simulator.HOUR_SECONDS, 0.0874)],perfclass=1),
+                          (23 * Simulator.HOUR_SECONDS, 0.0874)], perfclass=1),
 
             ElectricNode("node3", 1, 1024, 500,
                          [(0 * Simulator.HOUR_SECONDS, 0.4268),
@@ -277,13 +277,17 @@ class Infrastructure:
                           (20 * Simulator.HOUR_SECONDS, 0.5209),
                           (21 * Simulator.HOUR_SECONDS, 0.5162),
                           (22 * Simulator.HOUR_SECONDS, 0.5175),
-                          (23 * Simulator.HOUR_SECONDS, 0.5192)],perfclass=2)]
+                          (23 * Simulator.HOUR_SECONDS, 0.5192)], perfclass=2)]
 
         containers = [Container("container1", 0.1, 25, 10, perfclass=2),
-                      Container("container2", 0.2, 25, 10, perfclass=1),
-                      Container("container3", 0.15, 25, 10, perfclass=1),
-                      Container("container4", 0.11, 25, 10, perfclass=1),
-                      Container("container5", 0.07, 25, 10, perfclass=1),
+                      Container("container2", 0.1, 25, 10, perfclass=1),
+                      Container("container3", 0.1, 25, 10, perfclass=1),
+                      Container("container4", 0.1, 25, 10, perfclass=1),
+                      Container("container5", 0.1, 25, 10, perfclass=1),
+
+                      Container("container6", 0.1, 25, 10, perfclass=0),
+                      Container("container7", 0.1, 25, 10, perfclass=0),
+                      Container("container8", 0.1, 25, 10, perfclass=0),
                       ]
 
         return nodes, containers
@@ -293,11 +297,11 @@ class Infrastructure:
 
         nodes = [ElectricNode("node1", 1, 1024, 500,
                               spikes(5, 1),
-                              perfclass=1),
+                              perfclass=2),
 
                  ElectricNode("node2", 1, 1024, 500,
                               spikes(8, 0.8),
-                              perfclass=1),
+                              perfclass=0),
 
                  ElectricNode("node3", 1, 1024, 500,
                               spikes(10, 0.2),
@@ -306,19 +310,20 @@ class Infrastructure:
                  ElectricNode("node4", 1, 1024, 500,
                               [(0 * Simulator.HOUR_SECONDS, 0.8),
                                (24 * Simulator.HOUR_SECONDS, 0.2)],
-                              perfclass=0),
+                              perfclass=1),
 
                  ElectricNode("node5", 1, 1024, 500,
                               [(0 * Simulator.HOUR_SECONDS, 0.1),
                                (24 * Simulator.HOUR_SECONDS, 0.9)],
-                              perfclass=0)
+                              perfclass=2)
                  ]
 
-        containers = [Container("container1", 0.1, 25, 10, perfclass=2),
-                      Container("container2", 0.2, 25, 10, perfclass=1),
-                      Container("container3", 0.15, 25, 10, perfclass=1),
-                      Container("container4", 0.11, 25, 10, perfclass=1),
-                      Container("container5", 0.07, 25, 10, perfclass=1),
+        containers = [Container("container1", 0.1, 25, 10, perfclass=1),
+                      Container("container2", 0.1, 25, 10, perfclass=1),
+                      Container("container3", 0.1, 25, 10, perfclass=1),
+                      Container("container4", 0.1, 25, 10, perfclass=1),
+                      Container("container5", 0.1, 25, 10, perfclass=1),
+
                       ]
 
         return nodes, containers

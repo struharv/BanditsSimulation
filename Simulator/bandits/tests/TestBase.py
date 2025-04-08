@@ -16,11 +16,19 @@ class TestBase(unittest.TestCase):
     ENABLE_STATS = False
     OUT_DIR = "plots/"
 
+    PERFMATRIX = [[1.0, 1.0, 1.0],
+                  [1.0, 1.0, 1.0],
+                  [1.0, 1.0, 1.0]]
+
+    #PERFMATRIX = [[0.1, 0.1, 0.1],
+    #              [1.0, 1.0, 1.0],
+    #              [0.1, 0.1, 0.1]]
+
     TEST_SUITE = [
         #["superstill", Infrastructure.make_infrastructure_superstill()],
         #["still", Infrastructure.make_infrastructure_still()],
-        ["Constant_Green_Energy", Infrastructure.make_infrastructure_still_containers(3, 0.2, 10, 10)],
-        ["Real", Infrastructure.make_infrastructure_real_1()],
+        #["Constant_Green_Energy", Infrastructure.make_infrastructure_still_containers(3, 0.2, 10, 10)],
+        #["Real", Infrastructure.make_infrastructure_real_1()],
 
         #["still_4_container", Infrastructure.make_infrastructure_still_containers(4, 0.2, 10, 10)],
         #["still_5_container", Infrastructure.make_infrastructure_still_containers(5, 0.2, 10, 10)],
@@ -35,13 +43,18 @@ class TestBase(unittest.TestCase):
         #["spikey5", Infrastructure.make_infrastructure_spikey5()],
     ]
 
-    def simulate(self, nodes, containers, do_init, do_tick, directory, test_file_name: str, title: str, orchestrator=None, visualize=True, perfmatrix=None):
-        simulator = Simulator(nodes, containers)
+    def simulate(self, nodes, containers, do_init, do_tick, directory, test_file_name: str, title: str, orchestrator=None, visualize=True, perfmatrix=None, simulation_time=None):
+
+        if simulation_time:
+            simulator = Simulator(nodes, containers, simulation_time=simulation_time)
+        else:
+            simulator = Simulator(nodes, containers)
+
         simulator.set_perfmatrix(perfmatrix)
         simulator.set_orchestrator(orchestrator)
         simulator.set_action_tick(do_tick)
         simulator.set_action_init(do_init)
- 
+
         print("about to simulate")
         simulator.simulate()
         print("simulation is done")

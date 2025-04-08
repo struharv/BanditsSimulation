@@ -7,6 +7,9 @@ from parameterized import parameterized
 from bandits.Simulator import Simulator
 from bandits.tests.TestBase import TestBase
 from bandits.tests.test_helpers.Infrastructure import Infrastructure
+from electricitymaps.ElectricityMaps2 import ElectricityMap2Node
+from engine.Container import Container
+from engine.ElectricNode import ElectricNode
 
 possible_deployments = None
 
@@ -41,10 +44,41 @@ class BestTest(TestBase):
         nodes, containers = infrastructure
         possible_deployments = self.compute_all_possible_deployments(nodes, containers)
 
-        results = self.simulate(nodes, containers, TestBase.random_init, do_tick, inspect.currentframe().f_code.co_name, name, f"Best - {name}")
+        results = self.simulate(nodes, containers, TestBase.random_init, do_tick, inspect.currentframe().f_code.co_name, name, f"Best - {name}", perfmatrix=TestBase.PERFMATRIX)
 
         return results
 
+
+    def test_UCBElMap_bandit(self, name= "best_elmmap"):
+        self.case__UCBElMap_bandit(name)
+
+
+    def case__UCBElMap_bandit(self, name):
+        global possible_deployments
+
+        days = 4
+        nodes = [
+            ElectricNode("nodeES", 1, 1024, 500, ElectricityMap2Node.toGreen("ES", 2024, 8, 20, limit=24 * days + 1)),
+            ElectricNode("nodePT", 1, 1024, 500, ElectricityMap2Node.toGreen("PT", 2024, 8, 20, limit=24 * days + 1)),
+            ElectricNode("nodeUS", 1, 1024, 500,
+                         ElectricityMap2Node.toGreen("US-NY-NYIS", 2024, 8, 20, limit=24 * days + 1)),
+            ElectricNode("nodeFR", 1, 1024, 500, ElectricityMap2Node.toGreen("FR", 2024, 8, 20, limit=24 * days + 1)),
+            ElectricNode("nodeHU", 1, 1024, 500, ElectricityMap2Node.toGreen("HU", 2024, 8, 20, limit=24 * days + 1))
+            ]
+
+        containers = [Container("container1", 0.1, 256, 10),
+                      Container("container2", 0.1, 256, 10),
+                      Container("container3", 0.1, 256, 10),
+                      Container("container4", 0.1, 256, 10),
+                      ]
+
+        possible_deployments = self.compute_all_possible_deployments(nodes, containers)
+
+        results = self.simulate(nodes, containers, TestBase.random_init, do_tick, inspect.currentframe().f_code.co_name, name, f"Best - {name}", simulation_time=24 * days * Simulator.HOUR_SECONDS)
+
+        return results
+
+    """
     def test_best_perfmatrix_big_spikey(self):
         name = "best_perfmat"
         infrastructure = Infrastructure.make_infrastructure_bigspikey()
@@ -56,14 +90,13 @@ class BestTest(TestBase):
 
         nodes, containers = infrastructure
         possible_deployments = self.compute_all_possible_deployments(nodes, containers)
-        perfmatrix = [[1.0, 1.0, 0.1],
-                      [1.0, 1.0, 0.1],
-                      [0.1, 0.1, 1.0]]
+        perfmatrix = TestBase.PERFMATRIX
 
 
         results = self.simulate(nodes, containers, TestBase.random_init, do_tick, inspect.currentframe().f_code.co_name, name, f"Best - {name}", perfmatrix=perfmatrix)
 
         return results
+    """
 
 if __name__ == '__main__':
     unittest.main()

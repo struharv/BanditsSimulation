@@ -1,3 +1,4 @@
+import numpy
 import numpy as np
 
 import random
@@ -52,8 +53,8 @@ class UCBBandit3(Orchestrator):
         # find good node based on the context
         # selected_arm = random.randint(0, len(self.simulator.nodes)-1)
         selected_arm = self.select_arm(x)
-        #if random.random() < 0.1:
-        #    selected_arm = random.randint(0, self.K_arms-1)
+        if random.random() < 0.02:
+            selected_arm = random.randint(0, self.K_arms-1)
 
         # decide which container to migrate & migrate
         worst_node = self.worst_node_with_container()
@@ -63,7 +64,7 @@ class UCBBandit3(Orchestrator):
                                    self.simulator.nodes[selected_arm].name)
 
             # get reward
-            reward = self.simulator.compute_reward()
+            reward = self.simulator.compute_reward() + 0.1*numpy.random.normal(loc=0.0, scale=1, size=None)
             print(f"{selected_arm}: reward {reward}")
 
             # update arm
@@ -76,6 +77,7 @@ class UCBBandit3(Orchestrator):
             context = node.get_context(time_s)
             for context_item in context:
                 res += [context_item]
+                #res += [0]
 
         return res
 
@@ -102,6 +104,7 @@ class UCBBandit3(Orchestrator):
         highest_ucb = -1
 
         candidate_arms = []
+        #all_arms = []
 
         for arm_index in range(self.K_arms):
             arm_ucb = self.linucb_arms[arm_index].calc_UCB(x_array)

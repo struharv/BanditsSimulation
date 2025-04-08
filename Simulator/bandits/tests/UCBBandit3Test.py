@@ -19,9 +19,7 @@ class UCBBandit3Test(TestBase):
     def case_UCB_bandit(self, name, infrastructure):
         nodes, containers = infrastructure
 
-        perfmatrix = [[1.0, 1.0, 0.1],
-                      [1.0, 1.0, 0.1],
-                      [0.1, 0.1, 1.0]]
+        perfmatrix = TestBase.PERFMATRIX
 
         bandit = UCBBandit3(len(nodes), len(nodes) * len(nodes[0].get_context(0)), alpha=0.1)
         result = self.simulate(nodes, containers, TestBase.random_init, None,

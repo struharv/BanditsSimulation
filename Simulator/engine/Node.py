@@ -10,7 +10,7 @@ class Node:
 
     # parameters to compute the reward value
     PARAM_PERFORMANCE = 0
-    PARAM_PERFORMANCE_PERFMATRIX = 0
+    PARAM_PERFORMANCE_PERFMATRIX = 1.0
     PARAM_ENERGY = 1.0
     PARAM_COLOCATION = 0.0
 
@@ -103,11 +103,13 @@ class Node:
             # performance:
             reward += self.PARAM_PERFORMANCE * self.compute_performance(containers)
 
-            # performance: perfmatrix
-            reward += self.PARAM_PERFORMANCE_PERFMATRIX * self.get_perf(container)
+
 
             # colocation: more containers deployed, the less reward
             reward += self.PARAM_COLOCATION * self.compute_colocation(containers)
+
+            # performance: perfmatrix
+            reward *= self.PARAM_PERFORMANCE_PERFMATRIX * self.get_perf(container)
 
         return reward
 
