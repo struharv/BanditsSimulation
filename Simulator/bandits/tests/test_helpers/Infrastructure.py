@@ -327,3 +327,52 @@ class Infrastructure:
                       ]
 
         return nodes, containers
+
+    @staticmethod
+    def make_infrastructure_bigspikey_large_utilization():
+
+        nodes = [ElectricNode("node1", 1, 1024, 500,
+                              spikes(5, 1),
+                              perfclass=2),
+
+                 ElectricNode("node2", 1, 1024, 500,
+                              spikes(8, 0.8),
+                              perfclass=0),
+
+                 ElectricNode("node3", 1, 1024, 500,
+                              spikes(10, 0.2),
+                              perfclass=2),
+
+                 ElectricNode("node4", 1, 1024, 500,
+                              [(0 * Simulator.HOUR_SECONDS, 0.8),
+                               (24 * Simulator.HOUR_SECONDS, 0.2)],
+                              perfclass=1),
+
+                 ElectricNode("node5", 1, 1024, 500,
+                              [(0 * Simulator.HOUR_SECONDS, 0.1),
+                               (24 * Simulator.HOUR_SECONDS, 0.9)],
+                              perfclass=2),
+
+
+                 ]
+
+        containers = [Container("container1", 0.1, 25, 10, perfclass=1),
+                      Container("container2", 0.1, 25, 10, perfclass=1),
+                      Container("container3", 0.1, 25, 10, perfclass=1),
+                      Container("container4", 0.1, 25, 10, perfclass=1),
+                      Container("container5", 0.1, 25, 10, perfclass=1),
+                      Container("container6", 0.1, 25, 10, perfclass=1),
+                      Container("container7", 0.1, 25, 10, perfclass=1),
+                      Container("container8", 0.1, 25, 10, perfclass=1),
+                      Container("container9", 0.1, 25, 10, perfclass=1),
+                      Container("container10", 0.1, 25, 10, perfclass=1),
+                      Container("container11", 0.1, 25, 10, perfclass=1),
+                      Container("container12", 0.1, 25, 10, perfclass=1),
+                      Container("container13", 0.1, 25, 10, perfclass=1),
+                      Container("container14", 0.1, 25, 10, perfclass=1),
+                      Container("container15", 0.1, 25, 10, perfclass=1),
+                      Container("container16", 0.1, 25, 10, perfclass=1),
+                      Container("container17", 0.1, 25, 10, perfclass=1),
+                      ]
+
+        return nodes, containers

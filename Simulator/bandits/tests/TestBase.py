@@ -40,6 +40,9 @@ class TestBase(unittest.TestCase):
 
         #["Varying_Green_Energy", Infrastructure.make_infrastructure_spikey(3, 0.2, 10, 10)],
         ["bigspikey", Infrastructure.make_infrastructure_bigspikey()],
+        ["bigspikey_large_utilization", Infrastructure.make_infrastructure_bigspikey_large_utilization()],
+        ["still_20_container", Infrastructure.make_infrastructure_still_containers(20, 0.1, 10, 10)],
+
         #["spikey5", Infrastructure.make_infrastructure_spikey5()],
     ]
 
