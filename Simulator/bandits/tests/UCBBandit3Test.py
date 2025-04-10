@@ -6,7 +6,6 @@ from bandits.UCBBandit3 import UCBBandit3
 from bandits.tests.TestBase import TestBase
 
 
-
 class UCBBandit3Test(TestBase):
 
     @parameterized.expand(TestBase.TEST_SUITE)
@@ -17,7 +16,7 @@ class UCBBandit3Test(TestBase):
         self.perform_stats("test_UCB_bandit", self.case_UCB_bandit, TestBase.TEST_SUITE)
 
     def case_UCB_bandit(self, name, infrastructure):
-        nodes, containers = infrastructure
+        nodes, containers, perfmatrix = infrastructure
 
         perfmatrix = TestBase.PERFMATRIX
 

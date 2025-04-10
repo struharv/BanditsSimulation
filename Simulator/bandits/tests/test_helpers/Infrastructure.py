@@ -47,7 +47,7 @@ class Infrastructure:
                       Container("container5", 0.07, 25, 10),
                       ]
 
-        return nodes, containers
+        return nodes, containers, None
 
     @staticmethod
     def make_infrastructure_still():
@@ -71,71 +71,70 @@ class Infrastructure:
                       Container("container5", 0.1, 25, 10),
                       ]
 
-        return nodes, containers
+        return nodes, containers, None
 
     @staticmethod
     def make_infrastructure_still_containers(container_cnt: int, cpu: float, memory: int, storage: int):
-        nodes = [ElectricNode("node1", 1, 1024, 500,
+        nodes = [ElectricNode("node1", 1, 100000, 100000,
 
-                              [(0 * Simulator.HOUR_SECONDS, 0.1),
-                               (24 * Simulator.HOUR_SECONDS, 0.1)]),
+                              [(0 * Simulator.HOUR_SECONDS, 0.5),
+                               (24 * Simulator.HOUR_SECONDS, 0.5)], perfclass=0),
 
-                 ElectricNode("node2", 1, 1024, 500,
-                              [(0 * Simulator.HOUR_SECONDS, 0.2),
-                               (24 * Simulator.HOUR_SECONDS, 0.2)]),
+                 ElectricNode("node2", 1, 100000, 100000,
+                              [(0 * Simulator.HOUR_SECONDS, 0.5),
+                               (24 * Simulator.HOUR_SECONDS, 0.5)], perfclass=0),
 
-                 ElectricNode("node3", 1, 1024, 500,
-                              [(0 * Simulator.HOUR_SECONDS, 0.8),
-                               (24 * Simulator.HOUR_SECONDS, 0.8)])]
-
-        containers = []
-        for i in range(container_cnt):
-            containers += [Container(f"container{i}", cpu, memory, storage)]
-
-        return nodes, containers
-
-    @staticmethod
-    def make_infrastructure_increasing_containers(container_cnt: int, cpu: float, memory: int, storage: int):
-        nodes = [ElectricNode("node1", 1, 1024, 500,
-
-                              [(0 * Simulator.HOUR_SECONDS, 0.1),
-                               (24 * Simulator.HOUR_SECONDS, 0.1)]),
-
-                 ElectricNode("node2", 1, 1024, 500,
-                              [(0 * Simulator.HOUR_SECONDS, 0.2),
-                               (24 * Simulator.HOUR_SECONDS, 0.2)]),
-
-                 ElectricNode("node3", 1, 1024, 500,
-                              [(0 * Simulator.HOUR_SECONDS, 0.1),
-                               (24 * Simulator.HOUR_SECONDS, 0.9)])]
+                 ElectricNode("node3", 1, 100000, 100000,
+                              [(0 * Simulator.HOUR_SECONDS, 0.5),
+                               (24 * Simulator.HOUR_SECONDS, 0.5)], perfclass=0)]
 
         containers = []
         for i in range(container_cnt):
-            containers += [Container(f"containers{containers}", cpu, memory, storage)]
+            containers += [Container(f"container{i}", cpu, memory, storage, perfclass=0 % 3)]
 
-        return nodes, containers
+        return nodes, containers, None
 
     @staticmethod
-    def make_infrastructure_superstill():
+    def make_infrastructure_3_nodes_increasing_containers(container_cnt: int, cpu: float, memory: int, storage: int):
+        nodes = [ElectricNode("node1", 1, 10240, 5000,
+
+                              [(0 * Simulator.HOUR_SECONDS, 0.1),
+                               (24 * Simulator.HOUR_SECONDS, 0.1)], perfclass=0),
+
+                 ElectricNode("node2", 1, 10240, 5000,
+                              [(0 * Simulator.HOUR_SECONDS, 0.2),
+                               (24 * Simulator.HOUR_SECONDS, 0.2)], perfclass=1),
+
+                 ElectricNode("node3", 1, 10240, 5000,
+                              [(0 * Simulator.HOUR_SECONDS, 0.1),
+                               (24 * Simulator.HOUR_SECONDS, 0.9)], perfclass=2)]
+
+        containers = []
+        for i in range(container_cnt):
+            containers += [Container(f"container{i}", cpu, memory, storage, perfclass=i % 3)]
+
+        return nodes, containers, None
+
+    @staticmethod
+    def make_infrastructure_superstill(container_cnt: int, container_cpu: float, container_memory: int=1, container_storage: int=1, perfclasses: int = 3):
         nodes = [ElectricNode("node1", 1, 1024, 500,
 
                               [(0 * Simulator.HOUR_SECONDS, 0.1),
-                               (24 * Simulator.HOUR_SECONDS, 0.1)]),
+                               (24 * Simulator.HOUR_SECONDS, 0.1)], perfclass=0),
 
                  ElectricNode("node2", 1, 1024, 500,
                               [(0 * Simulator.HOUR_SECONDS, 0.1),
-                               (24 * Simulator.HOUR_SECONDS, 0.1)]),
+                               (24 * Simulator.HOUR_SECONDS, 0.1)], perfclass=1),
 
                  ElectricNode("node3", 1, 1024, 500,
                               [(0 * Simulator.HOUR_SECONDS, 0.1),
-                               (24 * Simulator.HOUR_SECONDS, 0.1)])]
+                               (24 * Simulator.HOUR_SECONDS, 0.1)], perfclass=2)]
 
-        containers = [Container("container1", 0.2, 25, 10),
-                      Container("container2", 0.2, 25, 10),
-                      Container("container3", 0.2, 25, 10),
-                      ]
+        containers = []
+        for i in range(container_cnt):
+            containers += [Container(f"container{i}", container_cpu, container_memory, container_storage, perfclass=i % perfclasses)]
 
-        return nodes, containers
+        return nodes, containers, None
 
     @staticmethod
     def make_infrastructure_extreme_still():
@@ -154,12 +153,29 @@ class Infrastructure:
 
         containers = [Container("container1", 0.1, 25, 10, perfclass=1),
                       Container("container2", 0.2, 25, 10, perfclass=1),
-                      Container("container3", 0.15, 25, 10, perfclass=0),
+                      Container("container3", 0.15, 25, 10, perfclass=1),
                       Container("container4", 0.11, 25, 10, perfclass=0),
                       Container("container5", 0.07, 25, 10, perfclass=0),
                       ]
 
-        return nodes, containers
+        return nodes, containers, None
+
+    @staticmethod
+    def make_infrastructure_def_still(node_cnt: int, node_cpu: float, node_memory: int, node_storage: int,
+                                      container_cnt: int, container_cpu: float, container_memory: int, container_storage: int, perfclasses: int = 3):
+        nodes = []
+        print("x")
+        for i in range(node_cnt):
+            nodes += [ElectricNode(f"node{i}", node_cpu, node_memory, node_storage, [(0 * Simulator.HOUR_SECONDS, 0.2*i),
+                               (24 * Simulator.HOUR_SECONDS, 0.2*i)], perfclass=i % perfclasses)]
+        print("y")
+
+        containers = []
+        for i in range(container_cnt):
+            containers += [Container(f"container{i}", container_cpu, container_memory, container_storage, perfclass=i % perfclasses)]
+
+        print("z")
+        return nodes, containers, None
 
     @staticmethod
     def make_infrastructure_spikey(container_cnt: int, cpu: float, memory: int, storage: int):
@@ -175,9 +191,9 @@ class Infrastructure:
 
         containers = []
         for i in range(container_cnt):
-            containers += [Container(f"containers{containers}", cpu, memory, storage)]
+            containers += [Container(f"container{i}", cpu, memory, storage)]
 
-        return nodes, containers
+        return nodes, containers, None
 
     @staticmethod
     def make_infrastructure_spikey5(count=5):
@@ -193,10 +209,10 @@ class Infrastructure:
                       Container("container5", 0.07, 25, 10),
                       ]
 
-        return nodes, containers
+        return nodes, containers, None
 
     @staticmethod
-    def make_infrastructure_real_1():
+    def make_infrastructure_real_1(container_cnt: int = 30, container_cpu: float=0.1, container_memory: int=1, container_storage: int=1):
         nodes = [
             # czech
             ElectricNode("node1", 1, 1024, 500,
@@ -279,6 +295,10 @@ class Infrastructure:
                           (22 * Simulator.HOUR_SECONDS, 0.5175),
                           (23 * Simulator.HOUR_SECONDS, 0.5192)], perfclass=2)]
 
+        containers = []
+        for i in range(container_cnt):
+            containers += [Container(f"container{i}", container_cpu, container_memory, container_storage)]
+        """    
         containers = [Container("container1", 0.1, 25, 10, perfclass=2),
                       Container("container2", 0.1, 25, 10, perfclass=1),
                       Container("container3", 0.1, 25, 10, perfclass=1),
@@ -289,8 +309,8 @@ class Infrastructure:
                       Container("container7", 0.1, 25, 10, perfclass=0),
                       Container("container8", 0.1, 25, 10, perfclass=0),
                       ]
-
-        return nodes, containers
+        """
+        return nodes, containers, None
 
     @staticmethod
     def make_infrastructure_bigspikey():
@@ -326,18 +346,18 @@ class Infrastructure:
 
                       ]
 
-        return nodes, containers
+        return nodes, containers, None
 
     @staticmethod
-    def make_infrastructure_bigspikey_large_utilization():
+    def make_infrastructure_bigspikey_large_utilization(container_cnt: int = 17, container_cpu: float=0.1, container_memory: int=1, container_storage: int=1):
 
         nodes = [ElectricNode("node1", 1, 1024, 500,
                               spikes(5, 1),
-                              perfclass=2),
+                              perfclass=0),
 
                  ElectricNode("node2", 1, 1024, 500,
                               spikes(8, 0.8),
-                              perfclass=0),
+                              perfclass=1),
 
                  ElectricNode("node3", 1, 1024, 500,
                               spikes(10, 0.2),
@@ -356,23 +376,9 @@ class Infrastructure:
 
                  ]
 
-        containers = [Container("container1", 0.1, 25, 10, perfclass=1),
-                      Container("container2", 0.1, 25, 10, perfclass=1),
-                      Container("container3", 0.1, 25, 10, perfclass=1),
-                      Container("container4", 0.1, 25, 10, perfclass=1),
-                      Container("container5", 0.1, 25, 10, perfclass=1),
-                      Container("container6", 0.1, 25, 10, perfclass=1),
-                      Container("container7", 0.1, 25, 10, perfclass=1),
-                      Container("container8", 0.1, 25, 10, perfclass=1),
-                      Container("container9", 0.1, 25, 10, perfclass=1),
-                      Container("container10", 0.1, 25, 10, perfclass=1),
-                      Container("container11", 0.1, 25, 10, perfclass=1),
-                      Container("container12", 0.1, 25, 10, perfclass=1),
-                      Container("container13", 0.1, 25, 10, perfclass=1),
-                      Container("container14", 0.1, 25, 10, perfclass=1),
-                      Container("container15", 0.1, 25, 10, perfclass=1),
-                      Container("container16", 0.1, 25, 10, perfclass=1),
-                      Container("container17", 0.1, 25, 10, perfclass=1),
-                      ]
+        containers = []
+        for i in range(container_cnt):
+            containers += [Container(f"container{i}", container_cpu, container_memory, container_storage)]
 
-        return nodes, containers
+        perfmatrix = None
+        return nodes, containers, perfmatrix

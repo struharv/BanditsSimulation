@@ -47,6 +47,7 @@ class Visualizer:
         self.dump_reward_history()
         self.dump_reward_cummulative()
         self.dump_events()
+        self.dump_correct_placement()
         self.dump_resources()
 
         self.make_plot(title)
@@ -124,3 +125,9 @@ class Visualizer:
         with open(f"{self.test_dir}/events.pts", "w") as f:
             for event in self.simulator.orchestration_events:
                 f.write(f"{event[0]} {event[1]} {event[2]} \n")
+
+    def dump_correct_placement(self):
+        with open(f"{self.test_dir}/correct_placement.pts", "w") as f:
+
+            for correct_placement in self.simulator.correct_placement:
+                f.write(f"{correct_placement[0]} {correct_placement[1]}\n")

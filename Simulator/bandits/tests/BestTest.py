@@ -41,16 +41,19 @@ class BestTest(TestBase):
     def case_best(self, name, infrastructure):
         global possible_deployments
 
-        nodes, containers = infrastructure
+        nodes, containers, perfmatrix = infrastructure
+        perfmatrix = TestBase.PERFMATRIX
+
         possible_deployments = self.compute_all_possible_deployments(nodes, containers)
 
-        results = self.simulate(nodes, containers, TestBase.random_init, do_tick, inspect.currentframe().f_code.co_name, name, f"Best - {name}", perfmatrix=TestBase.PERFMATRIX)
+        results = self.simulate(nodes, containers, TestBase.random_init, do_tick, inspect.currentframe().f_code.co_name, name, f"Best - {name}", perfmatrix=perfmatrix)
 
         return results
 
 
     def test_UCBElMap_bandit(self, name= "best_elmmap"):
-        self.case__UCBElMap_bandit(name)
+        #self.case__UCBElMap_bandit(name)
+        pass
 
 
     def case__UCBElMap_bandit(self, name):

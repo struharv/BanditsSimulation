@@ -23,6 +23,7 @@ class Simulator(BaseSimulator):
 
         reward = self.compute_reward()
         self.reward_history += [(self.time, reward)]
+        self.correct_placement += [(self.time, self.compute_correct())]
 
 
     def simulate(self):

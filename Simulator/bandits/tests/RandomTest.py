@@ -18,7 +18,7 @@ class RandomTest(TestBase):
         self.perform_stats("test_random_0", self.case_random, TestBase.TEST_SUITE)
 
     def case_random(self, name, infrastructure):
-        nodes, containers = infrastructure
+        nodes, containers, perfmatrix = infrastructure
 
         def do_tick(simulator: Simulator):
             if simulator.now() % RandomTest.DECISION_PERIOD_SEC == 0:

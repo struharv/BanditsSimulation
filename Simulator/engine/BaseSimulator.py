@@ -26,6 +26,7 @@ class BaseSimulator:
 
         self.orchestration_events: list[tuple[2]] = []
         self.reward_history: list[tuple[int, float]] = []
+        self.correct_placement :list[tuple[int, float]] = []
 
         self.perfmatrix = None
 
@@ -67,6 +68,8 @@ class BaseSimulator:
         print("BaseSimulator.simulate")
         if self.action_init:
             self.action_init(self)
+        print("/BaseSimulator.simulate")
+
 
     def now(self) -> int:
         return self.time
@@ -128,12 +131,28 @@ class BaseSimulator:
 
         return None
 
+    def get_highest_perfclass(self):
+        max_perfclass = 0
+        for container in self.containers:
+            if container.perfclass > max_perfclass:
+                max_perfclass = container.perfclass
+
+        return max_perfclass
+
     def compute_reward(self) -> float:
         reward = 0
         for node in self.nodes:
             reward += node.compute_reward()
 
         return reward
+
+    def compute_correct(self):
+        correct = 0
+        for node in self.nodes:
+            for container in node.containers:
+                if node.get_perf(container) >= 1.0:
+                    correct += 1
+        return correct
 
     def compute_possible_reward(self, deployment, time) -> float:
         #print("computing possible reward")

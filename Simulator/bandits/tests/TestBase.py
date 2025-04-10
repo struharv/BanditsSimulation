@@ -15,34 +15,58 @@ class TestBase(unittest.TestCase):
     DECISION_PERIOD_SEC = 30
     ENABLE_STATS = False
     OUT_DIR = "plots/"
-
+    """
     PERFMATRIX = [[1.0, 1.0, 1.0],
+                  [0.8, 0.8, 0.8],
+                  [0.8, 0.8, 0.8]]
+
+    """
+    PERFMATRIX = [[1.0, 0.7, 0.7],
+                  [0.7, 1.0, 0.7],
+                  [0.7, 0.7, 1.0]]
+
+    """
+    PERFMATRIX = [[1.1, 1.0, 1.0],
                   [1.0, 1.0, 1.0],
                   [1.0, 1.0, 1.0]]
-
-    #PERFMATRIX = [[0.1, 0.1, 0.1],
-    #              [1.0, 1.0, 1.0],
-    #              [0.1, 0.1, 0.1]]
+    
 
     TEST_SUITE = [
-        #["superstill", Infrastructure.make_infrastructure_superstill()],
+        ["superstill_30_high", Infrastructure.make_infrastructure_superstill(container_cnt=30, container_cpu=0.8*3.0/30)],
+        ["superstill_30_medium", Infrastructure.make_infrastructure_superstill(container_cnt=30, container_cpu=0.4 * 3.0/30)],
+        ["superstill_30_low", Infrastructure.make_infrastructure_superstill(container_cnt=30, container_cpu=0.2 * 3.0/30)],
         #["still", Infrastructure.make_infrastructure_still()],
-        #["Constant_Green_Energy", Infrastructure.make_infrastructure_still_containers(3, 0.2, 10, 10)],
-        #["Real", Infrastructure.make_infrastructure_real_1()],
 
-        #["still_4_container", Infrastructure.make_infrastructure_still_containers(4, 0.2, 10, 10)],
-        #["still_5_container", Infrastructure.make_infrastructure_still_containers(5, 0.2, 10, 10)],
-        #["increasing_5_container", Infrastructure.make_infrastructure_increasing_containers(5, 0.2, 10, 10)],
-        #["increasing_4_container", Infrastructure.make_infrastructure_increasing_containers(4, 0.2, 10, 10)],
-        #["increasing_5_container", Infrastructure.make_infrastructure_increasing_containers(5, 0.2, 10, 10)],
+        #["Constant_Green_Energy", Infrastructure.make_infrastructure_still_containers(3, 0.2, 10, 10)],
+
+        #["Real_30_high", Infrastructure.make_infrastructure_real_1(container_cnt=30, container_cpu=0.8*3.0/30)],
+        #["Real_30_medium", Infrastructure.make_infrastructure_real_1(container_cnt=30, container_cpu=0.4 * 3.0 / 30)],
+        #["Real_30_low", Infrastructure.make_infrastructure_real_1(container_cnt=30, container_cpu=0.2 * 3.0 / 30)],
+    
+        ["increasing_30_container_high", Infrastructure.make_infrastructure_3_nodes_increasing_containers(30, 0.8*3.0/30, 1, 1)],
+        ["increasing_30_container_medium", Infrastructure.make_infrastructure_3_nodes_increasing_containers(30, 0.4 * 3.0 / 30, 1, 1)],
+        ["increasing_30_container_low", Infrastructure.make_infrastructure_3_nodes_increasing_containers(30, 0.2*3.0/30, 1, 1)],
+
+        ["bigspikey_30_container_high", Infrastructure.make_infrastructure_bigspikey_large_utilization(container_cnt=30, container_cpu=0.8*5.0/30)],
+        ["bigspikey_30_container_medium", Infrastructure.make_infrastructure_bigspikey_large_utilization(container_cnt=30, container_cpu=0.4*5.0/30)],
+        ["bigspikey_30_container_low",Infrastructure.make_infrastructure_bigspikey_large_utilization(container_cnt=30, container_cpu=0.2*5.0/30)],
+
 
         #["extreme_still", Infrastructure.make_infrastructure_extreme_still()],
 
         #["Varying_Green_Energy", Infrastructure.make_infrastructure_spikey(3, 0.2, 10, 10)],
-        ["bigspikey", Infrastructure.make_infrastructure_bigspikey()],
-        ["bigspikey_large_utilization", Infrastructure.make_infrastructure_bigspikey_large_utilization()],
-        ["still_20_container", Infrastructure.make_infrastructure_still_containers(20, 0.1, 10, 10)],
 
+        ####
+ 
+        #["bigspikey", Infrastructure.make_infrastructure_bigspikey()],
+        #["bigspikey_large_utilization", Infrastructure.make_infrastructure_bigspikey_large_utilization()],
+        #["bigspikey_large_utilization_100containers", Infrastructure.make_infrastructure_bigspikey_large_utilization(container_cnt=100, container_cpu=0.01)],
+        #["still_20_container", Infrastructure.make_infrastructure_still_containers(20, 0.01, 10, 10)],
+        #["still_3_nodes_30_containers", Infrastructure.make_infrastructure_def_still(
+        #                                3, 1, 10000, 10000,
+        #                                30, 0.05, 1, 1)],
+        #["still_30_nodes_1000_containers", Infrastructure.make_infrastructure_def_still(30, 1, 10, 10,
+        #                                                                                20, 0.1, 10, 10)]
         #["spikey5", Infrastructure.make_infrastructure_spikey5()],
     ]
 
@@ -107,8 +131,11 @@ class TestBase(unittest.TestCase):
             buf_containers += [cont]
 
         while len(buf_containers) > 0:
+            #print(buf_containers[0].name)
+
             if simulator.migrate(buf_containers[0].name, random.choice(simulator.nodes).name):
                 del buf_containers[0]
+                #print(len(buf_containers))
 
     def compute_all_possible_deployments(self, nodes, containers):
         permutations = Permutations(nodes, containers)
