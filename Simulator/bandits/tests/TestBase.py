@@ -30,11 +30,10 @@ class TestBase(unittest.TestCase):
                   [1.0, 1.0, 1.0],
                   [1.0, 1.0, 1.0]]
     
-
+    """
     TEST_SUITE = [
         ["superstill_30_high", Infrastructure.make_infrastructure_superstill(container_cnt=30, container_cpu=0.8*3.0/30)],
-        ["superstill_30_medium", Infrastructure.make_infrastructure_superstill(c
-        ontainer_cnt=30, container_cpu=0.4 * 3.0/30)],
+        ["superstill_30_medium", Infrastructure.make_infrastructure_superstill(container_cnt=30, container_cpu=0.4 * 3.0/30)],
         ["superstill_30_low", Infrastructure.make_infrastructure_superstill(container_cnt=30, container_cpu=0.2 * 3.0/30)],
         #["still", Infrastructure.make_infrastructure_still()],
 
