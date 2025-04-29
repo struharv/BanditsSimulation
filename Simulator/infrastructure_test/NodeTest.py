@@ -1,6 +1,6 @@
 import unittest
 
-from bandits.NewSimulator import NewSimulator
+from bandits.Simulator import Simulator
 from engine.ElectricNode import ElectricNode
 
 
@@ -29,11 +29,11 @@ class NodeTest(unittest.TestCase):
         self.assertEqual(0.5, node.green_at(15))
 
     def test_node_green_two_points(self):
-        node = ElectricNode("abcx", 0, 0, 0, [(0, 0.5), (NewSimulator.TIME_MAX_SECONDS, 0.5)])
+        node = ElectricNode("abcx", 0, 0, 0, [(0, 0.5), (Simulator.DEFAULT_SIMULATION_TIME, 0.5)])
         self.assertEqual(0.5, node.green_at(15))
 
     def test_node_green_advanced(self):
-        node = ElectricNode("node1", 1, 1024, 500, [(7 * NewSimulator.HOUR_SECONDS, 0.0), (12 * NewSimulator.HOUR_SECONDS, 0.5), (14 * NewSimulator.HOUR_SECONDS, 0.5), (19 * NewSimulator.HOUR_SECONDS, 0.0)])
+        node = ElectricNode("node1", 1, 1024, 500, [(7 * Simulator.HOUR_SECONDS, 0.0), (12 * Simulator.HOUR_SECONDS, 0.5), (14 * Simulator.HOUR_SECONDS, 0.5), (19 * Simulator.HOUR_SECONDS, 0.0)])
 
         self.assertEqual(0, node.green_at(19 * 60 + 1))
 

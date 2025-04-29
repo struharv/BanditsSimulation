@@ -70,7 +70,6 @@ class BaseSimulator:
             self.action_init(self)
         print("/BaseSimulator.simulate")
 
-
     def now(self) -> int:
         return self.time
 
@@ -192,3 +191,18 @@ class BaseSimulator:
             if self.migrate(buf_containers[0].name, random.choice(self.nodes).name):
                 del buf_containers[0]
 
+
+    def make_context(self, time_s: int):
+        res = []
+
+        for node in self.nodes:
+            context = node.get_context(time_s)
+            for context_item in context:
+                res += [context_item]
+                #res += [0]
+
+        return res
+
+    def inc_time(self):
+        self.time += 1
+        return self.time

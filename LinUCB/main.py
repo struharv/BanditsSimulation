@@ -103,10 +103,11 @@ def ctr_simulator(K_arms, d, alpha, data_path):
             # 1st column: Logged data arm. 
             # Integer data type
             data_arm = int(line_data.split()[0])
-
+            print("arm", data_arm)
             # 2nd column: Logged data reward for logged chosen arm
             # Float data type
             data_reward = float(line_data.split()[1])
+            print("reward", data_reward)
 
             # 3rd columns onwards: 100 covariates. Keep in array of dimensions (100,) with float data type
             covariate_string_list = line_data.split()[2:]
@@ -114,10 +115,11 @@ def ctr_simulator(K_arms, d, alpha, data_path):
 
             # Find policy's chosen arm based on input covariates at current time step
             arm_index = linucb_policy_object.select_arm(data_x_array)
-
+            print("I think best is ", data_reward)
             # Check if arm_index is the same as data_arm (ie same actions were chosen)
             # Note that data_arms index range from 1 to 10 while policy arms index range from 0 to 9.
-            if arm_index + 1 == data_arm:
+            if arm_index == data_arm:
+                print("yes")
                 # Use reward information for the chosen arm to update
                 linucb_policy_object.linucb_arms[arm_index].reward_update(data_reward, data_x_array)
 
@@ -131,8 +133,11 @@ def ctr_simulator(K_arms, d, alpha, data_path):
 
 
 alpha_input = 1.5
-data_path = "data/news_dataset_1000.txt"
-aligned_time_steps, cum_rewards, aligned_ctr, policy = ctr_simulator(K_arms = 10, d = 100, alpha = alpha_input, data_path = data_path)
+#data_path = "data/news_dataset_1000.txt"
+#aligned_time_steps, cum_rewards, aligned_ctr, policy = ctr_simulator(K_arms = 10, d = 100, alpha = alpha_input, data_path = data_path)
+
+data_path = "data/best_schedule.txt"
+aligned_time_steps, cum_rewards, aligned_ctr, policy = ctr_simulator(K_arms=5, d=5, alpha=alpha_input, data_path=data_path)
 
 plt.plot(aligned_ctr)
 plt.title("alpha = "+str(alpha_input))
