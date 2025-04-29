@@ -73,7 +73,7 @@ class UCBBandit3(Orchestrator):
         self.K_arms = K_arms
         self.d = d
         self.alpha = alpha
-        self.randomness = 0.05
+        self.randomness = 0.01
         #self.linucb_arms = [LinucbArm(arm_index=i, d=d, alpha=alpha) for i in range(K_arms)]
 
 

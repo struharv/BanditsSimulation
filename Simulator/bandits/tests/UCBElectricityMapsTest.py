@@ -30,12 +30,13 @@ class ElectricityMapsTest(TestBase):
             ElectricNode("nodeHU", 1, 1024, 500, ElectricityMap2Node.toGreen("HU", 2024, 8, 20, limit=24 * days + 1))
             ]
 
-        containers = [Container("container1", 0.1, 256, 10),
-                      Container("container2", 0.1, 256, 10),
-                      Container("container3", 0.1, 256, 10),
-                      Container("container4", 0.1, 256, 10),
-                      Container("container5", 0.1, 256, 10),
-                      ]
+        containers = []
+        container_cpu = 0.3
+        container_memory = 10
+        container_storage = 10
+        for i in range(5):
+            containers += [Container(f"container{i}", container_cpu, container_memory, container_storage)]
+
 
         perfmatrix = TestBase.PERFMATRIX
 
