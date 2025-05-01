@@ -31,10 +31,10 @@ class ElectricityMapsTest(TestBase):
             ]
 
         containers = []
-        container_cpu = 0.3
+        container_cpu = 0.15
         container_memory = 10
         container_storage = 10
-        for i in range(5):
+        for i in range(10):
             containers += [Container(f"container{i}", container_cpu, container_memory, container_storage)]
 
 

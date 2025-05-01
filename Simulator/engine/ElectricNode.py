@@ -68,7 +68,7 @@ class ElectricNode(Node):
  
     def get_context(self, time_s: int):
         #return [self.green_at(time_s), 1.0-self.current_cpu_usage()]
-        return [1.0 - self.current_cpu_usage()]
+        return [self.green_at(time_s), 1.0 - self.current_cpu_usage()]
 
     def __repr__(self):
         return f"Node.{self.name}{self.cpu, self.memory_mb, self.storage_mb}"
