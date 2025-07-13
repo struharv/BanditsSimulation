@@ -1,6 +1,6 @@
-set terminal pdfcairo size 10,4
+set terminal pdfcairo size 4.5,2
 set output 'summary.pdf'
-set title 'Deployment Comparison'
+set title 'Deployment Method Comparison'
 COLOR0='#99ffff'
 COLOR1='#4671d5'
 COLOR2='#ff0000'
@@ -9,14 +9,16 @@ COLOR4='#f36e00'
 COLOR5='#f36e00'
 COLOR6='#f36e00'
 
-
 set auto x
 set style data histogram
 set style histogram cluster gap 1
 set style fill solid border -1
-set boxwidth 0.9
+set boxwidth 0.99
 set xtic scale 0
 set ylabel 'Average Cumulative reward '
-set xlabel 'Scenario'
+
+set key outside below
+set key vertical maxrows 1 width -1
+
 
 plot 'summary.dat' using 2:xtic(1) ti col fc rgb COLOR0, 'summary.dat' using 3:xtic(1) ti col fc rgb COLOR1, 'summary.dat' using 4:xtic(1) ti col fc rgb COLOR2, 'summary.dat' using 5:xtic(1) ti col fc rgb COLOR3

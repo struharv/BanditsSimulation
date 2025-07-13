@@ -47,9 +47,9 @@ class TestBase(unittest.TestCase):
         ["increasing_30_container_medium", Infrastructure.make_infrastructure_3_nodes_increasing_containers(30, 0.4 * 3.0 / 30, 1, 1)],
         ["increasing_30_container_low", Infrastructure.make_infrastructure_3_nodes_increasing_containers(30, 0.2*3.0/30, 1, 1)],
 
-        ["bigspikey_30_container_high", Infrastructure.make_infrastructure_bigspikey_large_utilization(container_cnt=30, container_cpu=0.8*5.0/30)],
-        ["bigspikey_30_container_medium", Infrastructure.make_infrastructure_bigspikey_large_utilization(container_cnt=30, container_cpu=0.4*5.0/30)],
-        ["bigspikey_30_container_low",Infrastructure.make_infrastructure_bigspikey_large_utilization(container_cnt=30, container_cpu=0.2*5.0/30)],
+        ["bigspikey_30_container_high", Infrastructure.make_infrastructure_bigspikey_large_utilization(container_cnt=30, container_cpu=0.8*3.0/30)],
+        ["bigspikey_30_container_medium", Infrastructure.make_infrastructure_bigspikey_large_utilization(container_cnt=30, container_cpu=0.4*3.0/30)],
+        ["bigspikey_30_container_low",Infrastructure.make_infrastructure_bigspikey_large_utilization(container_cnt=30, container_cpu=0.2*3.0/30)],
 
 
         #["extreme_still", Infrastructure.make_infrastructure_extreme_still()],

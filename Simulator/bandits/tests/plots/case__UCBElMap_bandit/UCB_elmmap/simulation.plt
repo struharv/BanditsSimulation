@@ -1,7 +1,7 @@
 set terminal pdfcairo size 5,8
 set output 'UCB Multi Armed Bandit - UCB_elmmap.pdf'
 set key left top
-set multiplot layout 7, 1 title "UCB Multi Armed Bandit - UCB\\\_elmmap" font ",20"
+set multiplot layout 7, 1 title "Contextual Multi-Armed Bandit - Electricity Maps" font ",20"
 set yrange [0:1]
 set xrange [0:345600]
 set format x " " 
